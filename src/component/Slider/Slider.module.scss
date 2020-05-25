@@ -1,0 +1,15 @@
+.carrousel_wrapper {
+    // overflow: hidden;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.carrousel_image {
+    border-radius: 25px;
+    background-size: cover !important;
+    height: 300px;
+}
+
+.slick-prev {
+    background-color: red;
+}

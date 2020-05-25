@@ -1,0 +1,90 @@
+.news {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    
+    .body {
+        width: 100%;
+        margin: 0 auto;
+        .item {
+            min-height: 140px;
+            background-color: #fff;
+            display: flex;
+            box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
+            margin-bottom: 20px;
+            .author {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 17%;
+                border-right: 1px solid rgb(158, 158, 158);
+                height: unset;
+                background: #d5d5d5;
+                p {
+                    margin-top: 10px;
+                    font-weight: bold;
+                    font-size: 15px;
+                    color: #848484;
+                }
+                .photo {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 70px;
+                    height: 70px;
+                    border-radius: 50%;
+                    background: #f7f7f7;
+                }
+            }
+            .content {
+                width: 83%;
+                padding: 20px;
+                // display: flex;
+                // flex-direction: column;
+                .theme {
+                    color: #848484;
+                    margin-bottom: 10px;
+                    font-weight: bold;
+                    font-size: 18px;
+                    line-height: 22px;
+                }
+                .data {
+                    display: inline-block;
+                    font-size: 16px;
+                    color: #848484;
+                    margin-bottom: 10px;
+                    margin-right: 30px;
+                }
+                form {
+                    display: flex;
+                    flex-direction: column;
+                    label {
+                        font-size: 13px;
+                        margin-bottom: 7px;
+                        &:last-child {
+                            margin: 0;
+                        }
+                    }
+                    input {
+                        margin-left: 10px;
+                        margin-right: 20px;
+                    }
+                }
+            }
+        }
+    }
+    .btn-add-survey {
+        width: 299px;
+        height: 50px;
+        background: #d6d6d6;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 20px;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 22px;
+        color: #000000;
+    }
+}
