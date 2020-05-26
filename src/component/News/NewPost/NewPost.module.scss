@@ -1,0 +1,82 @@
+.item {
+    margin: 0 auto;
+    min-height: 140px;
+    background-color: #fff;
+    display: flex;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
+    margin-bottom: 20px;
+    .author {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 17%;
+        border-right: 1px solid rgb(158, 158, 158);
+        height: unset;
+        background: #d5d5d5;
+        p {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 15px;
+            color: #848484;
+        }
+        .photo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #f7f7f7;
+        }
+    }
+    .body__content {
+        width: 83%;
+        .content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            .theme {
+                color: #848484;
+                margin-bottom: 10px;
+                input {
+                    font-size: 16px;
+                    padding: 3px 10px;
+                    width: 80%;
+                    margin-left: 10px;
+                    border: 1px solid #000;
+                }
+            }
+            .text {
+                color: #000000;
+                word-wrap: break-word;
+                margin-bottom: 10px;
+                textarea {
+                    font-size: 18px;
+                    padding: 5px 10px;
+                    width: 100%;
+                    height: 100px;
+                    resize: none;
+                    border: 1px solid #000;
+                }
+            }
+            .data {
+                display: inline-block;
+                font-size: 16px;
+                color: #848484;
+                margin-right: 30px;
+            }
+            .btn-public {
+                background: none;
+                font-weight: bold;
+                font-size: 16px;
+                line-height: 19px;
+                color: #000000;
+            }
+        }
+        .comment {
+            font-size: 15px;
+            color: #000000;
+        }
+    }
+}

@@ -1,5 +1,3 @@
-
-
 let initialState = {
     survey: [
         { id: 1, photos: { large: '', small: '' }, author: 'Fedor', theme: 'Открытая лекция', datatime: '02.12.2019 10:21' },
