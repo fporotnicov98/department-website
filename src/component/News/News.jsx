@@ -10,13 +10,23 @@ const Comment = (props) => {
             {
                 props.comment.map(item =>
                     <div key={item.id} className={style['comment_item']}>
-                        <div className={style['comment__author']}>
-                            <div className={style['comment__photo']}><img src={user} alt="" /></div>
-                            <p>{item.author}</p>
+                        <div className={style['comment__body']}>
+                            <div className={style['comment__author']}>
+                                <div className={style['comment__photo']}><img src={user} alt="" /></div>
+                                <p>{item.author}</p>
+                            </div>
+                            <div className={style['comment__content']}>
+                                <div className={style['comment__text']}>{item.text}</div>
+                                <div className={style['comment__data']}>
+                                    {item.datatime}
+                                    <button>Ответить</button>
+                                </div>
+                            </div>
                         </div>
-                        <div className={style['comment__content']}>
-                            <div className={style['comment__text']}>{item.text}</div>
-                            <div className={style['comment__data']}>{item.datatime}</div>
+                        <p style={{ display: 'none' }}>Чтобы комментировать, войдите или зарегистрируйтесь</p>
+                        <div className={style['response']}>
+                            <textarea name="" id=""></textarea>
+                            <button>Ответить</button>
                         </div>
                     </div>
                 )
@@ -44,9 +54,6 @@ const News = (props) => {
                                     <div className={style['text']}>{item.text}</div>
                                     <div className={style['data']}>{item.datatime}</div>
                                     <button className={style['btn-comment']}>Комментировать</button>
-                                    {/* <div className={style['comment']}>
-                                    <p>Чтобы комментировать, войдите или зарегистрируйтесь</p>
-                                </div> */}
                                 </div>
                                 <div className={style['comment']}>
                                     <Comment comment={item.comment} />

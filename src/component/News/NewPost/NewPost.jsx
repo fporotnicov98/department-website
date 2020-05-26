@@ -13,7 +13,7 @@ const NewPost = (props) => {
                 <div className={style['content']}>
 
                     <div className={style['theme']}>Тема:<input type="text" name="" id="" /></div>
-                    <div className={style['text']}><textarea name="" id="" cols="30" rows="10"></textarea></div>
+                    <div className={style['text']}><textarea name="" id=""></textarea></div>
                     <div className={style['data']}>{/* здесь надо показать время публикации */}</div>
                     <button className={style['btn-public']}>Опубликовать</button>
                 </div>

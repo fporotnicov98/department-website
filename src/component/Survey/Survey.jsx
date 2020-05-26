@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './Survey.module.scss';
 import user from './../../asets/image/user.png'
+import NewSurvey from './NewSurvey/NewSurvey';
 
 
 const Survey = (props) => {
@@ -27,6 +28,7 @@ const Survey = (props) => {
                         </div>
                     )
                 }
+                <NewSurvey />
             </div>
             <button className={style['btn-add-survey']}>Добавить опрос</button>
         </div>
