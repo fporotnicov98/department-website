@@ -31,8 +31,8 @@
     .content {
         width: 83%;
         padding: 20px;
-        // display: flex;
-        // flex-direction: column;
+        display: flex;
+        flex-direction: column;
         .theme {
             color: #848484;
             margin-bottom: 10px;
@@ -44,7 +44,8 @@
                 padding: 3px 10px;
                 width: 80%;
                 margin-left: 10px;
-                border: 1px solid #000;
+                background: #f0f0f0;
+                border: 1px solid rgba(0, 0, 0, 0.35);
             }
         }
         .data {
@@ -59,8 +60,18 @@
             padding: 8px;
             border-radius: 5px;
             box-shadow: 1px 1px 1px 1px rgb(121, 111, 111);
+            width: 25%;
+            margin-bottom: 15px;
             i {
                 margin-right: 10px;
+            }
+        }
+        .variant {
+            .add-option {
+                width: 45%;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                padding: 5px;
+                background: #f0f0f0;
             }
         }
     }
