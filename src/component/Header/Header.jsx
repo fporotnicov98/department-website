@@ -18,7 +18,6 @@ class Header extends React.Component {
         this.setState({ isModalOpen: false });
     }
     render() {
-        debugger
         return (
             <header>
                 <div className={style['container']}>

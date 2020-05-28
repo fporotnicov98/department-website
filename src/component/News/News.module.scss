@@ -67,6 +67,9 @@
                         font-size: 16px;
                         line-height: 19px;
                         color: #000000;
+                        img {
+                            margin-left: 5px;
+                        }
                     }
                     .btn-public {
                         background: none;
@@ -79,6 +82,27 @@
                 .comment {
                     font-size: 15px;
                     color: #000000;
+                }
+                .response {
+                    padding: 10px 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    textarea {
+                        background: #f0f0f0;
+                        border: 1px solid rgba(0, 0, 0, 0.35);
+                        font-size: 14px;
+                        padding: 5px 10px;
+                        width: 85%;
+                        height: 35px;
+                        resize: none;
+                    }
+                    button {
+                        background: #f0f0f0;
+                        border: 1px solid rgba(0, 0, 0, 0.35);
+                        height: 35px;
+                        border-radius: 5px;
+                        width: 100px;
+                    }
                 }
             }
         }
@@ -138,26 +162,8 @@
                     }
                 }
             }
-            .response {
-                padding: 20px 20px 0 20px;
-                display: flex;
-                justify-content: space-between;
-                textarea {
-                    background: #f0f0f0;
-                    border: 1px solid rgba(0, 0, 0, 0.35);
-                    font-size: 14px;
-                    padding: 5px 10px;
-                    width: 85%;
-                    height: 35px;
-                    resize: none;
-                }
-                button {
-                    background: #f0f0f0;
-                    border: 1px solid rgba(0, 0, 0, 0.35);
-                    height: 35px;
-                    border-radius: 5px;
-                    width: 100px;
-                }
+            &:last-child {
+                border-bottom: 1px solid rgb(190, 190, 190);
             }
         }
     }
