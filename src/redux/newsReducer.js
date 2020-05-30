@@ -1,8 +1,5 @@
 import { getDate } from "../component/commons/date";
 
-const SHOW_COMMENT = 'SHOW_COMMENT';
-const ON_SEND_POST = 'ON_SEND_POST';
-
 let initialState = {
     posts: [
         { id: 1, photos: { large: '', small: '' }, author: 'Fedor', theme: 'Открытая лекция', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam molestie dapibus nulla, ac varius lacus elementum et. Nullam nec purus justo. Nullam bibendum velit nec viverra faucibus. Cras mauris est, tincidunt vel massa at', datatime: '02.12.2019 09:45', comment: [{ id: 0, photos: { large: '', small: '' }, author: 'Viktor', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam molestie dapibus nulla, ac varius lacus elementum et. Nullam nec purus justo. Nullam bibendum velit nec viverra faucibus. Cras mauris est, tincidunt vel massa at.', datatime: '02.12.2019 09:45' }, { id: 1, photos: { large: '', small: '' }, author: 'Alexey', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam molestie dapibus nulla, ac varius lacus elementum et.', datatime: '02.12.2019 09:45' }] },
@@ -13,7 +10,7 @@ let initialState = {
 
 const newsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SHOW_COMMENT:
+        case "SHOW_COMMENT":
             return {
                 ...state,
                 posts: [...state.posts.map(item => {
@@ -23,19 +20,19 @@ const newsReducer = (state = initialState, action) => {
                 })],
                 isToggleShowComment: true
             }
-        case ON_SEND_POST:
+        case "ADD_POST":
             let newPost = {
-                id: 0,
+                id: `f${(+new Date).toString(16)}`,
                 photos: {},
                 author: 'Fedor',
-                theme: action.enteredText,
-                text: '',
+                theme: action.theme,
+                text: action.text,
                 datatime: getDate(),
                 comment: []
             }
             return {
-                ...state,
-                posts: [...state.posts.map(item => { item.id++; return { ...item } }), newPost]
+                state,
+                posts: [...state.posts, newPost]
             }
         default:
             return state;
@@ -43,7 +40,7 @@ const newsReducer = (state = initialState, action) => {
 
 };
 
-export const showComment = (postId) => ({ type: SHOW_COMMENT, payload: postId })
-export const onSendPost = (enteredTheme) => ({ type: ON_SEND_POST, enteredTheme })
+export const showComment = (postId) => ({ type: "SHOW_COMMENT", payload: postId })
+export const addPost = (theme,text) => ({ type: "ADD_POST", theme, text})
 
 export default newsReducer;
