@@ -1,6 +1,6 @@
 .item {
     margin: 0 auto;
-    min-height: 140px;
+    min-height: 110px;
     background-color: #fff;
     display: flex;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
@@ -36,6 +36,7 @@
             padding: 20px;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             .theme {
                 color: #848484;
                 margin-bottom: 10px;

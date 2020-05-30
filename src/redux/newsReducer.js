@@ -25,17 +25,17 @@ const newsReducer = (state = initialState, action) => {
             }
         case ON_SEND_POST:
             let newPost = {
-                id: 0,
+                id: `f${(+new Date).toString(16)}`,
                 photos: {},
                 author: 'Fedor',
                 theme: action.enteredText,
-                text: '',
+                text: action.enteredTheme,
                 datatime: getDate(),
                 comment: []
             }
             return {
                 ...state,
-                posts: [...state.posts.map(item => { item.id++; return { ...item } }), newPost]
+                posts: [...state.posts, newPost]
             }
         default:
             return state;
@@ -44,6 +44,6 @@ const newsReducer = (state = initialState, action) => {
 };
 
 export const showComment = (postId) => ({ type: SHOW_COMMENT, payload: postId })
-export const onSendPost = (enteredTheme) => ({ type: ON_SEND_POST, enteredTheme })
+export const onSendPost = (enteredText, enteredTheme) => ({ type: ON_SEND_POST, enteredTheme, enteredText })
 
 export default newsReducer;
