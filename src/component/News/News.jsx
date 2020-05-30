@@ -2,14 +2,16 @@ import React from 'react'
 import Slider from './../Slider/Slider'
 import style from './News.module.scss';
 import user from './../../asets/image/user.png'
-import more from './../../asets/image/more.svg'
+import up from './../../asets/image/up.svg'
+import down from './../../asets/image/down.svg'
 import NewPost from './NewPost/NewPost';
+
 
 const Comment = (props) => {
     return (
         <>
             {
-                props.comment.map(item =>
+                props.comments.map(item =>
                     <div key={item.id} className={style['comment_item']}>
                         <div className={style['comment__body']}>
                             <div className={style['comment__author']}>
@@ -33,57 +35,50 @@ const Comment = (props) => {
     )
 }
 
-// Toggle's надо переносить в основной стейт для того, чтобы закрыть форму после добавления поста
-
-
-class News extends React.Component {
-    state = {
-        isToggleAddNewPost: false,
-        isToggleShowComment: false,
-    };
-    addNewPost = () => {
-        this.setState({
-            isToggleAddNewPost: !this.state.isToggleAddNewPost
-        })
-    }
-    showComment = () => {
-        this.setState({
-            isToggleShowComment: !this.state.isToggleShowComment,
-        })
-    }
-    render() {
-        return (
-            <div>
-                <div className={style['news']}>
-                    <Slider />
-                    <div className={style['body']}>
-                        {
-                            this.props.posts.map(post =>
-                                <div key={post.id} className={style['item']}>
-                                    <div className={style['author']}>
-                                        <div className={style['photo']}><img src={user} alt="" /></div>
-                                        <p>{post.author}</p>
+const News = (props) => {
+    return (
+        <div>
+            <div className={style['news']}>
+                <Slider />
+                <div className={style['body']}>
+                    {
+                        props.posts.map(post =>
+                            <div key={post.id} className={style['item']}>
+                                <div className={style['author']}>
+                                    <div className={style['photo']}><img src={user} alt="" /></div>
+                                    <p>{post.author}</p>
+                                </div>
+                                <div className={style['body__content']}>
+                                    <div className={style['content']}>
+                                        <div className={style['theme']}>{post.theme}</div>
+                                        <div className={style['text']}>{post.text}</div>
+                                        <div className={style['data']}>{post.datatime}</div>
+                                        <button onClick={() => {
+                                            if (props.postId.some(item => item.id === post.id)){
+                                                props.removePostId(post.id)
+                                            } else {
+                                                props.setPostId(post.id)
+                                            }
+                                        }
+                                        } className={style['btn-comment']}>Комментировать<img className={style['more']} src={props.postId.some(item => item.id === post.id) ? down : up} alt="" /></button>
                                     </div>
-                                    <div className={style['body__content']}>
-                                        <div className={style['content']}>
-                                            <div className={style['theme']}>{post.theme}</div>
-                                            <div className={style['text']}>{post.text}</div>
-                                            <div className={style['data']}>{post.datatime}</div>
-                                            <button onClick={() => this.showComment()} className={style['btn-comment']}>Комментировать<img className={style['more']} src={more} alt="" /></button>
-                                        </div>
-                                        <div className={style['comment']}>
-                                            {this.state.isToggleShowComment ? <Comment comment = {post.comment} /> : null}
-                                        </div>
+                                    <div className={style['comment']}>
+                                        {props.postId.some(item => item.id === post.id) && <Comment comments={post.comment} />}
+
                                     </div>
                                 </div>
-                            )}
-                        {this.state.isToggleAddNewPost ? <NewPost /> : null}
-                    </div>
-                    <button onClick={() => this.addNewPost()} className={style['btn-add-post']}> {this.state.isToggleAddNewPost ? "Отмена" : "Добавить новость"}</button>
+                            </div>
+                        )}
+                    {props.isToggleShowPostForm && <NewPost />}
                 </div>
+                {
+                    !props.isToggleShowPostForm
+                    ?<button onClick={() => props.toggleShowPostForm(true)} className={style['btn-add-post']}>Добавить новость</button>
+                    :<button onClick={() => props.toggleShowPostForm(false)} className={style['btn-add-post']}>Отмена</button>
+                }
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 export default News;

@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './Forum.module.scss';
-import more from './../../asets/image/more.svg'
+import up from './../../asets/image/up.svg'
 import ForumItem from './ForumItem/ForumItem';
 import NewForum from './NewForum/NewForum';
 
@@ -21,7 +21,7 @@ const Forum = (props) => {
                                 <div className={style['theme']}>{item.theme}</div>
                             </div>
                             <p>Ответов: <span>{/* количество ответов */}</span></p>
-                            <div className={style['more']}>Подробнее<img src={more} alt="" /></div>
+                            <div className={style['more']}>Подробнее<img src={up} alt="" /></div>
                         </div>
                     </div>
                 </>)

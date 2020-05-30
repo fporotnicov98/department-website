@@ -2,7 +2,7 @@ import React from 'react';
 import style from './NewPost.module.scss'
 import user from './../../../asets/image/user.png'
 import { reduxForm, Field } from 'redux-form';
-import {addPost} from './../../../redux/newsReducer'
+import {addPost,toggleShowPostForm} from './../../../redux/newsReducer'
 import { connect } from 'react-redux';
 
 
@@ -39,6 +39,7 @@ const NewPost = (props) => {
 
     const onSubmit = (values) => {
         props.addPost(values.newPostTheme,values.newPostText)
+        props.toggleShowPostForm(false)
     }
 
     return (
@@ -56,4 +57,4 @@ const NewPost = (props) => {
     );
 }
 
-export default connect(null, {addPost})(NewPost)
+export default connect(null, {addPost,toggleShowPostForm})(NewPost)
