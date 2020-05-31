@@ -2,22 +2,30 @@ import React from 'react'
 import style from './Survey.module.scss';
 import user from './../../asets/image/user.png'
 import NewSurvey from './NewSurvey/NewSurvey';
-import Polls from 'react-polls'
+import Poll from 'react-polls'
 
-const pollQuestion = 'Is react-polls useful?'
-const pollAnswers = [
-  { option: 'Yes', votes: 8 },
-  { option: 'No', votes: 2 }
-]
 
 class Survey extends React.Component {
-    render(){
+ 
+    handleVote = (voteAnswer,pollAnswers, pollNumber) => {
+        const newPollAnswers = pollAnswers.map(answer => {
+            if (answer.option === voteAnswer) answer.votes++
+            return answer
+        })
+        this.props.setNewAnswers(newPollAnswers,pollNumber)
+    }
+    render() {
         return (
-            
-             <NewSurvey />
-                
+            <>
+                {
+                this.props.survey.map(poll => 
+
+                <Poll question={poll.question} answers={poll.answers} onVote={voteAnswer => this.handleVote(voteAnswer,poll.answers,poll.id)}  noStorage />
+                )}
+                <NewSurvey />
+            </>
         )
     }
-    
+
 }
 export default Survey
