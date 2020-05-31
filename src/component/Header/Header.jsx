@@ -25,7 +25,7 @@ class Header extends React.Component {
                         <a className={style['logo']} href="/"><img src={logo} alt="" /></a>
                         <a href="/" className={style['title']}>Кафедра информационной безопасности</a>
                         <ul className={style['buttons-menu']}>
-                            <li><NavLink to='/' activeClassName={style['active-link']}>Новости</NavLink></li>
+                            <li><NavLink exact to='/' activeClassName={style['active-link']}>Новости</NavLink></li>
                             <li><NavLink to='/survey' activeClassName={style['active-link']}>Опросы</NavLink></li>
                             <li><NavLink to='/forum' activeClassName={style['active-link']}>Форум</NavLink></li>
                             <li><NavLink to='/info' activeClassName={style['active-link']}>Информация</NavLink></li>
