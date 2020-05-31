@@ -5,9 +5,7 @@ import NewPost from './NewPost/NewPost';
 
 
 const News = (props) => {
-  
         return (
-            
             <div>
                 <div className={style['news']}>
                     <Slider />

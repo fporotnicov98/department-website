@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Forum from './Forum'
+import { toggleShowPostForm } from "../../redux/forumReducer";
 
 
 class ForumContainer extends React.Component {
@@ -13,8 +14,10 @@ class ForumContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        forumPage: state.forumPage
+        posts: state.forumPage.posts,
+        isToggleShowPostForm: state.forumPage.isToggleShowPostForm
+
     }
 }
 
-export default connect(mapStateToProps)(ForumContainer)
+export default connect(mapStateToProps,{toggleShowPostForm})(ForumContainer)
