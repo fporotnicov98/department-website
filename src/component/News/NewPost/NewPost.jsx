@@ -2,8 +2,11 @@ import React from 'react';
 import style from './NewPost.module.scss'
 import user from './../../../asets/image/user.png'
 import { reduxForm, Field } from 'redux-form';
+import {addPost,toggleShowPostForm} from './../../../redux/newsReducer'
+import { connect } from 'react-redux';
 
-let NewPostForm = (props) => {
+
+let PostForm = (props) => {
     debugger
     return (
         <form onSubmit={props.handleSubmit}>
@@ -30,12 +33,13 @@ let NewPostForm = (props) => {
     )
 }
 
-NewPostForm = reduxForm({ form: 'newPostForm' })(NewPostForm)
+const NewPostForm = reduxForm({ form: 'PostForm' })(PostForm)
 
 const NewPost = (props) => {
 
-    let addPost = (values) => {
-        props.onSendPost(values.newPostTheme)
+    const onSubmit = (values) => {
+        props.addPost(values.newPostTheme,values.newPostText)
+        props.toggleShowPostForm(false)
     }
 
     return (
@@ -46,11 +50,11 @@ const NewPost = (props) => {
             </div>
             <div className={style['body__content']}>
                 <div className={style['content']}>
-                    <NewPostForm onSubmit={addPost} />
+                    <NewPostForm onSubmit={onSubmit} />
                 </div>
             </div>
         </div>
     );
 }
 
-export default NewPost;
+export default connect(null, {addPost,toggleShowPostForm})(NewPost)

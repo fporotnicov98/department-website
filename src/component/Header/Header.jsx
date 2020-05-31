@@ -22,10 +22,10 @@ class Header extends React.Component {
             <header>
                 <div className={style['container']}>
                     <div className={style['header__row']}>
-                        <a className={style['logo']} href="#s"><img src={logo} alt="" /></a>
-                        <a href="#s" className={style['title']}>Кафедра информационной безопасности</a>
+                        <a className={style['logo']} href="/"><img src={logo} alt="" /></a>
+                        <a href="/" className={style['title']}>Кафедра информационной безопасности</a>
                         <ul className={style['buttons-menu']}>
-                            <li><NavLink to='/news' activeClassName={style['active-link']}>Новости</NavLink></li>
+                            <li><NavLink to='/' activeClassName={style['active-link']}>Новости</NavLink></li>
                             <li><NavLink to='/survey' activeClassName={style['active-link']}>Опросы</NavLink></li>
                             <li><NavLink to='/forum' activeClassName={style['active-link']}>Форум</NavLink></li>
                             <li><NavLink to='/info' activeClassName={style['active-link']}>Информация</NavLink></li>

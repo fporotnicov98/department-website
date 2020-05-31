@@ -1,41 +1,47 @@
 import { getDate } from "../component/commons/date";
 
-const SHOW_COMMENT = 'SHOW_COMMENT';
-const ON_SEND_POST = 'ON_SEND_POST';
-
 let initialState = {
     posts: [
         { id: 1, photos: { large: '', small: '' }, author: 'Fedor', theme: 'Открытая лекция', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam molestie dapibus nulla, ac varius lacus elementum et. Nullam nec purus justo. Nullam bibendum velit nec viverra faucibus. Cras mauris est, tincidunt vel massa at', datatime: '02.12.2019 09:45', comment: [{ id: 0, photos: { large: '', small: '' }, author: 'Viktor', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam molestie dapibus nulla, ac varius lacus elementum et. Nullam nec purus justo. Nullam bibendum velit nec viverra faucibus. Cras mauris est, tincidunt vel massa at.', datatime: '02.12.2019 09:45' }, { id: 1, photos: { large: '', small: '' }, author: 'Alexey', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam molestie dapibus nulla, ac varius lacus elementum et.', datatime: '02.12.2019 09:45' }] },
         { id: 2, photos: { large: '', small: '' }, author: 'Andrey', theme: 'Митап по информационной безопасности', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam molestie dapibus nulla, ac varius lacus elementum et.', datatime: '23.06.2020 13:23', comment: [{ id: 0, photos: { large: '', small: '' }, author: 'Nikolay', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam molestie dapibus nulla, ac varius lacus elementum et. Nullam nec purus justo. Nullam bibendum velit nec viverra faucibus. Cras mauris est, tincidunt vel massa at.', datatime: '02.12.2019 09:45' }] }
     ],
-    isToggleShowComment: false,
+    postId: [],
+    isToggleShowPostForm: false
 };
 
 const newsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SHOW_COMMENT:
+        case "SET_POST_ID":
+            let newId = {
+                id: action.payload
+            }
             return {
                 ...state,
-                posts: [...state.posts.map(item => {
-                    if (item.id === action.postId) {
-                        return { ...item }
-                    } else return item
-                })],
-                isToggleShowComment: true
+                postId: [...state.postId, newId]
             }
-        case ON_SEND_POST:
+        case "REMOVE_POST_ID":
+            return {
+                ...state,
+                postId: state.postId.filter(o => o.id !== action.payload)
+            };
+        case "ADD_POST":
             let newPost = {
-                id: `f${(+new Date).toString(16)}`,
+                id: 3,
                 photos: {},
                 author: 'Fedor',
-                theme: action.enteredText,
-                text: action.enteredTheme,
+                theme: action.theme,
+                text: action.text,
                 datatime: getDate(),
                 comment: []
             }
             return {
-                ...state,
+                state,
                 posts: [...state.posts, newPost]
+            }
+        case "TOGGLE_SHOW_POST_FORM":
+            return {
+                ...state,
+                isToggleShowPostForm: action.payload
             }
         default:
             return state;
@@ -43,7 +49,9 @@ const newsReducer = (state = initialState, action) => {
 
 };
 
-export const showComment = (postId) => ({ type: SHOW_COMMENT, payload: postId })
-export const onSendPost = (enteredText, enteredTheme) => ({ type: ON_SEND_POST, enteredTheme, enteredText })
+export const setPostId = (id) => ({ type: "SET_POST_ID", payload: id })
+export const removePostId = (id) => ({ type: "REMOVE_POST_ID", payload: id })
+export const addPost = (theme, text) => ({ type: "ADD_POST", theme, text })
+export const toggleShowPostForm = (isShow) => ({ type: "TOGGLE_SHOW_POST_FORM", payload: isShow })
 
 export default newsReducer;

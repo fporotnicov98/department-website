@@ -15,7 +15,7 @@ const App = () => {
         <Header />
         <div className={style['container']}>
           <Switch>
-            <Route path='/news' render={() => <NewsContainer />} />
+            <Route exact path='/' render={() => <NewsContainer />} />
             <Route path='/survey' render={() => <SurveyContainer />} />
             <Route exact path='/forum' render={() => <ForumContainer />} />
             <Route path='/info' render={() => <Information />} />

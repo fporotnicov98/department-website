@@ -1,21 +1,18 @@
 // import React from 'react'
 import News from './News'
 import { connect } from 'react-redux'
-import { showComment, onSendPost } from './../../redux/newsReducer'
+import { toggleShowPostForm,setPostId,removePostId} from "../../redux/newsReducer";
+import uniqBy from 'lodash/uniqBy'
 
 
-// class NewsContainer extends React.Component {
-//     render() {
-//         return <>
-//             <News {...this.props} />
-//         </>
-//     }
-// }
+
 
 let mapStateToProps = (state) => {
     return {
-        newsPage: state.newsPage
+        posts: state.newsPage.posts,
+        postId: uniqBy(state.newsPage.postId, o => o.id),
+        isToggleShowPostForm:state.newsPage.isToggleShowPostForm,
     }
 }
 
-export default connect(mapStateToProps, {showComment, onSendPost})(News)
+export default connect(mapStateToProps, {toggleShowPostForm,setPostId,removePostId})(News)
