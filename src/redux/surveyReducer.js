@@ -3,8 +3,8 @@
 let initialState = {
     survey: [
         { id: 1, question: 'Открытая лекция', answers: [{ option: 'Да', votes: 0 }, { option: 'Нет', votes: 0 }] },
-        { id: 2, question: 'Пойти нахуй', answers: [{ option: 'Да', votes: 4 }, { option: 'Нет', votes: 0 }] },
-        { id: 3, question: 'Остаться дома', answers: [{ option: 'Да', votes: 0 }, { option: 'Нет', votes: 5 }] },
+        { id: 2, question: 'Пойти нахуй', answers: [{ option: 'Да', votes: 0 }, { option: 'Нет', votes: 0 }] },
+        { id: 3, question: 'Остаться дома', answers: [{ option: 'Да', votes: 0 }, { option: 'Нет', votes: 0 }] },
 
     ]
 };
@@ -15,12 +15,17 @@ const surveyReducer = (state = initialState, action) => {
             return {
                 ...state,
                 survey: state.survey.map(item => {
-                    if(item.id === action.id){
+                    if (item.id === action.id) {
                         item.answers = action.answer
-                        return {...item }
+                        return { ...item }
                     }
                     return item
                 })
+            }
+        case 'ADD_NEW_SURVEY':
+            return {
+                ...state,
+                survey: [...state.survey, { id: 4, question: action.payload, answers: [{ option: 'Да', votes: 0 }, { option: 'Нет', votes: 0 }] }]
             }
         default:
             return state;
@@ -28,6 +33,7 @@ const surveyReducer = (state = initialState, action) => {
 
 };
 
-export const setNewAnswers = (answer, id) => ({ type: "SET_NEW_ANSWERS", answer, id })
+export const setNewAnswers = (answer, id) => ({ type: "SET_NEW_ANSWERS", answer, id });
+export const addNewSurvey = (question) => ({ type: "SET_NEW_ANSWERS", payload: question });
 
 export default surveyReducer;

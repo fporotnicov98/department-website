@@ -10,7 +10,7 @@ import Information from './component/Imformation/Information';
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <div>
         <Header />
         <div className={style['container']}>
