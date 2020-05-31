@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "847bbbf289855beb87d4b791272b6310",
+    "revision": "d533f4dbf37adffe1a968bfe71304162",
     "url": "/department-website/index.html"
   },
   {
-    "revision": "a259eeae9d1c84ed15e6",
+    "revision": "8887f3d384e4e34b3b73",
     "url": "/department-website/static/css/2.b18f5fde.chunk.css"
   },
   {
-    "revision": "66747f64029973efbb0a",
+    "revision": "fbe1e2c3e7e7f44ecc17",
     "url": "/department-website/static/css/main.e19c3615.chunk.css"
   },
   {
-    "revision": "a259eeae9d1c84ed15e6",
-    "url": "/department-website/static/js/2.d425d1d6.chunk.js"
+    "revision": "8887f3d384e4e34b3b73",
+    "url": "/department-website/static/js/2.c7ce5ef7.chunk.js"
   },
   {
     "revision": "3453b8997016469371284a28c0e873e2",
-    "url": "/department-website/static/js/2.d425d1d6.chunk.js.LICENSE.txt"
+    "url": "/department-website/static/js/2.c7ce5ef7.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "66747f64029973efbb0a",
-    "url": "/department-website/static/js/main.53774150.chunk.js"
+    "revision": "fbe1e2c3e7e7f44ecc17",
+    "url": "/department-website/static/js/main.063fd404.chunk.js"
   },
   {
     "revision": "29a6d80cf49939004324",
@@ -46,10 +46,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "20473e1c530bf9a1952ec555c7890659",
     "url": "/department-website/static/media/5.20473e1c.jpg"
-  },
-  {
-    "revision": "27ab2d2ea3e7fe65921d52a3b84e7bca",
-    "url": "/department-website/static/media/down.27ab2d2e.svg"
   },
   {
     "revision": "b8f80926c10054ac5a936f7beaab0e94",
