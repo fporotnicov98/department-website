@@ -18,6 +18,7 @@ let PostForm = (props) => {
                     type='text'
                     id='newPostTheme'
                     placeholder='Тема поста...'
+                    required='required'
                 />
             </div>
             <div className={style['text']}>
@@ -26,6 +27,7 @@ let PostForm = (props) => {
                     component='textarea'
                     id='newPostText'
                     placeholder='Содержание поста...'
+                    required='required'
                 />
             </div>
             <button className={style['btn-public']}>Опубликовать</button>

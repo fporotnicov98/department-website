@@ -36,6 +36,10 @@ const Comment = (props) => {
 }
 
 const News = (props) => {
+    // let truncate = (str, maxlength) => {
+    //     return (str.length > maxlength) ?
+    //         str.slice(0, maxlength - 1) + ". . ." : str;
+    // }
     return (
         <div>
             <div className={style['news']}>
@@ -44,28 +48,32 @@ const News = (props) => {
                     {
                         props.posts.map(post =>
                             <div key={post.id} className={style['item']}>
-                                <div className={style['author']}>
+                                {/* <div className={style['author']}>
                                     <div className={style['photo']}><img src={user} alt="" /></div>
                                     <p>{post.author}</p>
-                                </div>
+                                </div> */}
                                 <div className={style['body__content']}>
                                     <div className={style['content']}>
                                         <div className={style['theme']}>{post.theme}</div>
-                                        <div className={style['text']}>{post.text}</div>
+                                        <div className={style['text']}>{post.text.length > 100 ? post.text.slice(0, 99) + '. . .' : post.text}</div>
                                         <div className={style['data']}>{post.datatime}</div>
-                                        <button onClick={() => {
+                                        {/* <button onClick={() => {
                                             if (props.postId.some(item => item.id === post.id)){
                                                 props.removePostId(post.id)
                                             } else {
                                                 props.setPostId(post.id)
                                             }
                                         }
-                                        } className={style['btn-comment']}>Комментировать<img className={style['more']} src={props.postId.some(item => item.id === post.id) ? down : up} alt="" /></button>
+                                        } className={style['btn-comment']}>Комментировать<img className={style['more']} src={props.postId.some(item => item.id === post.id) ? down : up} alt="" /></button> */}
                                     </div>
-                                    <div className={style['comment']}>
+                                    <div className={style['footer']}>
+                                        <div className={style['author']}>{post.author}</div>
+                                        <button className={style['show-more']}>Подробнее</button>
+                                    </div>
+                                    {/* <div className={style['comment']}>
                                         {props.postId.some(item => item.id === post.id) && <Comment comments={post.comment} />}
 
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         )}
@@ -73,8 +81,8 @@ const News = (props) => {
                 </div>
                 {
                     !props.isToggleShowPostForm
-                    ?<button onClick={() => props.toggleShowPostForm(true)} className={style['btn-add-post']}>Добавить новость</button>
-                    :<button onClick={() => props.toggleShowPostForm(false)} className={style['btn-add-post']}>Отмена</button>
+                        ? <button onClick={() => props.toggleShowPostForm(true)} className={style['btn-add-post']}>Добавить новость</button>
+                        : <button onClick={() => props.toggleShowPostForm(false)} className={style['btn-add-post']}>Отмена</button>
                 }
             </div>
         </div>
