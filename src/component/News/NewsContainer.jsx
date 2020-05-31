@@ -1,7 +1,7 @@
 // import React from 'react'
 import News from './News'
 import { connect } from 'react-redux'
-import { toggleShowPostForm,setPostId,removePostId} from "../../redux/newsReducer";
+import { toggleShowPostForm,setPostId,removePostId,addComment} from "../../redux/newsReducer";
 import uniqBy from 'lodash/uniqBy'
 
 
@@ -15,4 +15,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {toggleShowPostForm,setPostId,removePostId})(News)
+export default connect(mapStateToProps, {toggleShowPostForm,setPostId,removePostId,addComment})(News)
