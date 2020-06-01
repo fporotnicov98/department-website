@@ -38,7 +38,7 @@ const NewPostForm = reduxForm({ form: 'PostForm' })(PostForm)
 const NewPost = (props) => {
 
     const onSubmit = (values) => {
-        props.addPost(values.newPostTheme, values.newPostText)
+        props.addPost(values.newPostTheme, values.newPostText);
         props.toggleShowPostForm(false)
     }
 

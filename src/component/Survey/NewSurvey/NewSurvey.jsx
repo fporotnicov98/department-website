@@ -1,24 +1,39 @@
 import React from 'react';
 import style from './NewSurvey.module.scss';
+import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import { addNewSurvey, toggleShowNewSurvey } from "./../../../redux/surveyReducer";
 
-class NewSurvey extends React.Component {
-    state = {
-        question :null
+
+let SurveyForum = (props) => {
+    return (
+        <form className={style['content']} onSubmit={props.handleSubmit}>
+            <label className={style['theme']} htmlFor="newSurvey">Тема: </label>
+            <Field
+                component='input'
+                type='text'
+                required='required'
+                name='newSurvey'
+            />
+            <button className={style['btn']}>Добавить</button>
+        </form>
+    )
+}
+
+SurveyForum = reduxForm({ form: 'surveyForum' })(SurveyForum)
+
+const NewSurvey = (props) => {
+
+    let onSubmit = (values) => {
+        props.addNewSurvey(values.newSurvey);
+        props.toggleShowNewSurvey(false)
     }
-    setTheme = (question) => {
-        this.setState({question: question})
-    }
-    render() {
-        return (
-            <div className={style['item']}>
-                <div className={style['content']}>
-                    <div className={style['theme']}>Тема опроса: <input type="text" onChange = {(e) => this.setTheme(e.target.value)} required='required'/></div>
-                    <a onClick = {() => this.props.addNewSurvey(this.state.question)} className={style['btn']} href="#s">Опубликовать</a>
-                </div>
-            </div>
-        );
-    }
+    return (
+        <div className={style['item']}>
+            <SurveyForum onSubmit={onSubmit} />
+        </div>
+    )
 
 };
 
-export default NewSurvey;
+export default connect(null, {toggleShowNewSurvey, addNewSurvey})(NewSurvey);

@@ -3,10 +3,10 @@
 let initialState = {
     survey: [
         { id: 1, question: 'Открытая лекция', answers: [{ option: 'Да', votes: 0 }, { option: 'Нет', votes: 0 }] },
-        { id: 2, question: 'Пойти нахуй', answers: [{ option: 'Да', votes: 0 }, { option: 'Нет', votes: 0 }] },
+        { id: 2, question: 'Митап по информационной безопасности', answers: [{ option: 'Да', votes: 0 }, { option: 'Нет', votes: 0 }] },
         { id: 3, question: 'Остаться дома', answers: [{ option: 'Да', votes: 0 }, { option: 'Нет', votes: 0 }] },
-
-    ]
+    ],
+    isToggleShowNewSurvey: false
 };
 
 const surveyReducer = (state = initialState, action) => {
@@ -27,12 +27,18 @@ const surveyReducer = (state = initialState, action) => {
                 ...state,
                 survey: [...state.survey, { id: 4, question: action.payload, answers: [{ option: 'Да', votes: 0 }, { option: 'Нет', votes: 0 }] }]
             }
+        case 'TOGGLE_SHOW_NEW_SURVEY':
+        return {
+            ...state,
+            isToggleShowNewSurvey: action.payload
+        }
         default:
             return state;
     }
 
 };
 
+export const toggleShowNewSurvey = (isToggleShow) => ({type: 'TOGGLE_SHOW_NEW_SURVEY', payload: isToggleShow})
 export const setNewAnswers = (answer, id) => ({ type: "SET_NEW_ANSWERS", answer, id });
 export const addNewSurvey = (question) => ({ type: "ADD_NEW_SURVEY", payload: question });
 

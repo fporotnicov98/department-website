@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './Forum.module.scss';
 import up from './../../asets/image/up.svg'
-import ForumItem from './ForumItem/ForumItem';
+// import ForumItem from './ForumItem/ForumItem';
 import NewForum from './NewForum/NewForum';
 
 
