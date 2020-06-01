@@ -3,7 +3,7 @@ import style from './NewSurvey.module.scss';
 
 class NewSurvey extends React.Component {
     state = {
-        question : ""
+        question :null
     }
     setTheme = (question) => {
         this.setState({question: question})
