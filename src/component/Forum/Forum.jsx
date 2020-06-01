@@ -7,12 +7,12 @@ import NewForum from './NewForum/NewForum';
 
 
 const Forum = (props) => {
-    debugger
+
     return (
         <>
         <div className={style['news']}>
             {
-                props.forumPage.posts.map((item) => <>
+                props.posts.map((item) => <>
                     <div className={style['themes']}>
                         <div key={item.id} className={style['item']}>
                             <div className={style['content']}>
@@ -26,10 +26,13 @@ const Forum = (props) => {
                     </div>
                 </>)
             }
-            <button className={style['btn-add-post']}>Создать новую тему</button>
+            {   !props.isToggleShowPostForm
+                ? <button  onClick={() => props.toggleShowPostForm(true)}  className={style['btn-add-post']}>Создать новую тему</button>
+                : <button onClick={() => props.toggleShowPostForm(false)}  className={style['btn-add-post']}>Отмена</button>
+            }
+            
         </div >
-        <ForumItem {...props} answers={props.forumPage.posts[0]}/>
-        <NewForum />
+        {props.isToggleShowPostForm && <NewForum />}
         </>
 
     )

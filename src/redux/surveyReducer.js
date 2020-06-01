@@ -34,6 +34,6 @@ const surveyReducer = (state = initialState, action) => {
 };
 
 export const setNewAnswers = (answer, id) => ({ type: "SET_NEW_ANSWERS", answer, id });
-export const addNewSurvey = (question) => ({ type: "SET_NEW_ANSWERS", payload: question });
+export const addNewSurvey = (question) => ({ type: "ADD_NEW_SURVEY", payload: question });
 
 export default surveyReducer;
