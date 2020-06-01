@@ -14,16 +14,17 @@ class Survey extends React.Component {
         })
         this.props.setNewAnswers(newPollAnswers, pollNumber)
     }
-    
+
     render() {
         return (
             <>
                 {
                     this.props.survey.map(poll =>
-
-                        <Poll question={poll.question} answers={poll.answers} onVote={voteAnswer => this.handleVote(voteAnswer, poll.answers, poll.id)} noStorage />
+                        <div className={style['item']}>
+                            <Poll question={poll.question} answers={poll.answers} onVote={voteAnswer => this.handleVote(voteAnswer, poll.answers, poll.id)} noStorage />
+                        </div>
                     )}
-                <NewSurvey addNewSurvey = {this.props.addNewSurvey}/>
+                <NewSurvey addNewSurvey={this.props.addNewSurvey} />
             </>
         )
     }

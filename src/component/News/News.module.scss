@@ -13,31 +13,6 @@
             display: flex;
             box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
             margin-bottom: 20px;
-            // .author {
-            //     display: flex;
-            //     flex-direction: column;
-            //     justify-content: center;
-            //     align-items: center;
-            //     width: 17%;
-            //     border-right: 1px solid rgb(158, 158, 158);
-            //     height: unset;
-            //     background: #d5d5d5;
-            //     p {
-            //         margin-top: 10px;
-            //         font-weight: bold;
-            //         font-size: 15px;
-            //         color: #848484;
-            //     }
-            //     .photo {
-            //         display: flex;
-            //         align-items: center;
-            //         justify-content: center;
-            //         width: 70px;
-            //         height: 70px;
-            //         border-radius: 50%;
-            //         background: #f7f7f7;
-            //     }
-            // }
             .body__content {
                 width:100%;
                 margin: 0 auto;
@@ -89,6 +64,7 @@
                     }
                     .show-more {
                         background: none;
+                        transition: height 0.5s ease 0.5s;
                     }
                 }
                 .comment {
