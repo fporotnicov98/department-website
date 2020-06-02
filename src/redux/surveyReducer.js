@@ -25,7 +25,7 @@ const surveyReducer = (state = initialState, action) => {
         case 'ADD_NEW_SURVEY':
             return {
                 ...state,
-                survey: [{ id: 4, question: action.payload, answers: [{ option: 'Да', votes: 0 }, { option: 'Нет', votes: 0 }] }, ...state.survey]
+                survey: [...state.survey, { id: 4, question: action.payload, answers: [{ option: 'Да', votes: 0 }, { option: 'Нет', votes: 0 }] } ]
             }
         case 'TOGGLE_SHOW_NEW_SURVEY':
         return {
