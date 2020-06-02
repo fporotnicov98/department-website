@@ -1,10 +1,16 @@
 import React from "react";
 import Carousel from "./Carousel";
+import { connect } from "react-redux";
 
-const Slider = () => {
+const Slider = (props) => {
     return (
-        <Carousel />
+        <Carousel {...props} />
     );
 };
 
-export default Slider;
+let mapStateToProps = (state) => {
+    return {
+        posts: state.newsPage.posts,
+    }
+}
+export default connect(mapStateToProps)(Slider);

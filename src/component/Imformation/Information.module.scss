@@ -45,9 +45,11 @@
             div {
                 display: flex;
                 justify-content: space-between;
+                margin: 15px auto;
             }
             h1 {
                 flex: 0 0 48%;
+                font-weight: 500;
             }
             span {
                 text-align: right;

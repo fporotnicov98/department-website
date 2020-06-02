@@ -14,7 +14,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.75);
         margin-left: auto;
         margin-right: auto;
         border-radius: 20px;
@@ -111,6 +111,7 @@
                     }
                 }
                 .clear {
+                    background: none;
                     font-weight: bold;
                     font-size: 14px;
                     line-height: 18px;
@@ -198,6 +199,7 @@
                     line-height: 18px;
                     margin-bottom: 15px;
                     color: #b0b0b0;
+                    background: none;
                 }
             }
         }
@@ -211,7 +213,9 @@
             line-height: 18px;
             margin-bottom: 15px;
             color: #b0b0b0;
+            
             button {
+                background: none;
                 margin-left: 10px;
                 font-weight: 500;
                 color: #2225e4;

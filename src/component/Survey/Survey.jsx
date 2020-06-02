@@ -35,7 +35,7 @@ class Survey extends React.Component {
                 {this.props.isToggleShowNewSurvey && <NewSurvey toggleShowNewSurvey={this.toggleShowNewSurvey} addNewSurvey={this.props.addNewSurvey} />}
                 {
                     !this.props.isToggleShowNewSurvey
-                        ? <button onClick={() => this.props.toggleShowNewSurvey(true)} className={style['btn-add-post']}>Добавить новость</button>
+                        ? <button onClick={() => this.props.toggleShowNewSurvey(true)} className={style['btn-add-post']}>Добавить опрос</button>
                         : <button onClick={() => this.props.toggleShowNewSurvey(false)} className={style['btn-add-post']}>Отмена</button>
                 }
             </div>

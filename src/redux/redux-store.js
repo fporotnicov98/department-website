@@ -10,7 +10,7 @@ let reducers = combineReducers({
     newsPage: newsReducer,
     surveyPage: surveyReducer,
     forumPage: forumReducer,
-    form: formReducer
+    form: formReducer,
 })
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware))
