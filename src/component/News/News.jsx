@@ -9,7 +9,13 @@ const News = (props) => {
         <div>
             <div className={style['news']}>
                 <Slider />
+                {
+                    !props.isToggleShowPostForm
+                        ? <button onClick={() => props.toggleShowPostForm(true)} className={style['btn-add-post']}>Добавить новость</button>
+                        : <button onClick={() => props.toggleShowPostForm(false)} className={style['btn-add-post']}>Отмена</button>
+                }
                 <div className={style['body']}>
+                    {props.isToggleShowPostForm && <NewPost />}
                     {
                         props.posts.map(post =>
                             <div key={post.id} className={style['item']}>
@@ -29,13 +35,7 @@ const News = (props) => {
                                 </div>
                             </div>
                         )}
-                    {props.isToggleShowPostForm && <NewPost />}
                 </div>
-                {
-                    !props.isToggleShowPostForm
-                        ? <button onClick={() => props.toggleShowPostForm(true)} className={style['btn-add-post']}>Добавить новость</button>
-                        : <button onClick={() => props.toggleShowPostForm(false)} className={style['btn-add-post']}>Отмена</button>
-                }
             </div>
         </div >
     );
