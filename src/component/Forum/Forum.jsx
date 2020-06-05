@@ -34,12 +34,13 @@ class Forum extends React.Component {
                                     </div>
                                     <p>Ответов: <span>{/* количество ответов */}</span></p>
                                     <a href="#s" className={style['more']}>Подробнее...</a>
+                                    <button onClick = {()=> this.props.removeForumPost(item.id)}>Удалить</button>
                                 </div>
                             </div>
                         </>)
                     }
                 </div >
-                <NewForum addNewPostForum={this.props.addNewPostForum} isOpen={this.state.isModalOpen} onClose={() => this.closeModal()} />
+                <NewForum addForum={this.props.addForum} isOpen={this.state.isModalOpen} onClose={() => this.closeModal()} />
             </div>
         );
     }

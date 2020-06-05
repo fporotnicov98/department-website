@@ -26,5 +26,11 @@ const API = {
     getForum(){
         return instanse.get(`Forum/GetForum`)
     },
+    addForum(id,theme){
+        return instanse.post(`Forum/AddForum`,{id,theme})
+    },
+    removeForumPost(id){
+        return instanse.delete(`Forum/DeleteForum/?id=${id}`)
+    },
 }
 export default API

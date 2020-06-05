@@ -25,5 +25,17 @@ export const getForum = () => (dispatch) => {
             dispatch(setForumPosts((response.data)))
         })
 }
+export const addForum = (id,theme) => (dispatch) => {
+    API.addForum(id,theme)
+        .then(response => {
+            dispatch(getForum())
+        })
+}
+export const removeForumPost = (id) => (dispatch) => {
+    API.removeForumPost(id)
+    .then(response => {
+        dispatch(getForum())
+    })
+}
 
 export default forumReducer;
