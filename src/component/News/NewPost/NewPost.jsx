@@ -1,9 +1,10 @@
 import React from 'react';
 import style from './NewPost.module.scss'
 import { reduxForm, Field } from 'redux-form';
-import { addPost, toggleShowPostForm } from './../../../redux/newsReducer'
+import { addNews, toggleShowPostForm } from './../../../redux/newsReducer'
 import { connect } from 'react-redux';
 
+let date = new Date().toDateString();
 
 let PostForm = (props) => {
     return (
@@ -38,7 +39,7 @@ const NewPostForm = reduxForm({ form: 'PostForm' })(PostForm)
 const NewPost = (props) => {
 
     const onSubmit = (values) => {
-        props.addPost(values.newPostTheme, values.newPostText);
+        props.addNews(5,values.newPostTheme, values.newPostText,date);
         props.toggleShowPostForm(false)
     }
 
@@ -53,4 +54,4 @@ const NewPost = (props) => {
     );
 }
 
-export default connect(null, { addPost, toggleShowPostForm })(NewPost)
+export default connect(null, { addNews, toggleShowPostForm })(NewPost)

@@ -26,17 +26,17 @@ class Survey extends React.Component {
         return (
             <div className={style['survey']}>
                 {
+                    !this.props.isToggleShowNewSurvey
+                        ? <button onClick={() => this.props.toggleShowNewSurvey(true)} className={style['btn-add-post']}>Добавить опрос</button>
+                        : <button onClick={() => this.props.toggleShowNewSurvey(false)} className={style['btn-add-post']}>Отмена</button>
+                }
+                {this.props.isToggleShowNewSurvey && <NewSurvey toggleShowNewSurvey={this.toggleShowNewSurvey} addNewSurvey={this.props.addNewSurvey} />}
+                {
                     this.props.survey.map(poll =>
                         <div className={style['item']}>
                             <Poll customStyles={customStyles} question={poll.question} answers={poll.answers} onVote={voteAnswer => this.handleVote(voteAnswer, poll.answers, poll.id)} noStorage />
                         </div>
                     )
-                }
-                {this.props.isToggleShowNewSurvey && <NewSurvey toggleShowNewSurvey={this.toggleShowNewSurvey} addNewSurvey={this.props.addNewSurvey} />}
-                {
-                    !this.props.isToggleShowNewSurvey
-                        ? <button onClick={() => this.props.toggleShowNewSurvey(true)} className={style['btn-add-post']}>Добавить опрос</button>
-                        : <button onClick={() => this.props.toggleShowNewSurvey(false)} className={style['btn-add-post']}>Отмена</button>
                 }
             </div>
         )

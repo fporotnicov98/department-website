@@ -31,12 +31,12 @@ const Carousel = (props) => {
                             <div className={style['content']}>
                                 <div className={style['news']}>
                                     <div className={style['title']}>{item.theme}</div>
-                                    <div className={style['text']}>{item.text}</div>
+                                    <div className={style['text']}>{item.newsText}</div>
                                 </div>
                                 <div className={style['footer']}>
                                     <img src={logo} alt="" />
                                     <div className={style['author']}>{item.author}</div>
-                                    <div className={style['date']}>{item.datatime}</div>
+                                    <div className={style['date']}>{item.newsDate}</div>
                                 </div>
                             </div>
 

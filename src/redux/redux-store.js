@@ -6,6 +6,7 @@ import forumReducer from "./forumReducer";
 import { reducer as formReducer } from 'redux-form'
 
 
+
 let reducers = combineReducers({
     newsPage: newsReducer,
     surveyPage: surveyReducer,

@@ -2,7 +2,7 @@ import React from 'react';
 import style from './NewSurvey.module.scss';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
-import { addNewSurvey, toggleShowNewSurvey } from "./../../../redux/surveyReducer";
+import {  toggleShowNewSurvey } from "./../../../redux/surveyReducer";
 
 
 let SurveyForum = (props) => {
@@ -25,7 +25,6 @@ SurveyForum = reduxForm({ form: 'surveyForum' })(SurveyForum)
 const NewSurvey = (props) => {
 
     let onSubmit = (values) => {
-        props.addNewSurvey(values.newSurvey);
         props.toggleShowNewSurvey(false)
     }
     return (
@@ -36,4 +35,4 @@ const NewSurvey = (props) => {
 
 };
 
-export default connect(null, {toggleShowNewSurvey, addNewSurvey})(NewSurvey);
+export default connect(null, {toggleShowNewSurvey})(NewSurvey);

@@ -1,31 +1,16 @@
-
+import API from '../API/API'
 
 let initialState = {
-    survey: [
-        { id: 1, question: 'Открытая лекция', answers: [{ option: 'Да', votes: 0 }, { option: 'Нет', votes: 0 }] },
-        { id: 2, question: 'Митап по информационной безопасности', answers: [{ option: 'Да', votes: 0 }, { option: 'Нет', votes: 0 }] },
-        { id: 3, question: 'Остаться дома', answers: [{ option: 'Да', votes: 0 }, { option: 'Нет', votes: 0 }] },
-    ],
+    survey: [],
     isToggleShowNewSurvey: false
 };
 
 const surveyReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "SET_NEW_ANSWERS":
+        case 'SET_POLL':
             return {
                 ...state,
-                survey: state.survey.map(item => {
-                    if (item.id === action.id) {
-                        item.answers = action.answer
-                        return { ...item }
-                    }
-                    return item
-                })
-            }
-        case 'ADD_NEW_SURVEY':
-            return {
-                ...state,
-                survey: [...state.survey, { id: 4, question: action.payload, answers: [{ option: 'Да', votes: 0 }, { option: 'Нет', votes: 0 }] } ]
+                survey: action.payload
             }
         case 'TOGGLE_SHOW_NEW_SURVEY':
         return {
@@ -40,6 +25,13 @@ const surveyReducer = (state = initialState, action) => {
 
 export const toggleShowNewSurvey = (isToggleShow) => ({type: 'TOGGLE_SHOW_NEW_SURVEY', payload: isToggleShow})
 export const setNewAnswers = (answer, id) => ({ type: "SET_NEW_ANSWERS", answer, id });
-export const addNewSurvey = (question) => ({ type: "ADD_NEW_SURVEY", payload: question });
+export const setPolls = (poll) => ({ type: "SET_POLL", payload: poll });
 
 export default surveyReducer;
+
+export const getPolls = () => (dispatch) => {
+    API.getPolls()
+        .then(response => {
+            dispatch(setPolls((response.data)))
+        })
+}

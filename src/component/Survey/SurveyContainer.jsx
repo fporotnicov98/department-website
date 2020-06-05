@@ -1,10 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Survey from './Survey'
-import { setNewAnswers, addNewSurvey, toggleShowNewSurvey } from "../../redux/surveyReducer";
+import { setNewAnswers, getPolls, toggleShowNewSurvey } from "../../redux/surveyReducer";
 
 
 class SurveyContainer extends React.Component {
+
+    componentDidMount(){
+        this.props.getPolls()
+    }
     render() {
         return <>
             <Survey {...this.props} />
@@ -19,4 +23,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { setNewAnswers, addNewSurvey, toggleShowNewSurvey })(SurveyContainer)
+export default connect(mapStateToProps, { setNewAnswers, getPolls, toggleShowNewSurvey })(SurveyContainer)

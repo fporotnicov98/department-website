@@ -1,11 +1,23 @@
-// import React from 'react'
+import React from 'react'
 import News from './News'
 import { connect } from 'react-redux'
-import { toggleShowPostForm, setPostId, removePostId } from "../../redux/newsReducer";
+import { toggleShowPostForm} from "../../redux/newsReducer";
 import uniqBy from 'lodash/uniqBy'
+import { getNews,removeNews,updateNews } from "../../redux/newsReducer";
 
 
+class NewsContainer extends React.Component{
 
+    componentDidMount(){
+        this.props.getNews()
+    }
+
+    render(){
+        return(
+            <News {...this.props}/>
+        )
+    }
+}
 
 let mapStateToProps = (state) => {
     return {
@@ -15,4 +27,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { toggleShowPostForm, setPostId, removePostId })(News)
+export default connect(mapStateToProps, { toggleShowPostForm,getNews,removeNews,updateNews })(NewsContainer)
