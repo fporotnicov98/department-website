@@ -35,7 +35,6 @@ const newsReducer = (state = initialState, action) => {
         case "ADD_POST":
             let newPost = {
                 id: 6,
-                photos: null,
                 author: 'Fedor',
                 theme: action.theme,
                 text: action.text,
