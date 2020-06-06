@@ -80,20 +80,22 @@
                     }
                     
                 }
-                .data {
-                    display: inline-block;
-                    font-size: 16px;
-                    color: #848484;
-                    margin-right: 30px;
-                    margin-bottom: 15px;
-                }
                 .footer {
-                    display: flex;
-                    justify-content: space-between;
+                    position: relative;
                     .author {
                         font-weight: bold;
+                        display: inline-block;
+                        margin-right: 15px;
+                    }
+                    .data {
+                        display: inline-block;
+                        font-size: 16px;
+                        color: #848484;
                     }
                     .show-more {
+                        position: absolute;
+                        bottom: 0;
+                        right: 0;
                         background: none;
                         transition: all 8s;
                     }

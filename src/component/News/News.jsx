@@ -105,11 +105,11 @@ class News extends React.Component {
                                                         }} className={style['edit']}><i class="fas fa-pencil-alt"></i></button></div>
                                                     </div>
                                             }
-                                            <div className={style['data']}>{post.newsDate}</div>
                                             <div className={style['footer']}>
                                                 <div className={style['author']}>{post.author}</div>
+                                                <div className={style['data']}>{post.newsDate}</div>
                                                 {this.state.detailId.some(item => item === post.id)
-                                                    ? <button onClick={() => this.removeDetailId(post.id)} style={post.newsText.length < 100 ? { display: 'none' } : null} className={style['show-more']}>Свернуть</button>
+                                                    ? <button onClick={() => this.removeDetailId(post.id)} style={this.state.updateId.some(item => item === post.id) && post.newsText.length < 100 ? { display: 'none' } : null} className={style['show-more']}>Свернуть</button>
                                                     : <button onClick={() => this.setDetailId(post.id)} style={post.newsText.length < 100 ? { display: 'none' } : null} className={style['show-more']}>Подробнее</button>
                                                 }
                                             </div>

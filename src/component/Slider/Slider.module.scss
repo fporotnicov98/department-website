@@ -46,7 +46,7 @@
                 .title {
                     text-align: center;
                     margin-bottom: 40px;
-                    font-size: 2em;
+                    font-size: 2.6em;
                     text-transform: uppercase;
                     font-weight: 700;
                     letter-spacing: 3px;
@@ -59,7 +59,7 @@
                     text-align: center;
                     color: #5e5e5e;
                     text-shadow: 0px 2px 6px rgb(180, 180, 180);
-                    font-size: 1.3em;
+                    font-size: 1.5em;
                 }
             }
             .footer {
@@ -72,10 +72,15 @@
                 border-top: 2px ridge rgb(158, 158, 158);
                 .author {
                     font-weight: 500;
-                    font-size: 1.3em;
+                    font-size: 1.8em;
                     color: #5e5e5e;
                 }
+                .date {
+                    font-size: 1.4em;
+                    color: #848484;
+                }
                 img {
+                    
                     height: 50px;
                 }
             }
