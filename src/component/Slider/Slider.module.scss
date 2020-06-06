@@ -1,11 +1,14 @@
 .wrapper {
     // overflow: hidden;
-    width: 100%;
+    width: 98%;
     margin: 0 auto;
+    border: 1px solid #7a7a7a;
+    box-shadow: 3px 3px 3px #7a7a7a;
+    margin-top: 20px;
     .item {
         background: #fff;
         position: relative;
-        height: 450px;
+        height: 630px;
         .body {
             // background-size: cover !important;
             opacity: 0.3;
@@ -20,7 +23,7 @@
             align-items: center;
             justify-content: center;
             img {
-                width: 70%;
+                width: 50%;
             }
         }
         .content {
@@ -79,8 +82,6 @@
         }
     }
 }
-
-
 
 .slick-prev {
     background-color: red;
