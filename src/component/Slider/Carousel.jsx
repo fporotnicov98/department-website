@@ -12,8 +12,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 
-const Carousel = (props) => {
-    const settings = {
+class Carousel extends React.Component {
+
+
+    settings = {
         dots: true,
         infinite: true,
         autoplay: true,
@@ -21,71 +23,33 @@ const Carousel = (props) => {
         pauseOnDotsHover: true,
 
     };
-    return (
-        <div className={style["wrapper"]}>
-            <Slider {...settings}>
-                {
-                    props.posts.map((item, index) =>
-                        <div key={index} className={style['item']}>
-                            <div className={style['body']} /* style={{ background: `url(${logo})` }} */ ><img src={logo} alt="" /></div>
-                            <div className={style['content']}>
-                                <div className={style['news']}>
-                                    <div className={style['title']}>{item.theme}</div>
-                                    <div className={style['text']}>{item.newsText}</div>
-                                </div>
-                                <div className={style['footer']}>
-                                    {/*  */}
-                                    <div className={style['author']}>{item.author}</div>
-                                    <div className={style['date']}>{item.newsDate}</div>
+    render() {
+        return (
+            <div className={style["wrapper"]}>
+                <Slider {...this.settings}>
+                    {
+                        this.props.sliderNews.map((item, index) =>
+                            <div key={index} className={style['item']}>
+                                <div className={style['body']} /* style={{ background: `url(${logo})` }} */ ><img src={logo} alt="" /></div>
+                                <div className={style['content']}>
+                                    <div className={style['news']}>
+                                        <div className={style['title']}>{item.theme}</div>
+                                        <div className={style['text']}>{item.newsText}</div>
+                                    </div>
+                                    <div className={style['footer']}>
+                                        {/*  */}
+                                        <div className={style['author']}>{item.author}</div>
+                                        <div className={style['date']}>{item.newsDate}</div>
+                                    </div>
                                 </div>
                             </div>
+                        )
+                    }
+                </Slider>
+            </div>
+        );
+    };
+}
 
-                        </div>
-                    )
-                }
-                {/* <div className={style['item']}>
-                    <div
-                        className={style["carrousel_image"]}
-                        style={{
-                            background: `url(${space1})`
-                        }}
-                    />
-                </div>
-                <div className={style['item']}>
-                    <div
-                        className={style["carrousel_image"]}
-                        style={{
-                            background: `url(${space2})`
-                        }}
-                    />
-                </div>
-                <div className={style['item']}>
-                    <div
-                        className={style["carrousel_image"]}
-                        style={{
-                            background: `url(${space3})`
-                        }}
-                    />
-                </div>
-                <div className={style['item']}>
-                    <div
-                        className={style["carrousel_image"]}
-                        style={{
-                            background: `url(${space4})`
-                        }}
-                    />
-                </div>
-                <div className={style['item']}>
-                    <div
-                        className={style["carrousel_image"]}
-                        style={{
-                            background: `url(${space5})`
-                        }}
-                    />
-                </div> */}
-            </Slider>
-        </div>
-    );
-};
 
 export default Carousel; 

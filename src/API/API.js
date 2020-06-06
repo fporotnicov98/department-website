@@ -41,8 +41,8 @@ const API = {
     removeForumPost(id) {
         return instanse.delete(`Forum/DeleteForum/?id=${id}`)
     },
-    updateForum(id, theme) {
-        return instanse.put(`Forum/UpdateForum`, { id, theme })
+    toggleImportantNews(id,isImportant){
+        return instanse.put(`News/UpdateNewsImportant`, {id,isImportant})
     }
 }
 export default API

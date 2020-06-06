@@ -12,7 +12,6 @@ class News extends React.Component {
         newsText: this.props.posts.newsText,
         newsTheme: this.props.posts.theme,
         updateId: [],
-        updateThemeId: [],
         detailId: [],
         isToggleShowPostForm: false
     }
@@ -27,12 +26,6 @@ class News extends React.Component {
     }
     removeUpdateId = (id) => {
         this.setState({ updateId: [...this.state.updateId.filter(o => o !== id)] })
-    }
-    setUpdateThemeId = (id) => {
-        this.setState({ updateThemeId: [...this.state.updateThemeId, id] })
-    }
-    removeUpdateThemeId = (id) => {
-        this.setState({ updateThemeId: [...this.state.updateThemeId.filter(o => o !== id)] })
     }
     setDetailId = (id) => {
         this.setState({ detailId: [...this.state.detailId, id] })
@@ -68,14 +61,6 @@ class News extends React.Component {
                                     <div key={post.id} className={style['item']}>
                                         <div className={style['body__content']}>
                                             <div className={style['buttons']}>
-                                                {/* {
-                                                this.state.updateThemeId.some(item => item === post.id)
-                                                && <button onClick={() => {
-                                                    this.removeUpdateThemeId(post.id)
-                                                    this.props.updateNews(post.id, this.state.newsTheme, this.state.newsText, date)
-                                                }
-                                                } className={style['edit']}><i class="fas fa-check"></i></button>
-                                            } */}
                                                 {
                                                     this.state.updateId.some(item => item === post.id)
                                                     && <button onClick={() => {
@@ -84,7 +69,7 @@ class News extends React.Component {
                                                     }
                                                     } className={style['edit']}><i class="fas fa-check"></i></button>
                                                 }
-                                                <button onClick={() => this.props.removeNews(post.id)} className={style['delete']}><i class="fas fa-trash-alt"></i></button>
+                                                <button onClick = {() => this.props.removeNews(post.id)} className={style['delete']}><i class="fas fa-trash-alt"></i></button>
                                             </div>
                                             {
                                                 this.state.updateId.some(item => item === post.id)
@@ -112,8 +97,12 @@ class News extends React.Component {
                                                     ? <button onClick={() => this.removeDetailId(post.id)} style={this.state.updateId.some(item => item === post.id) && post.newsText.length < 100 ? { display: 'none' } : null} className={style['show-more']}>Свернуть</button>
                                                     : <button onClick={() => this.setDetailId(post.id)} style={post.newsText.length < 100 ? { display: 'none' } : null} className={style['show-more']}>Подробнее</button>
                                                 }
+                                                <button onClick = {() => {
+                                                    this.props.toggleImportantNews(post.id,!post.isImportant)
+                                                    } }>ВАЖНОЕ</button>
                                             </div>
                                         </div>
+
                                     </div>
                                 )}
                         </div>

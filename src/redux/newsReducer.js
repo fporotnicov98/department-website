@@ -8,7 +8,8 @@ import API from '../API/API'
 
 let initialState = {
     posts: [],
-    
+    sliderNews: [],
+
 };
 
 const newsReducer = (state = initialState, action) => {
@@ -18,6 +19,11 @@ const newsReducer = (state = initialState, action) => {
                 ...state,
                 posts: action.payload
             }
+        case "SET_SLIDER_NEWS":
+            return {
+                ...state,
+                sliderNews: state.posts.filter(item => item.isImportant === true)
+            }
         default:
             return state;
     }
@@ -25,6 +31,7 @@ const newsReducer = (state = initialState, action) => {
 };
 
 export const setNewsPosts = (post) => ({ type: "SET_NEWS_POSTS", payload: post })
+export const setSliderNews = () => ({ type: "SET_SLIDER_NEWS" })
 
 export default newsReducer;
 
@@ -32,6 +39,7 @@ export const getNews = () => (dispatch) => {
     API.getNews()
         .then(response => {
             dispatch(setNewsPosts((response.data)))
+            dispatch(setSliderNews())
         })
 }
 export const addNews = (authorId, newsTheme, newsText, date) => (dispatch) => {
@@ -40,11 +48,17 @@ export const addNews = (authorId, newsTheme, newsText, date) => (dispatch) => {
             dispatch(getNews())
         })
 }
+export const toggleImportantNews = (id, isImportant) => (dispatch) => {
+    API.toggleImportantNews(id, isImportant)
+        .then(response => {
+            dispatch(getNews())
+        })
+}
 export const removeNews = (id) => (dispatch) => {
     API.removeNews(id)
-    .then(response => {
-        dispatch(getNews())
-    })
+        .then(response => {
+            dispatch(getNews())
+        })
 }
 export const updateNews = (id, newsTheme, newsText, date) => (dispatch) => {
     API.updateNews(id, newsTheme, newsText, date)
