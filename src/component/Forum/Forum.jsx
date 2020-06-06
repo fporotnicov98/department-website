@@ -33,8 +33,7 @@ class Forum extends React.Component {
                                         <p>{item.author}</p>
                                     </div>
                                     <p>Ответов: <span>{/* количество ответов */}</span></p>
-                                    <a href="#s" className={style['more']}>Подробнее...</a>
-                                    <button onClick = {()=> this.props.removeForumPost(item.id)}><i class="fas fa-trash-alt"></i></button>
+                                    <button className={style['basket']} onClick = {()=> this.props.removeForumPost(item.id)}><i class="fas fa-trash-alt"></i></button>
                                 </div>
                             </div>
                         </>)

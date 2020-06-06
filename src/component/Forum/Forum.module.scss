@@ -16,6 +16,8 @@
             box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
             .content {
                 flex: 1 1 auto;
+                display: flex;
+                align-items: center;
                 .data {
                     display: inline;
                     margin-right: 20px;
@@ -26,7 +28,6 @@
                     display: inline;
                 }
                 .theme {
-                    margin-bottom: 10px;
                     font-size: 18px;
                     font-weight: bold;
                     color: #000;
@@ -48,6 +49,11 @@
                 img {
                     margin-left: 5px;
                 }
+            }
+            .basket {
+                background: none;
+                font-size: 1.2em;
+                margin-left: 20px;
             }
         }
     }

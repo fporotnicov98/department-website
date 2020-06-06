@@ -22,7 +22,7 @@ export const setForumPosts = (post) => ({ type: "SET_FORUM_POSTS", payload: post
 export const getForum = () => (dispatch) => {
     API.getForum()
         .then(response => {
-            dispatch(setForumPosts((response.data)))
+            dispatch(setForumPosts(response.data))
         })
 }
 export const addForum = (id, theme) => (dispatch) => {
