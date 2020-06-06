@@ -6,30 +6,39 @@ const instanse = axios.create({
     withCredentials: true,
 })
 
+const newsApi = {
+    
+}
+const pollsApi = {
+
+}
+const forumApi = {
+
+}
 
 const API = {
-    getNews(){
+    getNews() {
         return instanse.get('News/GetNews')
     },
-    getPolls(){
+    getPolls() {
         return instanse.get('Polls/GetPoll')
     },
-    addNews(authorId,theme,news_Text,news_Date){
-        return instanse.post('News/AddNews',{authorId,theme,news_Text,news_Date})
+    addNews(authorId, theme, news_Text, news_Date) {
+        return instanse.post('News/AddNews', { authorId, theme, news_Text, news_Date })
     },
-    removeNews(id){
+    removeNews(id) {
         return instanse.delete(`News/DeleteNews/?id=${id}`)
     },
-    updateNews(id,theme,news_Text,news_Date){
-        return instanse.put(`News/UpdateNews`, {id,theme,news_Text,news_Date})
+    updateNews(id, theme, news_Text, news_Date) {
+        return instanse.put(`News/UpdateNews`, { id, theme, news_Text, news_Date })
     },
-    getForum(){
+    getForum() {
         return instanse.get(`Forum/GetForum`)
     },
-    addForum(id,theme){
-        return instanse.post(`Forum/AddForum`,{id,theme})
+    addForum(id, theme) {
+        return instanse.post(`Forum/AddForum`, { id, theme })
     },
-    removeForumPost(id){
+    removeForumPost(id) {
         return instanse.delete(`Forum/DeleteForum/?id=${id}`)
     },
     toggleImportantNews(id,isImportant){
