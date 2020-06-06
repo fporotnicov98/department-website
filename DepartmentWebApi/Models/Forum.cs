@@ -11,12 +11,14 @@ namespace DepartmentWebApi.Models
         public int Id { get; set; }
         public int AuthorId { get; set; }
         public string Theme { get; set; }
+        public DateTime ForumDate { get; set; }
 
-        public Forum(int id, int authorId, string theme)
+        public Forum(int id, int authorId, string theme, DateTime forumDate)
         {
             Id = id;
             AuthorId = authorId;
             Theme = theme;
+            ForumDate = forumDate;
         }
 
         public Forum(DataRow row)
@@ -24,6 +26,7 @@ namespace DepartmentWebApi.Models
             Id = row.Field<int>("id");
             AuthorId = row.Field<int>("AuthorId");
             Theme = row.Field<string>("Theme");
+            ForumDate = row.Field<DateTime>("ForumDate");
         }
     }
 
@@ -31,11 +34,13 @@ namespace DepartmentWebApi.Models
     {
         public int AuthorId { get; set; }
         public string Theme { get; set; }
+        public DateTime ForumDate { get; set; }
 
-        public ForumWithoutId(int authorId, string theme)
+        public ForumWithoutId(int authorId, string theme, DateTime forumDate)
         {
             AuthorId = authorId;
             Theme = theme;
+            ForumDate = forumDate;
         }
     }
 }

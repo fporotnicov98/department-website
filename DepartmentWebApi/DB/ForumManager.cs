@@ -56,9 +56,10 @@ namespace DepartmentWebApi.DB
                     connection.Open();
                     using (SqlCommand command = connection.CreateCommand())
                     {
-                        command.CommandText = @"INSERT INTO Forum VALUES(@Author, @Theme)";
+                        command.CommandText = @"INSERT INTO Forum VALUES(@Author, @Theme, @ForumDate)";
                         command.Parameters.AddWithValue("@Author", forum.AuthorId);
                         command.Parameters.AddWithValue("@Theme", forum.Theme);
+                        command.Parameters.AddWithValue("@ForumDate", forum.ForumDate);
                         command.ExecuteNonQuery();
                         return true;
                     }

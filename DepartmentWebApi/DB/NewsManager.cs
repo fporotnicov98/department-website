@@ -24,7 +24,7 @@ namespace DepartmentWebApi.DB
                     connection.Open();
                     using (SqlCommand command = connection.CreateCommand())
                     {
-                        command.CommandText = @"SELECT N.id, U.Login, N.Theme, N.NewsText, N.NewsDate, N.isImportant FROM News N
+                        command.CommandText = @"SELECT N.id, N.Theme, N.NewsText, N.NewsDate, N.isImportant FROM News N
                                                 LEFT JOIN Users U ON N.AuthorId = U.id
                                                 ORDER BY N.id DESC";
                         DataTable table = new DataTable();
