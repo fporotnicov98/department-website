@@ -34,7 +34,7 @@ class Forum extends React.Component {
                                     </div>
                                     <p>Ответов: <span>{/* количество ответов */}</span></p>
                                     <a href="#s" className={style['more']}>Подробнее...</a>
-                                    <button onClick = {()=> this.props.removeForumPost(item.id)}>Удалить</button>
+                                    <button onClick = {()=> this.props.removeForumPost(item.id)}><i class="fas fa-trash-alt"></i></button>
                                 </div>
                             </div>
                         </>)
