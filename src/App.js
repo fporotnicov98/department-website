@@ -13,18 +13,16 @@ const App = () => {
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <div>
         <Header />
-        <div className={style['container']}>
-          <Switch>
-            <Route exact path='/' render={() => <NewsContainer />} />
+        <Switch>
+          <Route exact path='/' render={() => <NewsContainer />} />
+          <div className={style['container']}>
             <Route path='/survey' render={() => <SurveyContainer />} />
             <Route exact path='/forum' render={() => <ForumContainer />} />
             <Route path='/info' render={() => <Information />} />
-          </Switch>
-
-        </div>
+          </div>
+        </Switch>
       </div>
     </BrowserRouter>
-
   )
 }
 

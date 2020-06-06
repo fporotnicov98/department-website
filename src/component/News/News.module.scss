@@ -1,5 +1,9 @@
-.news {
+.container {
     padding: 20px 0;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.news {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,45 +20,72 @@
                 width: 100%;
                 margin: 0 auto;
                 padding: 20px;
+                position: relative;
+                .buttons {
+                    position: absolute;
+                    top: 20px;
+                    right: 20px;
+                    .edit {
+                        font-size: 1em;
+                        background: none;
+                        margin-right: 10px;
+                    }
+                    .delete {
+                        font-size: 1em;
+                        background: none;
+                        margin-left: 10px;
+                    }
+                }
                 .content {
                     margin-bottom: 10px;
-                    // display: flex;
-                    // flex-direction: column;
-                    .theme {
+                    .edit {
+                        font-size: 0.6em;
+                        background: none;
+                        margin-left: 10px;
+                        color: rgba(102, 102, 102, 0.2);
+                        &:hover {
+                            transition: all 1s;
+                            color: #000;
+                        }
+                    }
+                    input {
+                        border-radius: 7px;
                         font-size: 16px;
+                        padding: 5px 7px;
+                        width: 65%;
+                        background: #f0f0f0;
+                        box-shadow: inset 0 0 3px 1px rgb(136, 136, 136);
+                        margin-bottom: 15px;
+                    }
+                    .theme {
+                        font-size: 18px;
                         color: #848484;
-                        margin-bottom: 10px;
-                       
+                        margin-bottom: 15px;
+                    }
+                    textarea {
+                        border-radius: 7px;
+                        height: 100px;
+                        resize: none;
+                        width: 100%;
+                        font-size: 17px;
+                        background: #f0f0f0;
+                        padding: 5px 7px;
+                        box-shadow: inset 0 0 1px 1px rgb(136, 136, 136);
                     }
                     .text {
                         font-size: 18px;
                         color: #000000;
                         word-wrap: break-word;
-                        margin-bottom: 10px;
+                        margin-bottom: 15px;
                     }
-                    .data {
-                        display: inline-block;
-                        font-size: 16px;
-                        color: #848484;
-                        margin-right: 30px;
-                    }
-                    .btn-comment {
-                        background: none;
-                        font-weight: bold;
-                        font-size: 16px;
-                        line-height: 19px;
-                        color: #000000;
-                        img {
-                            margin-left: 5px;
-                        }
-                    }
-                    .btn-public {
-                        background: none;
-                        font-weight: bold;
-                        font-size: 16px;
-                        line-height: 19px;
-                        color: #000000;
-                    }
+                    
+                }
+                .data {
+                    display: inline-block;
+                    font-size: 16px;
+                    color: #848484;
+                    margin-right: 30px;
+                    margin-bottom: 15px;
                 }
                 .footer {
                     display: flex;
@@ -64,94 +95,9 @@
                     }
                     .show-more {
                         background: none;
-                        transition: height 0.5s ease 0.5s;
+                        transition: all 8s;
                     }
                 }
-                .comment {
-                    font-size: 15px;
-                    color: #000000;
-                }
-                .response {
-                    padding: 10px 20px;
-                    display: flex;
-                    justify-content: space-between;
-                    textarea {
-                        background: #f0f0f0;
-                        border: 1px solid rgba(0, 0, 0, 0.35);
-                        font-size: 14px;
-                        padding: 5px 10px;
-                        width: 85%;
-                        height: 35px;
-                        resize: none;
-                    }
-                    button {
-                        background: #f0f0f0;
-                        border: 1px solid rgba(0, 0, 0, 0.35);
-                        height: 35px;
-                        border-radius: 5px;
-                        width: 100px;
-                    }
-                }
-            }
-        }
-        //! Comment
-        .comment_item {
-            border-top: 1px solid rgb(190, 190, 190);
-            display: flex;
-            flex-direction: column;
-            padding: 15px 0;
-            .comment__body {
-                display: flex;
-                .comment__author {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    width: 10%;
-                    p {
-                        margin-top: 10px;
-                        font-weight: bold;
-                        font-size: 8px;
-                        color: #848484;
-                    }
-                    .comment__photo {
-                        background: #eaeaea;
-                        border: 1px solid rgba(0, 0, 0, 0.17);
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        width: 40px;
-                        height: 40px;
-                        border-radius: 50%;
-                        img {
-                            width: 20px;
-                        }
-                    }
-                }
-                .comment__content {
-                    width: 90%;
-                    .comment__text {
-                        width: 89%;
-                        font-size: 12px;
-                        color: #000000;
-                        word-wrap: break-word;
-                        margin-bottom: 10px;
-                    }
-                    .comment__data {
-                        display: inline-block;
-                        font-size: 10px;
-                        color: #848484;
-                        button {
-                            margin-left: 15px;
-                            font-weight: bold;
-                            font-size: 12px;
-                            background: none;
-                        }
-                    }
-                }
-            }
-            &:last-child {
-                border-bottom: 1px solid rgb(190, 190, 190);
             }
         }
     }

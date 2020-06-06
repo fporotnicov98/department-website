@@ -7,7 +7,7 @@
         position: relative;
         height: 450px;
         .body {
-            background-size: cover !important;
+            // background-size: cover !important;
             opacity: 0.3;
             position: absolute;
             top: 0;
@@ -15,6 +15,13 @@
             width: 100%;
             height: 100%;
             z-index: 999;
+            filter: blur(3px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+                width: 70%;
+            }
         }
         .content {
             z-index: 1000;
@@ -41,11 +48,14 @@
                     font-weight: 700;
                     letter-spacing: 3px;
                     color: #3d3d3d;
-                    text-shadow: 0px 2px 6px #fff;
+                    text-shadow: 0px 2px 6px rgb(112, 112, 112);
                 }
                 .text {
+                    width: 90%;
+                    word-wrap: break-word;
                     text-align: center;
                     color: #5e5e5e;
+                    text-shadow: 0px 2px 6px rgb(180, 180, 180);
                     font-size: 1.3em;
                 }
             }
@@ -56,7 +66,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-evenly;
-                border-top: 2px solid rgb(158, 158, 158);
+                border-top: 2px ridge rgb(158, 158, 158);
                 .author {
                     font-weight: 500;
                     font-size: 1.3em;
