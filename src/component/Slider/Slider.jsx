@@ -11,6 +11,7 @@ const Slider = (props) => {
 let mapStateToProps = (state) => {
     return {
         posts: state.newsPage.posts,
+        sliderNews: state.newsPage.sliderNews
     }
 }
 export default connect(mapStateToProps)(Slider);

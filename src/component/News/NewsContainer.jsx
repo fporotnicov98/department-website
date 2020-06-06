@@ -2,13 +2,14 @@ import React from 'react'
 import News from './News'
 import { connect } from 'react-redux'
 import uniqBy from 'lodash/uniqBy'
-import { getNews, removeNews, updateNews } from "../../redux/newsReducer";
+import { getNews, removeNews, updateNews, toggleImportantNews,setSliderNews } from "../../redux/newsReducer";
 
 
 class NewsContainer extends React.Component {
 
     componentDidMount() {
         this.props.getNews()
+
     }
 
     render() {
@@ -25,4 +26,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getNews, removeNews, updateNews })(NewsContainer)
+export default connect(mapStateToProps, { getNews, removeNews, updateNews,toggleImportantNews,setSliderNews })(NewsContainer)
