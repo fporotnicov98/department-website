@@ -3,6 +3,7 @@ import newsReducer from "./newsReducer";
 import thunkMiddleware from 'redux-thunk'
 import surveyReducer from "./surveyReducer";
 import forumReducer from "./forumReducer";
+import authReducer from "./authReducer"
 import { reducer as formReducer } from 'redux-form'
 
 
@@ -12,6 +13,7 @@ let reducers = combineReducers({
     surveyPage: surveyReducer,
     forumPage: forumReducer,
     form: formReducer,
+    auth: authReducer
 })
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware))

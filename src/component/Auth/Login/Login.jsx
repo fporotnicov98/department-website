@@ -1,7 +1,9 @@
 import React from 'react';
 import style from './Login.module.scss'
 import logo from './../../../asets/image/logo.png'
+import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form';
+import {setRegistration,setLogin} from '../../../redux/authReducer'
 
 let LoginForm = (props) => {
     return (
@@ -65,20 +67,20 @@ let LogupForm = (props) => {
                 required='required'
                 id='password'
             />
-            <label htmlFor="password">Повторите пароль</label>
+            {/* <label htmlFor="password">Повторите пароль</label>
             <Field
                 name='password'
                 component='input'
                 type='password'
                 required='required'
                 id='password'
-            />
+            /> */}
             <button className={style['logup']} type="submit" ><span>Зарегистрироваться</span></button>
             <button className={style['clear']} type="button" onClick={props.reset}><span>Очистить поля</span></button>
         </form>
     )
 }
-LogupForm = reduxForm({ form: 'loginForm' })(LogupForm)
+const LogupFormRedux = reduxForm({ form: 'registrationForm' })(LogupForm)
 
 class Login extends React.Component {
     constructor(props) {
@@ -96,8 +98,11 @@ class Login extends React.Component {
     closeModal() {
         this.setState({ isModalOpen: false });
     }
-    onSubmit = (formData) => {
-        console.log(formData);
+    onSubmitReg = (formData) => {
+        this.props.setRegistration(formData.email,formData.password,formData.fio);
+    }
+    onSubmitAuth = (formData) => {
+        this.props.setLogin(formData.email,formData.password);
     }
     render() {
         if (this.props.isOpen === false) return null;
@@ -109,12 +114,12 @@ class Login extends React.Component {
                         <div className={style['logo']}><img src={logo} alt="" /></div>
                         <div className={this.state.isActive ? style['signin'] + " " + style['signin-left'] : style['signin']}>
                             <div className={style['title']}>Вход</div>
-                            <LoginForm onSubmit={this.onSubmit} />
+                            <LoginForm onSubmit={this.onSubmitAuth} />
                             <div className={style['signin-active']}>Еще не зарегистрированы?<button onClick={() => this.toggleAuth()}>Регистрация</button></div>
                         </div>
                         <div className={this.state.isActive ? style['signup'] + ' ' + style['signup-left'] : style['signup']}>
                             <div className={style['title']}>Регистрация</div>
-                            <LogupForm onSubmit={this.onSubmit} />
+                            <LogupFormRedux onSubmit={this.onSubmitReg} />
                             <div className={style['signin-active']}>Уже зарегистрированы? <button onClick={() => this.toggleAuth()}>Войти</button></div>
                         </div>
                     </div>
@@ -130,4 +135,4 @@ class Login extends React.Component {
     }
 };
 
-export default Login;
+export default connect(null,{setLogin,setRegistration})(Login);
