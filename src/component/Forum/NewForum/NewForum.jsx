@@ -2,7 +2,9 @@ import React from 'react';
 import style from './NewForum.module.scss'
 import { reduxForm, Field } from 'redux-form';
 
-let ForumForm = (props) => {debugger
+let date = new Date().toDateString();
+
+let ForumForm = (props) => {
     return (
         <form className={style['form']} onSubmit={props.handleSubmit}>
             <div className={style['theme']}>
@@ -15,14 +17,14 @@ let ForumForm = (props) => {debugger
                     required='required'
                 />
             </div>
-            <div className={style['text']}>
+            {/* <div className={style['text']}>
                 <Field
                     name='newPostText'
                     component='textarea'
                     id='newPostText'
                     required='required'
                 />
-            </div>
+            </div> */}
             <button className={style['btn']}>Опубликовать</button>
         </form>
     )
@@ -37,7 +39,7 @@ class NewForum extends React.Component {
     }
 
     onSubmit = (values) => {
-        this.props.addForum(1,values.newPostTheme)
+        this.props.addForum(1, values.newPostTheme, date)
         this.props.onClose()
     }
 

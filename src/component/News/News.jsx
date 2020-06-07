@@ -69,7 +69,10 @@ class News extends React.Component {
                                                     }
                                                     } className={style['edit']}><i class="fas fa-check"></i></button>
                                                 }
-                                                <button onClick = {() => this.props.removeNews(post.id)} className={style['delete']}><i class="fas fa-trash-alt"></i></button>
+                                                <button className={!post.isImportant ? style['stars'] : style['stars'] + " " + style['stars-active']} onClick={() => {
+                                                    this.props.toggleImportantNews(post.id, !post.isImportant)
+                                                }}><i class="fas fa-star"></i></button>
+                                                <button onClick={() => this.props.removeNews(post.id)} className={style['delete']}><i class="fas fa-trash-alt"></i></button>
                                             </div>
                                             {
                                                 this.state.updateId.some(item => item === post.id)
@@ -97,9 +100,6 @@ class News extends React.Component {
                                                     ? <button onClick={() => this.removeDetailId(post.id)} style={this.state.updateId.some(item => item === post.id) && post.newsText.length < 100 ? { display: 'none' } : null} className={style['show-more']}>Свернуть</button>
                                                     : <button onClick={() => this.setDetailId(post.id)} style={post.newsText.length < 100 ? { display: 'none' } : null} className={style['show-more']}>Подробнее</button>
                                                 }
-                                                <button onClick = {() => {
-                                                    this.props.toggleImportantNews(post.id,!post.isImportant)
-                                                    } }>ВАЖНОЕ</button>
                                             </div>
                                         </div>
 

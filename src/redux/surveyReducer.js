@@ -1,4 +1,4 @@
-import API from '../API/API'
+import { pollsAPI } from '../API/API'
 
 let initialState = {
     survey: [],
@@ -30,7 +30,7 @@ export const setPolls = (poll) => ({ type: "SET_POLL", payload: poll });
 export default surveyReducer;
 
 export const getPolls = () => (dispatch) => {
-    API.getPolls()
+    pollsAPI.getPolls()
         .then(response => {
             dispatch(setPolls((response.data)))
         })

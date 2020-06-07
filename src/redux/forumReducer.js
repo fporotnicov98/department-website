@@ -1,8 +1,10 @@
-import API from '../API/API'
+import { forumAPI } from '../API/API'
 
 
 let initialState = {
-    posts: []
+    posts: [
+        { answers: [] }
+    ]
 };
 
 const forumReducer = (state = initialState, action) => {
@@ -12,6 +14,13 @@ const forumReducer = (state = initialState, action) => {
                 ...state,
                 posts: action.payload
             }
+        case "SET_FORUM_ITEM_POSTS":
+            return {
+                ...state,
+                posts: [state.posts.map(item => {
+                    
+                })]
+            }
         default:
             return state;
     }
@@ -20,19 +29,25 @@ const forumReducer = (state = initialState, action) => {
 export const setForumPosts = (post) => ({ type: "SET_FORUM_POSTS", payload: post })
 
 export const getForum = () => (dispatch) => {
-    API.getForum()
+    forumAPI.getForum()
         .then(response => {
             dispatch(setForumPosts(response.data))
         })
 }
-export const addForum = (id, theme) => (dispatch) => {
-    API.addForum(id, theme)
+export const getForumItem = () => (dispatch) => {
+    forumAPI.getForumItem()
+        .then(response => {
+            dispatch(getForumItem())
+        })
+}
+export const addForum = (id, theme, date) => (dispatch) => {
+    forumAPI.addForum(id, theme, date)
         .then(response => {
             dispatch(getForum())
         })
 }
 export const removeForumPost = (id) => (dispatch) => {
-    API.removeForumPost(id)
+    forumAPI.removeForumPost(id)
         .then(response => {
             dispatch(getForum())
         })
@@ -40,5 +55,4 @@ export const removeForumPost = (id) => (dispatch) => {
 export const updateForum = (id, theme) => {
 
 }
-
 export default forumReducer;

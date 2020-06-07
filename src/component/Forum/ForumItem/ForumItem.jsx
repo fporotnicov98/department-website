@@ -3,7 +3,6 @@ import user from './../../../asets/image/user.png'
 import style from './ForumItem.module.scss';
 
 const ForumItem = (props) => {
-    debugger
     return (
         <div>
             <div className={style['thema-title']}>Тема: {props.answers.theme}</div>

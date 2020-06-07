@@ -6,22 +6,9 @@ const instanse = axios.create({
     withCredentials: true,
 })
 
-const newsApi = {
-    
-}
-const pollsApi = {
-
-}
-const forumApi = {
-
-}
-
-const API = {
+export const newsAPI = {
     getNews() {
         return instanse.get('News/GetNews')
-    },
-    getPolls() {
-        return instanse.get('Polls/GetPoll')
     },
     addNews(authorId, theme, news_Text, news_Date) {
         return instanse.post('News/AddNews', { authorId, theme, news_Text, news_Date })
@@ -32,17 +19,28 @@ const API = {
     updateNews(id, theme, news_Text, news_Date) {
         return instanse.put(`News/UpdateNews`, { id, theme, news_Text, news_Date })
     },
+    toggleImportantNews(id, isImportant) {
+        return instanse.put(`News/UpdateNewsImportant`, { id, isImportant })
+    }
+}
+export const pollsAPI = {
+    getPolls() {
+        return instanse.get('Polls/GetPoll')
+    },
+}
+export const forumAPI = {
     getForum() {
         return instanse.get(`Forum/GetForum`)
     },
-    addForum(id, theme) {
-        return instanse.post(`Forum/AddForum`, { id, theme })
+    addForum(id, theme, date) {
+        return instanse.post(`Forum/AddForum`, { id, theme, date })
     },
     removeForumPost(id) {
         return instanse.delete(`Forum/DeleteForum/?id=${id}`)
     },
-    toggleImportantNews(id,isImportant){
-        return instanse.put(`News/UpdateNewsImportant`, {id,isImportant})
+    getForumItem(idForum) {
+        return instanse.get(`/Forum/GetForumMessage`, idForum)
     }
 }
-export default API
+
+

@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Forum from './Forum'
-import { getForum,addForum,removeForumPost } from "../../redux/forumReducer";
+import { getForum, addForum, removeForumPost } from "../../redux/forumReducer";
 
 
 class ForumContainer extends React.Component {
-    componentDidMount(){
+    componentDidMount() {
         this.props.getForum()
     }
     render() {
@@ -21,4 +21,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getForum,addForum,removeForumPost})(ForumContainer)
+export default connect(mapStateToProps, { getForum, addForum, removeForumPost })(ForumContainer)
