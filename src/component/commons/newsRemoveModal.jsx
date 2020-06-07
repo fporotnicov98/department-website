@@ -2,7 +2,6 @@ import React from 'react';
 import style from './../News/News.module.scss'
 
 const ShowModalConfirmDeletePost = (props) => {
-    debugger
     let close = (e) => {
         e.preventDefault();
         if (props.onClose) {

@@ -72,7 +72,7 @@ class News extends React.Component {
                     <div className={style['news']}>
                         {
                             !this.state.isToggleShowPostForm
-                                ? <button onClick={() => this.toggleShowPostForm(true)} className={style['btn-add-post']}>Добавить новость</button>
+                                ? <button onClick={() => this.props.setRegistration()} className={style['btn-add-post']}>Добавить новость</button>
                                 : <button onClick={() => this.toggleShowPostForm(false)} className={style['btn-add-post']}>Отмена</button>
                         }
                         <div className={style['body']}>

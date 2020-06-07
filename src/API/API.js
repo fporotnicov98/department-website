@@ -42,5 +42,16 @@ export const forumAPI = {
         return instanse.get(`/Forum/GetForumMessage`, idForum)
     }
 }
+export const authAPI = {
+    addRegData(email,password,fio){
+        return instanse.post(`/Auth/Registration`,{email,password,fio})
+    },
+    login(eMail,password){
+        return instanse.post(`/Auth/Authenticate`,{eMail,password})
+    },
+    getAuth(token){
+        return instanse.get(`/Auth/Authorization`,{ headers: {"Authorization" : `Bearer ${token}`} })
+    },
+}
 
 
