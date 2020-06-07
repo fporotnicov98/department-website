@@ -1,5 +1,6 @@
 import React from 'react'
 import style from './Information.module.scss'
+import Header from '../Header/Header'
 
 const InformationOfDepartment = (props) => {
     return (
@@ -66,17 +67,23 @@ class Information extends React.Component {
     }
     render() {
         return (
-            <div className={style['information']}>
-                <div className={style['menu']}>
-                    <a href='#s' className={this.state.isActiveShowInfo ? style['active-btn'] : null} onClick={this.showInfo}>Информация о работе кафедры</a>
-                    <a href='#s' className={this.state.isActiveShowStructure ? style['active-btn'] : null} onClick={this.showInfo}>Состав кафедры</a>
-                    {/* <a href='#s' onClick={this.showInfo}>Контакты</a> */}
+            <>
+                <Header />
+                <div className={style['container']}>
+                    <div className={style['information']}>
+                        <div className={style['menu']}>
+                            <a href='#s' className={this.state.isActiveShowInfo ? style['active-btn'] : null} onClick={this.showInfo}>Информация о работе кафедры</a>
+                            <a href='#s' className={this.state.isActiveShowStructure ? style['active-btn'] : null} onClick={this.showInfo}>Состав кафедры</a>
+                            {/* <a href='#s' onClick={this.showInfo}>Контакты</a> */}
+                        </div>
+                        <div className={style['content']}>
+                            {this.state.isShowInfo ? <InformationOfDepartment /> : <StructureOfDepartment />}
+                            {/* {this.state.isShowStructure ?  : null} */}
+                        </div>
+                    </div>
                 </div>
-                <div className={style['content']}>
-                    {this.state.isShowInfo ? <InformationOfDepartment /> : <StructureOfDepartment />}
-                    {/* {this.state.isShowStructure ?  : null} */}
-                </div>
-            </div>
+
+            </>
         )
     }
 

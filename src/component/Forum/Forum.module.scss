@@ -1,5 +1,8 @@
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
 .news {
-    padding: 20px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,12 +62,11 @@
     }
 
     .btn-add-post {
-        margin: 0 0 20px 0;
+        margin: 20px 0 20px 0;
         width: 299px;
         height: 50px;
-        background: #d6d6d6;
+        background: #fff;
         border: 1px solid #ccc;
-        box-shadow: 0px 4px 0 0px rgba(0, 0, 0, 0.45);
         border-radius: 20px;
         font-size: 18px;
         font-weight: bold;
@@ -76,11 +78,8 @@
         text-transform: uppercase;
         letter-spacing: 2px;
         &:hover {
-            color: #000;
-            text-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
-            transform: translateY(4px);
-            background: #76cdee;
-            box-shadow: 0 0 0 1px rgba(122, 122, 122, 0.5);
+            color: #FFF;
+            background: #050381f5;
         }
     }
 }

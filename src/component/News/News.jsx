@@ -2,6 +2,9 @@ import React from 'react'
 import Slider from './../Slider/Slider'
 import style from './News.module.scss';
 import NewPost from './NewPost/NewPost';
+import ShowModalConfirmDeletePost from '../commons/newsRemoveModal';
+import Header from '../Header/Header';
+import HeaderNews from '../Header/HeaderNews';
 // import { getDate } from "../commons/date";
 
 let date = new Date().toDateString();
@@ -13,7 +16,18 @@ class News extends React.Component {
         newsTheme: this.props.posts.theme,
         updateId: [],
         detailId: [],
-        isToggleShowPostForm: false
+        removeId: null,
+        isToggleShowPostForm: false,
+        isShowModal: false
+    }
+    openModal = () => {
+        this.setState({ isShowModal: true })
+    }
+    closeModal = () => {
+        this.setState({ isShowModal: false })
+    }
+    setRemoveId = (id) => {
+        this.setState({ removeId: id })
     }
     updateText = (e) => {
         this.setState({ newsText: e.currentTarget.value })
@@ -46,7 +60,14 @@ class News extends React.Component {
     render() {
         return (
             <>
+                <HeaderNews />
                 <Slider />
+                <ShowModalConfirmDeletePost
+                    isOpen={this.state.isShowModal}
+                    onClose={() => this.closeModal()}
+                    removeId={this.state.removeId}
+                    removeNews={this.props.removeNews}
+                />
                 <div className={style['container']}>
                     <div className={style['news']}>
                         {
@@ -61,18 +82,29 @@ class News extends React.Component {
                                     <div key={post.id} className={style['item']}>
                                         <div className={style['body__content']}>
                                             <div className={style['buttons']}>
-                                                {
-                                                    this.state.updateId.some(item => item === post.id)
-                                                    && <button onClick={() => {
-                                                        this.removeUpdateId(post.id)
-                                                        this.props.updateNews(post.id, this.state.newsTheme, this.state.newsText, date)
-                                                    }
-                                                    } className={style['edit']}><i class="fas fa-check"></i></button>
-                                                }
+
                                                 <button className={!post.isImportant ? style['stars'] : style['stars'] + " " + style['stars-active']} onClick={() => {
                                                     this.props.toggleImportantNews(post.id, !post.isImportant)
                                                 }}><i class="fas fa-star"></i></button>
-                                                <button onClick={() => this.props.removeNews(post.id)} className={style['delete']}><i class="fas fa-trash-alt"></i></button>
+                                                {
+                                                    this.state.updateId.some(item => item === post.id)
+                                                        ? <button onClick={() => {
+                                                            this.removeUpdateId(post.id)
+                                                            this.props.updateNews(post.id, this.state.newsTheme, this.state.newsText, date)
+                                                        }
+                                                        } className={style['edit']}><i class="fas fa-check"></i></button>
+                                                        : <button onClick={() => {
+                                                            this.setText(post.newsText)
+                                                            this.setTheme(post.theme)
+                                                            this.setUpdateId(post.id)
+                                                        }} className={style['edit']}><i class="fas fa-pencil-alt"></i></button>
+                                                }
+                                                <button onClick={() => {
+                                                    this.openModal()
+                                                    this.setRemoveId(post.id)
+
+
+                                                }} className={style['delete']}><i class="fas fa-trash-alt"></i></button>
                                             </div>
                                             {
                                                 this.state.updateId.some(item => item === post.id)
@@ -81,16 +113,8 @@ class News extends React.Component {
                                                         <textarea onChange={this.updateText} value={this.state.newsText}></textarea>
                                                     </div>
                                                     : <div className={style['content']}>
-                                                        <div className={style['theme']}>{post.theme}<button onClick={() => {
-                                                            this.setTheme(post.theme)
-                                                            this.setText(post.newsText)
-                                                            this.setUpdateId(post.id)
-                                                        }} className={style['edit']}><i class="fas fa-pencil-alt"></i></button></div>
-                                                        <div className={style['text']}>{post.newsText.length < 100 || this.state.detailId.some(item => item === post.id) ? post.newsText : post.newsText.slice(0, 99) + ' ...'}<button onClick={() => {
-                                                            this.setText(post.newsText)
-                                                            this.setTheme(post.theme)
-                                                            this.setUpdateId(post.id)
-                                                        }} className={style['edit']}><i class="fas fa-pencil-alt"></i></button></div>
+                                                        <div className={style['theme']}>{post.theme}</div>
+                                                        <div className={style['text']}>{post.newsText.length < 100 || this.state.detailId.some(item => item === post.id) ? post.newsText : post.newsText.slice(0, 99) + ' ...'}</div>
                                                     </div>
                                             }
                                             <div className={style['footer']}>

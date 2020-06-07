@@ -10,11 +10,11 @@
         z-index: 1000;
         position: fixed;
         width: 500px;
-        height: 530px;
+        height: 490px;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: rgba(255, 255, 255, 0.75);
+        background: rgba(5, 3, 129, 1);
         margin-left: auto;
         margin-right: auto;
         border-radius: 20px;
@@ -54,7 +54,7 @@
                 font-weight: bold;
                 font-size: 48px;
                 line-height: 58px;
-                color: #676767;
+                color: #fff;
                 margin-bottom: 15px;
             }
             .form {
@@ -65,14 +65,14 @@
                     font-weight: bold;
                     font-size: 18px;
                     line-height: 23px;
-                    color: #676767;
+                    color: #fff;
                 }
                 input[type="email"],
                 input[type="password"] {
                     margin: 15px 0;
                     border-radius: 20px;
                     width: 350px;
-                    height: 50px;
+                    height: 40px;
                     font-size: 16px;
                     padding: 3px 10px;
                     background: #f2f2f2;
@@ -97,7 +97,7 @@
                     border-radius: 25px;
                     width: 226px;
                     margin: 10px 0;
-                    height: 55px;
+                    height: 45px;
                     span {
                         font-weight: 900;
                         font-size: 24px;
@@ -129,7 +129,7 @@
             flex-direction: column;
             align-items: center;
             position: relative;
-            top: -440px;
+            top: -396px;
             left: 500px;
             opacity: 0;
             transition: all 0.5s ease;
@@ -137,7 +137,7 @@
                 font-weight: bold;
                 font-size: 36px;
                 line-height: 50px;
-                color: #676767;
+                color: #fff;
                 margin-bottom: 10px;
             }
             .form {
@@ -147,7 +147,7 @@
                 label {
                     font-weight: bold;
                     font-size: 16px;
-                    color: #676767;
+                    color: #fff;
                 }
                 input[type="email"],
                 input[type="password"],
@@ -180,7 +180,7 @@
                     border-radius: 25px;
                     width: 290px;
                     margin: 10px 0;
-                    height: 55px;
+                    height: 45px;
                     span {
                         font-weight: 900;
                         font-size: 24px;
@@ -228,6 +228,6 @@
         }
     }
     .frame-long {
-        height: 570px;
+        height: 560px;
     }
 }

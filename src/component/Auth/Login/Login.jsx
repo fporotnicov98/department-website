@@ -22,7 +22,7 @@ let LoginForm = (props) => {
                 required='required'
                 id='password'
             />
-            <div className={style['remember']}>
+            {/* <div className={style['remember']}>
                 <Field
                     name='rememberMe'
                     component='input'
@@ -30,7 +30,7 @@ let LoginForm = (props) => {
                     id='rememberMe'
                 />
                 <label htmlFor="rememberMe" className={style['save']}>Запомнить меня</label>
-            </div>
+            </div> */}
             <button className={style['login']} type="submit" ><span>Войти</span></button>
             <button className={style['clear']} type="button" onClick={props.reset}><span>Очистить поля</span></button>
         </form>

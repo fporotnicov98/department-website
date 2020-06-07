@@ -1,10 +1,10 @@
 import React from 'react'
-import style from './Header.module.scss'
+import style from './HeaderNews.module.scss'
 import logo from './../../asets/image/logo.png'
 import { NavLink } from 'react-router-dom'
 import Login from '../Auth/Login/Login'
 
-class Header extends React.Component {
+class HeaderNews extends React.Component {
 
     constructor(props) {
         super(props);
@@ -44,4 +44,4 @@ class Header extends React.Component {
     }
 }
 
-export default Header;
+export default HeaderNews;

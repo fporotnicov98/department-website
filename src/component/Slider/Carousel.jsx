@@ -7,6 +7,7 @@ import style from './Slider.module.scss';
 // import space4 from './../../asets/image/slider/4.jpg';
 // import space5 from './../../asets/image/slider/5.jpg';
 import logo from './../../asets/image/logo.png'
+import korpus from './../../asets/image/korpus.jpeg'
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -16,7 +17,7 @@ class Carousel extends React.Component {
 
 
     settings = {
-        dots: true,
+        arrows: false,
         infinite: true,
         autoplay: true,
         speed: 500,
@@ -30,16 +31,12 @@ class Carousel extends React.Component {
                     {
                         this.props.sliderNews.map((item, index) =>
                             <div key={index} className={style['item']}>
-                                <div className={style['body']} /* style={{ background: `url(${logo})` }} */ ><img src={logo} alt="" /></div>
+                                <div className={style['body']} /* style={{ background: `url(${logo})` }} */ ><img src={korpus} alt="" /></div>
+                                
                                 <div className={style['content']}>
                                     <div className={style['news']}>
                                         <div className={style['title']}>{item.theme}</div>
                                         <div className={style['text']}>{item.newsText}</div>
-                                    </div>
-                                    <div className={style['footer']}>
-                                        {/*  */}
-                                        <div className={style['author']}>{item.author}</div>
-                                        <div className={style['date']}>{item.newsDate}</div>
                                     </div>
                                 </div>
                             </div>
