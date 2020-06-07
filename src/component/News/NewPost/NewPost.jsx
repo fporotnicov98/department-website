@@ -39,7 +39,7 @@ const NewPostForm = reduxForm({ form: 'PostForm' })(PostForm)
 const NewPost = (props) => {
 
     const onSubmit = (values) => {
-        props.addNews(5, values.newPostTheme, values.newPostText, date);
+        props.addNews(props.userId, values.newPostTheme, values.newPostText, date);
         props.toggleShowPostForm(false)
     }
 
@@ -54,4 +54,9 @@ const NewPost = (props) => {
     );
 }
 
-export default connect(null, { addNews })(NewPost)
+const mapStateToProps = state => {
+    return{
+        userId: state.auth.userId
+    }
+}
+export default connect(mapStateToProps, { addNews })(NewPost)

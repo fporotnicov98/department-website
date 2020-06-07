@@ -24,6 +24,8 @@ let mapStateToProps = (state) => {
     return {
         posts: state.newsPage.posts,
         postId: uniqBy(state.newsPage.postId, o => o.id),
+        roleUser: state.auth.roleUser,
+        email:state.auth.email
     }
 }
 

@@ -2,8 +2,10 @@ import {authAPI} from '../API/API'
 
 let initial = {
     email: null,
+    isAuth: null,
     fio: null,
-    role: null,
+    userId:null,
+    roleUser: null,
     token: null,
 }
 const authReducer = (state = initial, action) => {
@@ -18,18 +20,13 @@ const authReducer = (state = initial, action) => {
                 ...state,
                 token: action.payload
             }
-            case "SET_ORDERS":
-                return {
-                    ...state,
-                    orders: action.payload
-                }
         default:
             return state;
 
     }
 }
 
-export const setAuthData = (email, isAuth, fio, address,phoneNumber,login) => ({ type: "SET_AUTH_DATA", payload: { email, isAuth, fio, address,phoneNumber,login } })
+export const setAuthData = (email, fio, userId ,roleUser, isAuth) => ({ type: "SET_AUTH_DATA", payload: { email, fio, userId ,roleUser, isAuth } })
 export const setToken = (token) => ({ type: "SET_TOKEN", payload: token })
 export const setOrders= (orders) => ({ type: "SET_ORDERS", payload: orders })
 
@@ -47,8 +44,10 @@ export const setLogin = (email, password) => dispatch => {
 export const getAuth = (token) => (dispatch) => {
     authAPI.getAuth(token)
         .then(response => {
-                return response
+                dispatch(setAuthData(response.data.email,response.data.fio,response.data.id,response.data.roleUser,true))
         })
 }
-
+export const logout = () => dispatch => {
+    dispatch(setAuthData(null,null,null,null,false))
+}
 export default authReducer

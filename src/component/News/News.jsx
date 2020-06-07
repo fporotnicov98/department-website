@@ -70,10 +70,12 @@ class News extends React.Component {
                 />
                 <div className={style['container']}>
                     <div className={style['news']}>
-                        {
-                            !this.state.isToggleShowPostForm
-                                ? <button onClick={() => this.props.setRegistration()} className={style['btn-add-post']}>Добавить новость</button>
+                        {this.props.roleUser === 'admin' || this.props.roleUser === 'moderator'
+                            ? !this.state.isToggleShowPostForm
+                                ? <button onClick={() => this.toggleShowPostForm(true)} className={style['btn-add-post']}>Добавить новость</button>
                                 : <button onClick={() => this.toggleShowPostForm(false)} className={style['btn-add-post']}>Отмена</button>
+
+                            : null
                         }
                         <div className={style['body']}>
                             {this.state.isToggleShowPostForm && <NewPost toggleShowPostForm={this.toggleShowPostForm} />}
@@ -82,12 +84,14 @@ class News extends React.Component {
                                     <div key={post.id} className={style['item']}>
                                         <div className={style['body__content']}>
                                             <div className={style['buttons']}>
-
-                                                <button className={!post.isImportant ? style['stars'] : style['stars'] + " " + style['stars-active']} onClick={() => {
-                                                    this.props.toggleImportantNews(post.id, !post.isImportant)
-                                                }}><i class="fas fa-star"></i></button>
-                                                {
-                                                    this.state.updateId.some(item => item === post.id)
+                                                {this.props.roleUser === 'admin' || this.props.roleUser === 'moderator'
+                                                    ? <button className={!post.isImportant ? style['stars'] : style['stars'] + " " + style['stars-active']} onClick={() => {
+                                                        this.props.toggleImportantNews(post.id, !post.isImportant)
+                                                    }}><i class="fas fa-star"></i></button>
+                                                    : null
+                                                }
+                                                {this.props.roleUser === 'admin' || this.props.roleUser === 'moderator'
+                                                    ? this.state.updateId.some(item => item === post.id)
                                                         ? <button onClick={() => {
                                                             this.removeUpdateId(post.id)
                                                             this.props.updateNews(post.id, this.state.newsTheme, this.state.newsText, date)
@@ -98,13 +102,17 @@ class News extends React.Component {
                                                             this.setTheme(post.theme)
                                                             this.setUpdateId(post.id)
                                                         }} className={style['edit']}><i class="fas fa-pencil-alt"></i></button>
+                                                    : null
                                                 }
-                                                <button onClick={() => {
-                                                    this.openModal()
-                                                    this.setRemoveId(post.id)
+                                                {this.props.roleUser === 'admin' || this.props.roleUser === 'moderator'
+                                                    ? <button onClick={() => {
+                                                        this.openModal()
+                                                        this.setRemoveId(post.id)
 
 
-                                                }} className={style['delete']}><i class="fas fa-trash-alt"></i></button>
+                                                    }} className={style['delete']}><i class="fas fa-trash-alt"></i></button>
+                                                    : null
+                                                }
                                             </div>
                                             {
                                                 this.state.updateId.some(item => item === post.id)
