@@ -1,32 +1,28 @@
 {
   "files": {
-    "main.css": "/department-website/static/css/main.945ecb81.chunk.css",
-    "main.js": "/department-website/static/js/main.dafab9ac.chunk.js",
-    "main.js.map": "/department-website/static/js/main.dafab9ac.chunk.js.map",
+    "main.css": "/department-website/static/css/main.74f067f0.chunk.css",
+    "main.js": "/department-website/static/js/main.d29d2eb7.chunk.js",
+    "main.js.map": "/department-website/static/js/main.d29d2eb7.chunk.js.map",
     "runtime-main.js": "/department-website/static/js/runtime-main.0a504879.js",
     "runtime-main.js.map": "/department-website/static/js/runtime-main.0a504879.js.map",
     "static/css/2.b18f5fde.chunk.css": "/department-website/static/css/2.b18f5fde.chunk.css",
-    "static/js/2.3ef7204f.chunk.js": "/department-website/static/js/2.3ef7204f.chunk.js",
-    "static/js/2.3ef7204f.chunk.js.map": "/department-website/static/js/2.3ef7204f.chunk.js.map",
+    "static/js/2.426a1d94.chunk.js": "/department-website/static/js/2.426a1d94.chunk.js",
+    "static/js/2.426a1d94.chunk.js.map": "/department-website/static/js/2.426a1d94.chunk.js.map",
     "index.html": "/department-website/index.html",
-    "precache-manifest.d1f77cbfc8ece7f3add1c87f4b703e6f.js": "/department-website/precache-manifest.d1f77cbfc8ece7f3add1c87f4b703e6f.js",
+    "precache-manifest.ccc0970d603e7f03a416852e9531cf29.js": "/department-website/precache-manifest.ccc0970d603e7f03a416852e9531cf29.js",
     "service-worker.js": "/department-website/service-worker.js",
     "static/css/2.b18f5fde.chunk.css.map": "/department-website/static/css/2.b18f5fde.chunk.css.map",
-    "static/css/main.945ecb81.chunk.css.map": "/department-website/static/css/main.945ecb81.chunk.css.map",
-    "static/js/2.3ef7204f.chunk.js.LICENSE.txt": "/department-website/static/js/2.3ef7204f.chunk.js.LICENSE.txt",
-    "static/media/1.jpg": "/department-website/static/media/1.5a4a0dd7.jpg",
-    "static/media/2.jpg": "/department-website/static/media/2.bb373e31.jpg",
-    "static/media/3.jpg": "/department-website/static/media/3.74443d33.jpg",
-    "static/media/4.jpg": "/department-website/static/media/4.f0c06e73.jpg",
-    "static/media/5.jpg": "/department-website/static/media/5.20473e1c.jpg",
-    "static/media/logo.png": "/department-website/static/media/logo.b8f80926.png",
+    "static/css/main.74f067f0.chunk.css.map": "/department-website/static/css/main.74f067f0.chunk.css.map",
+    "static/js/2.426a1d94.chunk.js.LICENSE.txt": "/department-website/static/js/2.426a1d94.chunk.js.LICENSE.txt",
+    "static/media/korpus.png": "/department-website/static/media/korpus.6f691b1a.png",
+    "static/media/logo.png": "/department-website/static/media/logo.6943e6eb.png",
     "static/media/slick-theme.css": "/department-website/static/media/slick.f97e3bbf.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.0a504879.js",
     "static/css/2.b18f5fde.chunk.css",
-    "static/js/2.3ef7204f.chunk.js",
-    "static/css/main.945ecb81.chunk.css",
-    "static/js/main.dafab9ac.chunk.js"
+    "static/js/2.426a1d94.chunk.js",
+    "static/css/main.74f067f0.chunk.css",
+    "static/js/main.d29d2eb7.chunk.js"
   ]
 }
