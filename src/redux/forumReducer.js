@@ -1,10 +1,10 @@
 import { forumAPI } from '../API/API'
+import { act } from 'react-dom/test-utils';
 
 
 let initialState = {
-    posts: [
-        { answers: [] }
-    ]
+    posts: [],
+    forum: null
 };
 
 const forumReducer = (state = initialState, action) => {
@@ -17,9 +17,7 @@ const forumReducer = (state = initialState, action) => {
         case "SET_FORUM_ITEM_POSTS":
             return {
                 ...state,
-                posts: [state.posts.map(item => {
-                    
-                })]
+                forum: action.payload 
             }
         default:
             return state;
@@ -27,6 +25,7 @@ const forumReducer = (state = initialState, action) => {
 };
 
 export const setForumPosts = (post) => ({ type: "SET_FORUM_POSTS", payload: post })
+export const setForumItemPosts = (forum) => ({ type: "SET_FORUM_ITEM_POSTS", payload: forum })
 
 export const getForum = () => (dispatch) => {
     forumAPI.getForum()
@@ -34,10 +33,10 @@ export const getForum = () => (dispatch) => {
             dispatch(setForumPosts(response.data))
         })
 }
-export const getForumItem = () => (dispatch) => {
-    forumAPI.getForumItem()
+export const getForumItem = (id) => (dispatch) => {
+    forumAPI.getForumItem(id)
         .then(response => {
-            dispatch(getForumItem())
+            dispatch(setForumItemPosts(response.data))
         })
 }
 export const addForum = (id, theme, date) => (dispatch) => {

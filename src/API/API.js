@@ -32,14 +32,14 @@ export const forumAPI = {
     getForum() {
         return instanse.get(`Forum/GetForum`)
     },
-    addForum(id, theme, date) {
-        return instanse.post(`Forum/AddForum`, { id, theme, date })
+    addForum(id, theme, forumDate) {
+        return instanse.post(`Forum/AddForum`, { id, theme, forumDate })
     },
     removeForumPost(id) {
         return instanse.delete(`Forum/DeleteForum/?id=${id}`)
     },
-    getForumItem(idForum) {
-        return instanse.get(`/Forum/GetForumMessage`, idForum)
+    getForumItem(id) {
+        return instanse.get(`/Forum/GetForumById/?id=${id}`)
     }
 }
 

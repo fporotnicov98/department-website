@@ -6,7 +6,7 @@ import style from './Slider.module.scss';
 // import space3 from './../../asets/image/slider/3.jpg';
 // import space4 from './../../asets/image/slider/4.jpg';
 // import space5 from './../../asets/image/slider/5.jpg';
-import logo from './../../asets/image/logo.png'
+// import logo from './../../asets/image/logo.png'
 import korpus from './../../asets/image/korpus.png'
 
 import "slick-carousel/slick/slick.css";
@@ -14,8 +14,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 
 class Carousel extends React.Component {
-
-
     settings = {
         dots: true,
         arrows: false,
@@ -23,7 +21,6 @@ class Carousel extends React.Component {
         autoplay: true,
         speed: 500,
         pauseOnDotsHover: true,
-
     };
     render() {
         return (
@@ -42,7 +39,6 @@ class Carousel extends React.Component {
                                     </div>
                                 </div>
                             </div>
-
                         )
                     }
                 </Slider>

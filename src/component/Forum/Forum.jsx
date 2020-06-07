@@ -3,6 +3,7 @@ import style from './Forum.module.scss';
 // import ForumItem from './ForumItem/ForumItem';
 import NewForum from './NewForum/NewForum';
 import Header from '../Header/Header';
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -29,7 +30,7 @@ class Forum extends React.Component {
                         {
                             this.props.posts.map((item) => <>
                                 <div className={style['themes']}>
-                                    <div key={item.id} className={style['item']}>
+                                    <NavLink to={'/forum/' + item.id} key={item.id} className={style['item']}>
                                         <div className={style['content']}>
                                             <div className={style['theme']}>{item.theme}</div>
                                             <div className={style['data']}>{item.datatime}</div>
@@ -37,7 +38,7 @@ class Forum extends React.Component {
                                         </div>
                                         <p>Ответов: <span>{/* количество ответов */}</span></p>
                                         <button className={style['basket']} onClick={() => this.props.removeForumPost(item.id)}><i class="fas fa-trash-alt"></i></button>
-                                    </div>
+                                    </NavLink>
                                 </div>
                             </>)
                         }

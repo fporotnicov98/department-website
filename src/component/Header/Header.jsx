@@ -28,7 +28,7 @@ class Header extends React.Component {
                         <ul className={style['buttons-menu']}>
                             <li><NavLink exact to='/' activeClassName={style['active-link']}>Новости</NavLink></li>
                             <li><NavLink to='/survey' activeClassName={style['active-link']}>Опросы</NavLink></li>
-                            <li><NavLink to='/forum' activeClassName={style['active-link']}>Форум</NavLink></li>
+                            <li><NavLink to='/forums' activeClassName={style['active-link']}>Форум</NavLink></li>
                             <li><NavLink to='/info' activeClassName={style['active-link']}>Информация</NavLink></li>
                             <li  onClick={() => this.openModal()}><a to="#s">Вход</a></li>
                             <Login

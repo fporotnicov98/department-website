@@ -3,7 +3,7 @@ import Slider from './../Slider/Slider'
 import style from './News.module.scss';
 import NewPost from './NewPost/NewPost';
 import ShowModalConfirmDeletePost from '../commons/newsRemoveModal';
-import Header from '../Header/Header';
+// import Header from '../Header/Header';
 import HeaderNews from '../Header/HeaderNews';
 // import { getDate } from "../commons/date";
 

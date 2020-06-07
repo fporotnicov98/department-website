@@ -1,13 +1,12 @@
 import React from 'react';
 import style from './App.module.scss';
 import './normalize.scss'
-import Header from './component/Header/Header';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import NewsContainer from './component/News/NewsContainer';
 import SurveyContainer from './component/Survey/SurveyContainer';
 import ForumContainer from './component/Forum/ForumContainer';
 import Information from './component/Imformation/Information';
-import Slider from './component/Slider/Slider'
+import ForumItemContainer from './component/Forum/ForumItem/ForumItemContainer';
 
 const App = () => {
   return (
@@ -16,7 +15,8 @@ const App = () => {
           <Switch>
               <Route exact path='/' render={() => <NewsContainer />} />
               <Route path='/survey' render={() => <SurveyContainer />} />
-              <Route exact path='/forum' render={() => <ForumContainer />} />
+              <Route exact path='/forums' render={() => <ForumContainer />} />
+              <Route path='/forum/:forumId?' render={() => <ForumItemContainer />} />
               <Route path='/info' render={() => <Information />} />
           </Switch>
         </div>
