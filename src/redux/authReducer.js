@@ -1,5 +1,5 @@
 import {authAPI} from '../API/API'
-import { stopSubmit } from 'redux-form'
+import { stopSubmit, reset } from 'redux-form'
 
 let initial = {
     email: null,
@@ -28,12 +28,21 @@ export const setOrders= (orders) => ({ type: "SET_ORDERS", payload: orders })
 
 export const setRegistration = (email,password,fio) => dispatch => {
     authAPI.addRegData(email,password,fio)
+        .then(response => {
+            dispatch(reset('registrationForm'));
+        })
+        .catch(err => {
+            let action = stopSubmit("registrationForm",{_error: "Пользователь с таким email уже существует"})
+            dispatch(action)
+        })
 }
 export const setLogin = (email, password) => dispatch => {
     authAPI.login(email, password)
         .then(response => {
             if(response.data.resultCode === 0){
                 dispatch(getAuth(response.data.token))
+                dispatch(reset('loginForm'));
+
             }
                 else {
                     

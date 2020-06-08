@@ -7,3 +7,5 @@ export let getDate = () => {
     let Minutes = Data.getMinutes();
     return `${Day}.${Month}.${Year} ${Hour}:${Minutes}`
 }
+
+export default getDate
