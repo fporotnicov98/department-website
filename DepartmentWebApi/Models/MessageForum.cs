@@ -23,9 +23,9 @@ namespace DepartmentWebApi.Models
             MessageDate = messageDate;
         }
 
-        public MessageForum(DataRow row)
+        public MessageForum(DataRow row, int id)
         {
-            Id = row.Field<int>("id");
+            Id = id;
             idForum = row.Field<int>("idForum");
             idAuthor = row.Field<int>("idAuthor");
             MessageText = row.Field<string>("MessageText");

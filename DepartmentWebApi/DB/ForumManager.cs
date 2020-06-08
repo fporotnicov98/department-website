@@ -46,6 +46,52 @@ namespace DepartmentWebApi.DB
             }
         }
 
+        public static ForumWithMessages GetForumById(int id)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    ForumWithMessages forum;
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = @"SELECT * FROM Forum WHERE id = @Id";
+                        command.Parameters.AddWithValue("@Id", id);
+                        DataTable table = new DataTable();
+                        table.Load(command.ExecuteReader());
+                        forum = new ForumWithMessages(table.Rows[0]);
+
+                    }
+                    using(SqlCommand commandSql = connection.CreateCommand())
+                    {
+                        commandSql.CommandText = @"SELECT * FROM MessageForum WHERE idForum = @Id";
+                        commandSql.Parameters.AddWithValue("@Id", id);
+                        DataTable table = new DataTable();
+                        table.Load(commandSql.ExecuteReader());
+                        List<MessageForum> messages = new List<MessageForum>();
+
+                        int idMessage = 1;
+                        foreach(DataRow row in table.Rows)
+                        {
+                            messages.Add(new MessageForum(row, idMessage));
+                            idMessage++;
+                        }
+                        forum.messages = messages;
+                        forum.CountMessages = messages.Count-1;
+                        if (messages.Count == 0) forum.CountMessages = 0;
+                        return forum;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                return null;
+            }
+        }
+
 
         public static bool AddForum(ForumWithoutId forum)
         {
@@ -135,10 +181,11 @@ namespace DepartmentWebApi.DB
                         List<MessageForum> messages = new List<MessageForum>();
                         DataTable table = new DataTable();
                         table.Load(command.ExecuteReader());
-
+                        int idMessage = 1;
                         foreach (DataRow row in table.Rows)
                         {
-                            messages.Add(new MessageForum(row));
+                            messages.Add(new MessageForum(row, idMessage));
+                            idMessage++;
                         }
                         return messages;
                     }

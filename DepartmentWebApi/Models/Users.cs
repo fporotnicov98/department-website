@@ -11,31 +11,24 @@ namespace DepartmentWebApi.Models
         public int Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string Position { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string FIO { get; set; }
         public string RoleUser { get; set; }
 
-        public Users(int id, string email, string password, string position, string firstName, string lastName, string roleUser)
+        public Users(int id, string email, string password, string fIO, string roleUser)
         {
             Id = id;
             Email = email;
             Password = password;
-            Position = position;
-            FirstName = firstName;
-            LastName = lastName;
+            FIO = fIO;
             RoleUser = roleUser;
         }
-
 
         public Users(DataRow row)
         {
             Id = row.Field<int>("id");
             Email = row.Field<string>("Email");
             Password = row.Field<string>("Password");
-            Position = row.Field<string>("Position");
-            FirstName = row.Field<string>("FirstName");
-            LastName = row.Field<string>("LastName");
+            FIO = row.Field<string>("FIO");
             RoleUser = row.Field<string>("RoleUser");
         }
     }
@@ -44,19 +37,29 @@ namespace DepartmentWebApi.Models
     {
         public string Email { get; set; }
         public string Password { get; set; }
-        public string Position { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string FIO { get; set; }
         public string RoleUser { get; set; }
 
-        public UsersWithoutId(string email, string password, string position, string firstName, string lastName, string roleUser)
+        public UsersWithoutId(string email, string password, string fIO, string roleUser)
         {
             Email = email;
             Password = password;
-            Position = position;
-            FirstName = firstName;
-            LastName = lastName;
+            FIO = fIO;
             RoleUser = roleUser;
+        }
+    }
+
+    public class UsersWithoutIdRole
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string FIO { get; set; }
+
+        public UsersWithoutIdRole(string email, string password, string fIO)
+        {
+            Email = email;
+            Password = password;
+            FIO = fIO;
         }
     }
 }

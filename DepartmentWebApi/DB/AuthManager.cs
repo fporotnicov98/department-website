@@ -47,9 +47,9 @@ namespace DepartmentWebApi.DB
                         command.CommandText = @"SELECT * FROM Users WHERE Email = @Email";
                         command.Parameters.AddWithValue("@Email", email);
                         DataTable table = new DataTable();
+                        table.Load(command.ExecuteReader());
                         return new Users(table.Rows[0].Field<int>("id"), table.Rows[0].Field<string>("Email"), 
-                            null, table.Rows[0].Field<string>("Position"), table.Rows[0].Field<string>("FirstName"), 
-                            table.Rows[0].Field<string>("LastName"), table.Rows[0].Field<string>("RoleUser"));
+                            null, table.Rows[0].Field<string>("FIO"), table.Rows[0].Field<string>("RoleUser"));
                     }
                 }
             }
@@ -70,12 +70,10 @@ namespace DepartmentWebApi.DB
                     using (SqlCommand command = connection.CreateCommand())
                     {
                         command.CommandText =
-                            @"INSERT INTO Users VALUES(@Email, @Password, @Position, @FirstName, @LastName, @RoleUser)";
+                            @"INSERT INTO Users VALUES(@Email, @Password, @FIO, @RoleUser)";
                         command.Parameters.AddWithValue("@Email", user.Email);
                         command.Parameters.AddWithValue("@Password", hashPassword);
-                        command.Parameters.AddWithValue("@Position", user.Position);
-                        command.Parameters.AddWithValue("@FirstName", user.FirstName);
-                        command.Parameters.AddWithValue("@LastName", user.LastName);
+                        command.Parameters.AddWithValue("@FIO", user.FIO);
                         command.Parameters.AddWithValue("@RoleUser", user.RoleUser);
                         command.ExecuteNonQuery();
                         return true;

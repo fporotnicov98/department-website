@@ -43,4 +43,29 @@ namespace DepartmentWebApi.Models
             ForumDate = forumDate;
         }
     }
+
+    public class ForumWithMessages
+    {
+        public int AuthorId { get; set; }
+        public string Theme { get; set; }
+        public DateTime ForumDate { get; set; }
+        public List<MessageForum> messages { get; set; }
+        public int CountMessages { get; set; }
+
+        public ForumWithMessages(int authorId, string theme, DateTime forumDate, List<MessageForum> messages)
+        {
+            AuthorId = authorId;
+            Theme = theme;
+            ForumDate = forumDate;
+            this.messages = messages;
+        }
+
+        public ForumWithMessages(DataRow row)
+        {
+            AuthorId = row.Field<int>("AuthorId");
+            Theme = row.Field<string>("Theme");
+            ForumDate = row.Field<DateTime>("ForumDate");
+            messages = new List<MessageForum>();
+        }
+    }
 }

@@ -33,6 +33,14 @@ namespace DepartmentWebApi.Controllers
                 return Problem("Ошибка :(");
             }
         }
+        [HttpGet]
+        [Route("GetForumById")]
+        public IActionResult GetForumById(int id)
+        {
+            var forum = ForumManager.GetForumById(id);
+            if (forum == null) return Problem("Не удалось получить форум");
+            return Ok(forum);
+        }
 
         [HttpPost]
         [Route("AddForum")]
