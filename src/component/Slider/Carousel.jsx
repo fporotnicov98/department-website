@@ -26,8 +26,7 @@ class Carousel extends React.Component {
         return (
             <div className={style["wrapper"]} style={{ background: `url(${korpus})` }}>
                 <Slider {...this.settings}>
-                    {
-                        this.props.sliderNews.map((item, index) =>
+                    {this.props.sliderNews && this.props.sliderNews.map((item, index) =>
                             <div key={index} className={style['item']}>
                                 <div className={style['body']}>
 
@@ -39,8 +38,7 @@ class Carousel extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                        )
-                    }
+                        )}
                 </Slider>
             </div>
         );

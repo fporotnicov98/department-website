@@ -55,8 +55,10 @@
             }
             .basket {
                 background: none;
+                padding: 5px;
                 font-size: 1.2em;
                 margin-left: 20px;
+                z-index: 9999;
             }
         }
     }

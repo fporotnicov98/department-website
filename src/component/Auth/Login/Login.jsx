@@ -4,10 +4,12 @@ import logo from './../../../asets/image/logo.png'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form';
 import {setRegistration,setLogin} from '../../../redux/authReducer'
+import { Redirect } from "react-router-dom";
 
 let LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={style['form']}>
+            <div className = {style['error']}>{props.error}</div>
             <label htmlFor="email">Введите email</label>
             <Field
                 name='email'
@@ -103,9 +105,12 @@ class Login extends React.Component {
     }
     onSubmitAuth = (formData) => {
         this.props.setLogin(formData.email,formData.password);
+        
+        
     }
     render() {
         if (this.props.isOpen === false) return null;
+        if (this.props.isAuth) return <Redirect to = {'/'}></Redirect> 
         return (
             <>
                 <div className={style['bg']}>
@@ -135,4 +140,10 @@ class Login extends React.Component {
     }
 };
 
-export default connect(null,{setLogin,setRegistration})(Login);
+const mapStateToProps = state => {
+    return {
+        isAuth: state.auth.isAuth
+    }
+}
+
+export default connect(mapStateToProps,{setLogin,setRegistration})(Login);

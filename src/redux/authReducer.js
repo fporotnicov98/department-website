@@ -1,4 +1,5 @@
 import {authAPI} from '../API/API'
+import { stopSubmit } from 'redux-form'
 
 let initial = {
     email: null,
@@ -6,7 +7,6 @@ let initial = {
     fio: null,
     userId:null,
     roleUser: null,
-    token: null,
 }
 const authReducer = (state = initial, action) => {
     switch (action.type) {
@@ -14,11 +14,6 @@ const authReducer = (state = initial, action) => {
             return {
                 ...state,
                 ...action.payload
-            }
-        case "SET_TOKEN":
-            return{
-                ...state,
-                token: action.payload
             }
         default:
             return state;
@@ -37,14 +32,23 @@ export const setRegistration = (email,password,fio) => dispatch => {
 export const setLogin = (email, password) => dispatch => {
     authAPI.login(email, password)
         .then(response => {
-                dispatch(setToken(response.data))
-                dispatch(getAuth(response.data))
+            if(response.data.resultCode === 0){
+                dispatch(getAuth(response.data.token))
+            }
+                else {
+                    
+                }
+        })
+        .catch(err => {
+            let action = stopSubmit("loginForm",{_error: "Неправильный логин или пароль"})
+            dispatch(action)
         })
 }
 export const getAuth = (token) => (dispatch) => {
     authAPI.getAuth(token)
         .then(response => {
                 dispatch(setAuthData(response.data.email,response.data.fio,response.data.id,response.data.roleUser,true))
+                alert("Авторизация прошла успешно!")
         })
 }
 export const logout = () => dispatch => {
