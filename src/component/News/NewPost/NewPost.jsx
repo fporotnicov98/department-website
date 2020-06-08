@@ -30,7 +30,7 @@ let PostForm = (props) => {
                     required='required'
                 />
             </div>
-            <button onClick={props.reset()} className={style['btn-public']}>Добавить</button>
+            <button  className={style['btn-public']}>Добавить</button>
         </form>
     )
 }

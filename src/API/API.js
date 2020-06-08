@@ -66,7 +66,13 @@ export const authAPI = {
 
 export const userAPI = {
     getUsers() {
-        return instanse.get(`​/User​/GetUser`)
+        return instanse.get(`/User/GetUser`)
+    },
+    updateUserRole(id,userRole){
+        return instanse.put(`/User/UpdateRole`,{id,userRole})
+    },
+    removeUser(id){
+        return instanse.delete(`/User/DeleteUser?id=${id}`)
     }
 }
 

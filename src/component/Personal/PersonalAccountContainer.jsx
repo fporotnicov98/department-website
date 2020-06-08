@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PersonalAccount from './PersonalAccount';
-import { getUsers } from './../../redux/personalReducer'
+import { getUsers,updateUserRole,removeUser } from './../../redux/personalReducer'
 
 class PersonalAccountContainer extends React.Component {
     componentDidMount() {
@@ -17,8 +17,8 @@ class PersonalAccountContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         users: state.personalPage.users,
-        roleUser: state.auth.roleUser,
+        auth: state.auth
     }
 }
 
-export default connect(mapStateToProps, { getUsers })(PersonalAccountContainer);
+export default connect(mapStateToProps, { getUsers,updateUserRole,removeUser })(PersonalAccountContainer);

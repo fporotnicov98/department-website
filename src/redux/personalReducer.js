@@ -26,3 +26,15 @@ export const getUsers = () => (dispatch) => {
             dispatch(setUsers(response.data))
         })
 }
+export const updateUserRole = (id,userRole) => (dispatch) => {
+    userAPI.updateUserRole(id,userRole)
+     .then(response => {
+         dispatch(getUsers())
+     })
+}
+export const removeUser = (id) => (dispatch) => {
+    userAPI.removeUser(id)
+        .then(response => {
+            dispatch(getUsers())
+        })
+}
