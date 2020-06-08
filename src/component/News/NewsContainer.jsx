@@ -3,7 +3,7 @@ import News from './News'
 import { connect } from 'react-redux'
 import uniqBy from 'lodash/uniqBy'
 import { getNews, removeNews, updateNews, toggleImportantNews,setSliderNews } from "../../redux/newsReducer";
-import {setRegistration} from '../../redux/authReducer'
+
 
 
 class NewsContainer extends React.Component {
@@ -29,4 +29,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getNews, removeNews, updateNews,toggleImportantNews,setSliderNews,setRegistration })(NewsContainer)
+export default connect(mapStateToProps, { getNews, removeNews, updateNews,toggleImportantNews,setSliderNews})(NewsContainer)

@@ -26,8 +26,8 @@ export const setToken = (token) => ({ type: "SET_TOKEN", payload: token })
 export const setOrders= (orders) => ({ type: "SET_ORDERS", payload: orders })
 
 
-export const setRegistration = (email,password,fio) => dispatch => {
-    authAPI.addRegData(email,password,fio)
+export const sendEmail = (email,password,fio) => dispatch => {
+    authAPI.sendEmail(email,password,fio)
         .then(response => {
             dispatch(reset('registrationForm'));
         })

@@ -48,13 +48,13 @@ export const forumAPI = {
         return instanse.post(`/Forum/AddForumMessage`,{idForum,idAuthor,messageText,messageDate})
     },
     removeForumMessage(id){
-        return instanse.delete(`/Forum/DeleteForumMessage/?id=${id}`)
+        return instanse.delete(`/Forum/DeleteForumMessage/?id=${id}`)   
     }
        
 }
 export const authAPI = {
-    addRegData(email,password,fio){
-        return instanse.post(`/Auth/Registration`,{email,password,fio})
+    sendEmail(email,password,fio){
+        return instanse.post(`/Auth/SendMail`,{email,password,fio})
     },
     login(eMail,password){
         return instanse.post(`/Auth/Authenticate`,{eMail,password})

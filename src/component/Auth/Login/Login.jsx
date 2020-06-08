@@ -3,7 +3,7 @@ import style from './Login.module.scss'
 import logo from './../../../asets/image/logo.png'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form';
-import {setRegistration,setLogin} from '../../../redux/authReducer'
+import {sendEmail,setLogin} from '../../../redux/authReducer'
 import { Redirect } from "react-router-dom";
 
 let LoginForm = (props) => {
@@ -85,6 +85,24 @@ let LogupForm = (props) => {
 }
 const LogupFormRedux = reduxForm({ form: 'registrationForm' })(LogupForm)
 
+let ConfirmForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit} className={style['form']}>
+            <div className = {style['error']}>{props.error}</div>
+            <label htmlFor="code">Код подтверждения?</label>
+            <Field
+                name='code'
+                component='input'
+                type='text'
+                required='required'
+                id='code'
+            />
+            <button className={style['logup']} type="submit" ><span>Подтвердить</span></button>
+        </form>
+    )
+}
+const ConfirmFormRedux = reduxForm({ form: 'confirmForm' })(ConfirmForm)
+
 class Login extends React.Component {
     constructor(props) {
         super(props);
@@ -102,7 +120,7 @@ class Login extends React.Component {
         this.setState({ isModalOpen: false });
     }
     onSubmitReg = (formData) => {
-        this.props.setRegistration(formData.email,formData.password,formData.fio);
+        this.props.sendEmail(formData.email,formData.password,formData.fio);
     }
     onSubmitAuth = (formData) => {
         this.props.setLogin(formData.email,formData.password);
@@ -128,6 +146,10 @@ class Login extends React.Component {
                             <LogupFormRedux onSubmit={this.onSubmitReg} />
                             <div className={style['signin-active']}>Уже зарегистрированы? <button onClick={() => this.toggleAuth()}>Войти</button></div>
                         </div>
+                        <div className={this.state.isActive ? style['signup'] + ' ' + style['signup-left'] : style['signup']}>
+                            <div className={style['title']}>Подтверждение кода</div>
+                            <ConfirmFormRedux onSubmit={this.onSubmitConfirm} />
+                        </div>
                     </div>
                 </div>
             </>
@@ -147,4 +169,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps,{setLogin,setRegistration})(Login);
+export default connect(mapStateToProps,{setLogin,sendEmail})(Login);
