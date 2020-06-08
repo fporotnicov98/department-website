@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { getForumItem } from './../../../redux/forumReducer';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
+import Header from '../../Header/Header';
+import style from './ForumItem.module.scss';
 
 class ForumItemContainer extends React.Component {
     componentDidMount() {
@@ -16,7 +18,10 @@ class ForumItemContainer extends React.Component {
     render() {
         return (
             <div>
-                <ForumItem  {...this.props} />
+                <Header />
+                <div className={style['container']}>
+                    <ForumItem  {...this.props} />
+                </div>
             </div>
         );
     }
@@ -25,6 +30,7 @@ class ForumItemContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         posts: state.forumPage.posts,
+        forum: state.forumPage.forum
     }
 }
 

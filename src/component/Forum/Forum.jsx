@@ -28,19 +28,20 @@ class Forum extends React.Component {
                     <div className={style['news']}>
                         {!this.state.isModalOpen && <a href='#s' onClick={() => this.openModal()} className={style['btn-add-post']}>Создать новую тему</a>}
                         {
-                            this.props.posts.map((item) => <>
-                                <div className={style['themes']}>
-                                    <NavLink to={'/forum/' + item.id} key={item.id} className={style['item']}>
-                                        <div className={style['content']}>
-                                            <div className={style['theme']}>{item.theme}</div>
-                                            <div className={style['data']}>{item.datatime}</div>
-                                            <p>{item.author}</p>
+                            this.props.posts.map((item) =>
+                                <>
+                                    <div className={style['themes']}>
+                                        <div key={item.id} className={style['item']}>
+                                            <div className={style['content']}>
+                                                <NavLink to={'/forum/' + item.id} className={style['theme']}>{item.theme}</NavLink>
+                                                <div className={style['data']}>{item.datatime}</div>
+                                                <p>{item.author}</p>
+                                            </div>
+                                            <p>Ответов: <span>{/* количество ответов */}</span></p>
+                                            <button className={style['basket']} onClick={() => this.props.removeForumPost(item.id)}><i class="fas fa-trash-alt"></i></button>
                                         </div>
-                                        <p>Ответов: <span>{/* количество ответов */}</span></p>
-                                        <button className={style['basket']} onClick={() => this.props.removeForumPost(item.id)}><i class="fas fa-trash-alt"></i></button>
-                                    </NavLink>
-                                </div>
-                            </>)
+                                    </div>
+                                </>)
                         }
                     </div >
                     <NewForum addForum={this.props.addForum} isOpen={this.state.isModalOpen} onClose={() => this.closeModal()} />

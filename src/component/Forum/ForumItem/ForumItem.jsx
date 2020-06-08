@@ -1,25 +1,119 @@
 import React from 'react';
-import user from './../../../asets/image/user.png'
 import style from './ForumItem.module.scss';
+import { Field, reduxForm } from 'redux-form';
+import ShowModalConfirmDeletePost from '../../commons/newsRemoveModal';
 
-const ForumItem = (props) => {
+let date = new Date().toDateString();
+
+let NewMessageForm = (props) => {
     return (
-        <div>
-            {
-                props.forum.map(item =>
-                    <div className={style['body']}>
-                        <div key={item.id} className={style['item']}>
-                            <div className={style['content']}>
-                                <div className={style['data']}>{item.datatime}</div>
-                                <div className={style['text']}>{item.text}</div>
-                                <a href='#s'>Ответить</a>
+        <form onSubmit={props.handleSubmit}>
+            <label htmlFor="newPostText">Текст сообщения:</label>
+            <div className={style['text']}>
+                <Field
+                    name='newPostText'
+                    component='textarea'
+                    id='newPostText'
+                    placeholder='Содержание поста...'
+                    required='required'
+                />
+            </div>
+            <button className={style['btn-public']}>Отправить</button>  
+        </form>
+    )
+}
+
+NewMessageForm = reduxForm({ form: 'PostForm' })(NewMessageForm)
+
+export const NewMessage = (props) => {
+    const onSubmit = (values) => {
+        props.addNews(props.userId, values.newPostTheme, values.newPostText, date);
+        props.toggleShowPostForm(false)
+    }
+
+    return (
+        <div className={style['form-item']}>
+            <div className={style['body__content']}>
+                <div className={style['form-content']}>
+                    <NewMessageForm onSubmit={onSubmit} />
+                </div>
+            </div>
+        </div>
+    );
+}
+
+class ForumItem extends React.Component {
+    state = {
+        newsText: this.props.posts.newsText,
+        updateId: [],
+        removeId: null,
+        isToggleShowPostForm: false,
+        isShowModal: false
+    }
+    openModal = () => {
+        this.setState({ isShowModal: true })
+    }
+    closeModal = () => {
+        this.setState({ isShowModal: false })
+    }
+    setRemoveId = (id) => {
+        this.setState({ removeId: id })
+    }
+    updateText = (e) => {
+        this.setState({ newsText: e.currentTarget.value })
+    }
+    setUpdateId = (id) => {
+        this.setState({ updateId: [...this.state.updateId, id] })
+    }
+    removeUpdateId = (id) => {
+        this.setState({ updateId: [...this.state.updateId.filter(o => o !== id)] })
+    }
+    setText = (text) => {
+        this.setState({ newsText: text })
+    }
+    toggleShowPostForm = (isShow) => {
+        this.setState({ isToggleShowPostForm: isShow })
+    }
+    render() {
+        return (
+            <div>
+                <div className={style['body']}>
+                    <div className={style['thema-title']}></div>
+                    <NewMessage />
+                    <div /* key={post.id} */ className={style['item']}>
+                        <div className={style['body__content']}>
+                            <div className={style['buttons']}>
+                                <button onClick={() => {
+                                    this.openModal()
+                                    // this.setRemoveId(post.id)
+                                }} className={style['delete']}><i class="fas fa-trash-alt"></i></button>
+                                <ShowModalConfirmDeletePost
+                                    isOpen={this.state.isShowModal}
+                                    onClose={() => this.closeModal()}
+                                    removeId={this.state.removeId}
+                                    removeNews={this.props.removeNews}
+                                />
+                            </div>
+                            {/* {
+                                this.state.updateId.some(item => item === post.id)
+                                    ? <div className={style['content']}>
+                                        <textarea onChange={this.updateText} value={this.state.newsText}></textarea>
+                                    </div>
+                                    : <div className={style['content']}>
+                                        <div className={style['text']}>{post.newsText.length < 100 || this.state.detailId.some(item => item === post.id) ? post.newsText : post.newsText.slice(0, 99) + ' ...'}</div>
+                                    </div>
+                            } */}
+                            <div className={style['footer']}>
+                                <div className={style['author']}> {/* {post.author} */} </div>
+                                <div className={style['data']}> {/* {post.newsDate} */} </div>
+                                <a className={style['comment']} href="">Ответить</a>
                             </div>
                         </div>
                     </div>
-                )
-            }
-        </div >
-    );
+                </div>
+            </div >
+        )
+    }
 };
 
 export default ForumItem;
