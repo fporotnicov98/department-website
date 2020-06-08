@@ -1,10 +1,12 @@
 import { forumAPI } from '../API/API'
-import { act } from 'react-dom/test-utils';
+import { reset } from 'redux-form';
 
 
 let initialState = {
     posts: [],
-    forum: null
+    forumTheme: null,
+    forumId:null,
+    forumMessages: []
 };
 
 const forumReducer = (state = initialState, action) => {
@@ -14,10 +16,15 @@ const forumReducer = (state = initialState, action) => {
                 ...state,
                 posts: action.payload
             }
-        case "SET_FORUM_ITEM_POSTS":
+        case "SET_FORUM_INFO":
             return {
                 ...state,
-                forum: action.payload 
+                ...action.payload
+            }
+        case "SET_FORUM_MESSAGES":
+            return {
+                ...state,
+                forumMessages: action.payload
             }
         default:
             return state;
@@ -25,7 +32,8 @@ const forumReducer = (state = initialState, action) => {
 };
 
 export const setForumPosts = (post) => ({ type: "SET_FORUM_POSTS", payload: post })
-export const setForumItemPosts = (forum) => ({ type: "SET_FORUM_ITEM_POSTS", payload: forum })
+export const setForumInfo = (forumTheme, forumId) => ({ type: "SET_FORUM_INFO", payload: {forumTheme,forumId} })
+export const setForumMessages = (messages) => ({ type: "SET_FORUM_MESSAGES", payload: messages })
 
 export const getForum = () => (dispatch) => {
     forumAPI.getForum()
@@ -33,10 +41,10 @@ export const getForum = () => (dispatch) => {
             dispatch(setForumPosts(response.data))
         })
 }
-export const getForumItem = (id) => (dispatch) => {
-    forumAPI.getForumItem(id)
+export const updateForum = (id, theme, forumDate) => (dispatch) => {
+    forumAPI.updateForum(id, theme, forumDate)
         .then(response => {
-            dispatch(setForumItemPosts(response.data))
+            dispatch(getForum())
         })
 }
 export const addForum = (id, theme, date) => (dispatch) => {
@@ -45,13 +53,28 @@ export const addForum = (id, theme, date) => (dispatch) => {
             dispatch(getForum())
         })
 }
+export const addForumMessage = (idForum,idAuthor,messageText,messageDate) => (dispatch) => {
+    forumAPI.addForumMessage(idForum,idAuthor,messageText,messageDate)
+        .then(response => {
+            dispatch(reset('PostForm'));
+        })
+}
+export const removeForumMessage = (id) => (dispatch) => {
+    forumAPI.removeForumMessage(id)
+
+}
 export const removeForumPost = (id) => (dispatch) => {
     forumAPI.removeForumPost(id)
         .then(response => {
             dispatch(getForum())
         })
 }
-export const updateForum = (id, theme) => {
-
+export const getForumItem = (id) => (dispatch) => {
+    forumAPI.getForumItem(id)
+        .then(response => {
+            dispatch(setForumInfo(response.data.theme,response.data.id))
+            dispatch(setForumMessages(response.data.messages))
+        })
 }
+
 export default forumReducer;

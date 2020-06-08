@@ -3,8 +3,9 @@ import style from './NewPost.module.scss'
 import { reduxForm, Field } from 'redux-form';
 import { addNews } from './../../../redux/newsReducer'
 import { connect } from 'react-redux';
+import date from "../../commons/date"
 
-let date = new Date().toDateString();
+// let date = new Date().toDateString();
 
 let PostForm = (props) => {
     return (
@@ -29,7 +30,7 @@ let PostForm = (props) => {
                     required='required'
                 />
             </div>
-            <button className={style['btn-public']}>Добавить</button>
+            <button onClick={props.reset()} className={style['btn-public']}>Добавить</button>
         </form>
     )
 }
@@ -39,7 +40,7 @@ const NewPostForm = reduxForm({ form: 'PostForm' })(PostForm)
 const NewPost = (props) => {
 
     const onSubmit = (values) => {
-        props.addNews(props.userId, values.newPostTheme, values.newPostText, date);
+        props.addNews(props.userId, values.newPostTheme, values.newPostText, date());
         props.toggleShowPostForm(false)
     }
 

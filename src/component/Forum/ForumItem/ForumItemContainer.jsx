@@ -1,7 +1,7 @@
 import React from 'react';
 import ForumItem from './ForumItem';
 import { connect } from 'react-redux';
-import { getForumItem } from './../../../redux/forumReducer';
+import { getForumItem,addForumMessage,removeForumMessage } from './../../../redux/forumReducer';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import Header from '../../Header/Header';
@@ -29,12 +29,14 @@ class ForumItemContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        posts: state.forumPage.posts,
-        forum: state.forumPage.forum
+        forumTheme:state.forumPage.forumTheme,
+        forumMessages:state.forumPage.forumMessages,
+        forumId:state.forumPage.forumId,
+        userId:state.auth.userId
     }
 }
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, { getForumItem })
+    connect(mapStateToProps, { getForumItem,addForumMessage,removeForumMessage })
 )(ForumItemContainer);

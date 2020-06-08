@@ -1,9 +1,10 @@
 import React from 'react';
 import style from './ForumItem.module.scss';
 import { Field, reduxForm } from 'redux-form';
-import ShowModalConfirmDeletePost from '../../commons/newsRemoveModal';
+import ShowModalConfirmDeleteForumMessage from '../../commons/removeForumMessageModal';
+import date from '../../commons/date'
 
-let date = new Date().toDateString();
+
 
 let NewMessageForm = (props) => {
     return (
@@ -27,8 +28,8 @@ NewMessageForm = reduxForm({ form: 'PostForm' })(NewMessageForm)
 
 export const NewMessage = (props) => {
     const onSubmit = (values) => {
-        props.addNews(props.userId, values.newPostTheme, values.newPostText, date);
-        props.toggleShowPostForm(false)
+        props.addForumMessage(props.forumId,props.userId,values.newPostText, date());
+        props.getForumItem(props.forumId)
     }
 
     return (
@@ -44,7 +45,6 @@ export const NewMessage = (props) => {
 
 class ForumItem extends React.Component {
     state = {
-        newsText: this.props.posts.newsText,
         updateId: [],
         removeId: null,
         isToggleShowPostForm: false,
@@ -78,20 +78,21 @@ class ForumItem extends React.Component {
         return (
             <div>
                 <div className={style['body']}>
-                    <div className={style['thema-title']}></div>
-                    <NewMessage />
-                    <div /* key={post.id} */ className={style['item']}>
+                    <div className={style['thema-title']}>Тема: {this.props.forumTheme}</div>
+                    { this.props.forumMessages.map(message => 
+                    <div className={style['item']}>
                         <div className={style['body__content']}>
+                    <div className={style['text']}>{message.messageText}</div>
                             <div className={style['buttons']}>
                                 <button onClick={() => {
                                     this.openModal()
-                                    // this.setRemoveId(post.id)
+                                    this.setRemoveId(message.id)
                                 }} className={style['delete']}><i class="fas fa-trash-alt"></i></button>
-                                <ShowModalConfirmDeletePost
+                                <ShowModalConfirmDeleteForumMessage
                                     isOpen={this.state.isShowModal}
                                     onClose={() => this.closeModal()}
                                     removeId={this.state.removeId}
-                                    removeNews={this.props.removeNews}
+                                    removeForumMessage={this.props.removeForumMessage}
                                 />
                             </div>
                             {/* {
@@ -104,12 +105,14 @@ class ForumItem extends React.Component {
                                     </div>
                             } */}
                             <div className={style['footer']}>
-                                <div className={style['author']}> {/* {post.author} */} </div>
-                                <div className={style['data']}> {/* {post.newsDate} */} </div>
+                                <div className={style['author']}> {message.fio} </div>
+                                <div className={style['data']}> {message.messageDate} </div>
                                 <a className={style['comment']} href="">Ответить</a>
                             </div>
                         </div>
                     </div>
+                    )}
+                    <NewMessage {...this.props} />
                 </div>
             </div >
         )

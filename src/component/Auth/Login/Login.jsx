@@ -45,6 +45,7 @@ LoginForm = reduxForm({ form: 'loginForm' })(LoginForm)
 let LogupForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={style['form']}>
+            <div className = {style['error']}>{props.error}</div>
             <label htmlFor="fio">ФИО</label>
             <Field
                 name='fio'

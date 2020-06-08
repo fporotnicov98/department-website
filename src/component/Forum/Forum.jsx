@@ -8,10 +8,10 @@ import { NavLink } from 'react-router-dom';
 
 
 class Forum extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { isModalOpen: false };
-    }
+
+    state = {
+        isModalOpen: false
+    };
     openModal() {
         this.setState({ isModalOpen: true });
     }
@@ -37,7 +37,7 @@ class Forum extends React.Component {
                                                 <div className={style['data']}>{item.datatime}</div>
                                                 <p>{item.author}</p>
                                             </div>
-                                            <p>Ответов: <span>{/* количество ответов */}</span></p>
+                                            <p>Ответов: <span>{item.countMessages}</span></p>
                                             <button className={style['basket']} onClick={() => this.props.removeForumPost(item.id)}><i class="fas fa-trash-alt"></i></button>
                                         </div>
                                     </div>
