@@ -3,6 +3,7 @@ import style from './HeaderNews.module.scss'
 import logo from './../../asets/image/logo.png'
 import { NavLink } from 'react-router-dom'
 import Login from '../Auth/Login/Login'
+import { connect } from 'react-redux'
 
 class HeaderNews extends React.Component {
 
@@ -25,17 +26,26 @@ class HeaderNews extends React.Component {
                     <div className={style['header__row']}>
                         <a className={style['logo']} href="/"><img src={logo} alt="" /></a>
                         <a href="/" className={style['title']}>Кафедра информационной безопасности</a>
-                        <ul className={style['buttons-menu']}>
+                        <ul className={style['menu']}>
                             <li><NavLink exact to='/' activeClassName={style['active-link']}>Новости</NavLink></li>
                             <li><NavLink to='/survey' activeClassName={style['active-link']}>Опросы</NavLink></li>
                             <li><NavLink to='/forums' activeClassName={style['active-link']}>Форум</NavLink></li>
                             <li><NavLink to='/info' activeClassName={style['active-link']}>Информация</NavLink></li>
-                            <li  onClick={() => this.openModal()}><a to="#s">Вход</a></li>
+                            {
+                                !this.props.isAuth
+                                    ? <li onClick={() => this.openModal()}><a href="#s">Вход</a></li>
+                                    : <li className={style['burger']}>
+                                        <a href="#s"><i class="fas fa-user"></i></a>
+                                        <ul className={style['sub-menu']}>
+                                            <li><NavLink to="/personal">Личный кабинет</NavLink></li>
+                                            <li><a href="#s">Выход</a></li>
+                                        </ul>
+                                    </li>
+                            }
                             <Login
                                 isOpen={this.state.isModalOpen}
                                 onClose={() => this.closeModal()}
                             />
-                            <li style={{ display: 'none' }} id='account'>Личный кабинет</li>
                         </ul>
                     </div>
                 </div>
@@ -44,4 +54,10 @@ class HeaderNews extends React.Component {
     }
 }
 
-export default HeaderNews;
+let mapStateToProps = (state) => {
+    return {
+        isAuth: state.auth.isAuth
+    }
+}
+
+export default connect(mapStateToProps, {})(HeaderNews);

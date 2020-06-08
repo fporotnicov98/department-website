@@ -80,7 +80,7 @@ class News extends React.Component {
                         <div className={style['body']}>
                             {this.state.isToggleShowPostForm && <NewPost toggleShowPostForm={this.toggleShowPostForm} />}
                             {this.props.posts
-                               ? this.props.posts.map(post =>
+                                ? this.props.posts.map(post =>
                                     <div key={post.id} className={style['item']}>
                                         <div className={style['body__content']}>
                                             <div className={style['buttons']}>
@@ -108,8 +108,6 @@ class News extends React.Component {
                                                     ? <button onClick={() => {
                                                         this.openModal()
                                                         this.setRemoveId(post.id)
-
-
                                                     }} className={style['delete']}><i class="fas fa-trash-alt"></i></button>
                                                     : null
                                                 }
