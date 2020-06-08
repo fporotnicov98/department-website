@@ -35,8 +35,8 @@ export const forumAPI = {
     addForum(id, theme, forumDate) {
         return instanse.post(`Forum/AddForum`, { id, theme, forumDate })
     },
-    updateForum(id,theme,forumDate){
-        return instanse.put(`/Forum/UpdateForum`, {id,theme,forumDate})
+    updateForum(id, theme, forumDate) {
+        return instanse.put(`/Forum/UpdateForum`, { id, theme, forumDate })
     },
     removeForumPost(id) {
         return instanse.delete(`Forum/DeleteForum/?id=${id}`)
@@ -44,23 +44,23 @@ export const forumAPI = {
     getForumItem(id) {
         return instanse.get(`/Forum/GetForumById/?id=${id}`)
     },
-    addForumMessage(idForum,idAuthor,messageText,messageDate){
-        return instanse.post(`/Forum/AddForumMessage`,{idForum,idAuthor,messageText,messageDate})
+    addForumMessage(idForum, idAuthor, messageText, messageDate) {
+        return instanse.post(`/Forum/AddForumMessage`, { idForum, idAuthor, messageText, messageDate })
     },
-    removeForumMessage(id){
+    removeForumMessage(id) {
         return instanse.delete(`/Forum/DeleteForumMessage/?id=${id}`)
     }
-       
+
 }
 export const authAPI = {
-    addRegData(email,password,fio){
-        return instanse.post(`/Auth/Registration`,{email,password,fio})
+    addRegData(email, password, fio) {
+        return instanse.post(`/Auth/Registration`, { email, password, fio })
     },
-    login(eMail,password){
-        return instanse.post(`/Auth/Authenticate`,{eMail,password})
+    login(eMail, password) {
+        return instanse.post(`/Auth/Authenticate`, { eMail, password })
     },
-    getAuth(token){
-        return instanse.get(`/Auth/Authorization`,{ headers: {"Authorization" : `Bearer ${token}`} })
+    getAuth(token) {
+        return instanse.get(`/Auth/Authorization`, { headers: { "Authorization": `Bearer ${token}` } })
     },
 }
 

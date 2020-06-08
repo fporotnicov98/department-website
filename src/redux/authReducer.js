@@ -42,7 +42,7 @@ export const setLogin = (email, password) => dispatch => {
             if(response.data.resultCode === 0){
                 dispatch(getAuth(response.data.token))
                 dispatch(reset('loginForm'));
-
+                alert("Авторизация прошла успешно!")
             }
                 else {
                     
@@ -57,7 +57,6 @@ export const getAuth = (token) => (dispatch) => {
     authAPI.getAuth(token)
         .then(response => {
                 dispatch(setAuthData(response.data.email,response.data.fio,response.data.id,response.data.roleUser,true))
-                alert("Авторизация прошла успешно!")
         })
 }
 export const logout = () => dispatch => {
