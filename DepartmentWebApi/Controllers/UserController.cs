@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DepartmentWebApi.DB;
 using DepartmentWebApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,8 @@ namespace DepartmentWebApi.Controllers
         {
             try
             {
-                return Ok("Метод ничего не делает");
+                var list = UserManager.GetUsers();
+                return Ok(list);
             }
             catch (Exception ex)
             {
@@ -30,22 +32,6 @@ namespace DepartmentWebApi.Controllers
             }
         }
 
-
-
-        [HttpPost]
-        [Route("AddUser")]
-        public IActionResult AddUser(UsersWithoutId users)
-        {
-            try
-            {
-                return Ok("Метод ничего не делает");
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex);
-                return Problem("Ошибка :(");
-            }
-        }
 
         [HttpPut]
         [Route("UpdateUser")]
@@ -68,7 +54,28 @@ namespace DepartmentWebApi.Controllers
         {
             try
             {
-                return Ok("Метод ничего не делает");
+                if (UserManager.DeleteUser(id))
+                    return Ok("Пользователь успешно удален");
+                else
+                    return Problem("Не удалось удалить пользователя");
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                return Problem("Ошибка :(");
+            }
+        }
+
+        [HttpPut]
+        [Route("UpdateRole)")]
+        public IActionResult UpdateRole(UpdateUserRole user)
+        {
+            try
+            {
+                if (UserManager.UpdateRole(user.Id, user.UserRole))
+                    return Ok("Роль успешно обновлена");
+                else
+                    return Problem("Не удалось обновить роль пользователя");
             }
             catch (Exception ex)
             {

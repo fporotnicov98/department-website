@@ -77,7 +77,6 @@ namespace DepartmentWebApi
             }
 
             app.UseHttpsRedirection();
-
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>

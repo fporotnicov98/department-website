@@ -16,7 +16,7 @@ namespace DepartmentWebApi.DB
         private static string connectionString = "Server=DepartmentServ;Database=Depart;User Id=Serv;Password=5w~M3m<-q&";
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-        public static List<Forum> GetForum()
+        public static List<ForumWithCount> GetForum()
         {
             try
             {
@@ -27,13 +27,16 @@ namespace DepartmentWebApi.DB
                     {
                         command.CommandText = @"SELECT * FROM Forum";
 
-                        List<Forum> forums = new List<Forum>();
+                        List<ForumWithCount> forums = new List<ForumWithCount>();
                         DataTable table = new DataTable();
                         table.Load(command.ExecuteReader());
 
                         foreach (DataRow row in table.Rows)
                         {
-                            forums.Add(new Forum(row));
+                            ForumWithCount forum = new ForumWithCount(row);
+                            int count = GetForumMessages(row.Field<int>("id")).Count;
+                            forum.CountMessages = count;
+                            forums.Add(forum);
                         }
                         return forums;
                     }
@@ -65,16 +68,16 @@ namespace DepartmentWebApi.DB
                     }
                     using(SqlCommand commandSql = connection.CreateCommand())
                     {
-                        commandSql.CommandText = @"SELECT * FROM MessageForum WHERE idForum = @Id";
+                        commandSql.CommandText = @"SELECT M.id, M.idForum, U.FIO, M.MessageText, M.MessageDate FROM MessageForum M INNER JOIN Users U ON M.idAuthor = U.id WHERE idForum = @Id";
                         commandSql.Parameters.AddWithValue("@Id", id);
                         DataTable table = new DataTable();
                         table.Load(commandSql.ExecuteReader());
-                        List<MessageForum> messages = new List<MessageForum>();
+                        List<MessageForumFIO> messages = new List<MessageForumFIO>();
 
                         int idMessage = 1;
                         foreach(DataRow row in table.Rows)
                         {
-                            messages.Add(new MessageForum(row, idMessage));
+                            messages.Add(new MessageForumFIO(row, idMessage));
                             idMessage++;
                         }
                         forum.messages = messages;

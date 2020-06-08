@@ -62,4 +62,30 @@ namespace DepartmentWebApi.Models
             FIO = fIO;
         }
     }
+
+    public class UsersWithoutPass
+    {
+        public string Email { get; set; }
+        public string FIO { get; set; }
+        public string RoleUser { get; set; }
+
+        public UsersWithoutPass(string email, string fIO, string roleUser)
+        {
+            Email = email;
+            FIO = fIO;
+            RoleUser = roleUser;
+        }
+    }
+
+    public class UpdateUserRole
+    {
+        public int Id { get; set; }
+        public string UserRole { get; set; }
+
+        public UpdateUserRole(int id, string userRole)
+        {
+            Id = id;
+            UserRole = userRole;
+        }
+    }
 }

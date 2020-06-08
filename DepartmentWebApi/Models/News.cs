@@ -76,7 +76,7 @@ namespace DepartmentWebApi.Models
         public NewsAuthorName(DataRow row)
         {
             Id = row.Field<int>("id");
-            Author = "Тестовый"; //row.Field<string>("Login");
+            Author = row.Field<string>("FIO");
             Theme = row.Field<string>("Theme");
             NewsText = row.Field<string>("NewsText");
             NewsDate = row.Field<DateTime>("NewsDate");
