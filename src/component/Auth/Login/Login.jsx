@@ -3,13 +3,14 @@ import style from './Login.module.scss'
 import logo from './../../../asets/image/logo.png'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form';
-import {sendEmail,setLogin} from '../../../redux/authReducer'
+import { sendEmail, setLogin } from '../../../redux/authReducer'
 import { Redirect } from "react-router-dom";
+import { Confirm } from './Confirm';
 
 let LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={style['form']}>
-            <div className = {style['error']}>{props.error}</div>
+            <div className={style['error']}>{props.error}</div>
             <label htmlFor="email">Введите email</label>
             <Field
                 name='email'
@@ -36,7 +37,6 @@ let LoginForm = (props) => {
                 <label htmlFor="rememberMe" className={style['save']}>Запомнить меня</label>
             </div> */}
             <button className={style['login']} type="submit" ><span>Войти</span></button>
-            <button className={style['clear']} type="button" onClick={props.reset}><span>Очистить поля</span></button>
         </form>
     )
 }
@@ -45,7 +45,7 @@ LoginForm = reduxForm({ form: 'loginForm' })(LoginForm)
 let LogupForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={style['form']}>
-            <div className = {style['error']}>{props.error}</div>
+            <div className={style['error']}>{props.error}</div>
             <label htmlFor="fio">ФИО</label>
             <Field
                 name='fio'
@@ -79,7 +79,7 @@ let LogupForm = (props) => {
                 id='password'
             /> */}
             <button className={style['logup']} type="submit" ><span>Зарегистрироваться</span></button>
-            <button className={style['clear']} type="button" onClick={props.reset}><span>Очистить поля</span></button>
+
         </form>
     )
 }
@@ -88,8 +88,8 @@ const LogupFormRedux = reduxForm({ form: 'registrationForm' })(LogupForm)
 let ConfirmForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={style['form']}>
-            <div className = {style['error']}>{props.error}</div>
-            <label htmlFor="code">Код подтверждения?</label>
+            <div className={style['error']}>{props.error}</div>
+            <label htmlFor="code">Вам на почту был отправлен код подтверждения. Введите его в поле ниже.</label>
             <Field
                 name='code'
                 component='input'
@@ -113,46 +113,46 @@ class Login extends React.Component {
             isActive: !this.state.isActive
         })
     }
-    openModal() {
-        this.setState({ isModalOpen: true });
-    }
-    closeModal() {
-        this.setState({ isModalOpen: false });
-    }
     onSubmitReg = (formData) => {
-        this.props.sendEmail(formData.email,formData.password,formData.fio);
+        this.props.sendEmail(formData.email, formData.password, formData.fio);
+        this.setState({
+            isModalOpen: !this.state.isModalOpen
+        })
     }
     onSubmitAuth = (formData) => {
-        this.props.setLogin(formData.email,formData.password);
-        
-        
+        this.props.setLogin(formData.email, formData.password);
     }
     render() {
         if (this.props.isOpen === false) return null;
-        if (this.props.isAuth) return <Redirect to = {'/'}></Redirect> 
+        if (this.props.isAuth) return <Redirect to={'/'}></Redirect>
         return (
-            <>
-                <div className={style['bg']}>
-                    <div className={this.state.isActive ? style['frame'] + " " + style['frame-long'] : style['frame']}>
-                        <button onClick={e => this.close(e)} className={style["close-auth"]}>&times;</button>
-                        <div className={style['logo']}><img src={logo} alt="" /></div>
-                        <div className={this.state.isActive ? style['signin'] + " " + style['signin-left'] : style['signin']}>
-                            <div className={style['title']}>Вход</div>
-                            <LoginForm onSubmit={this.onSubmitAuth} />
-                            <div className={style['signin-active']}>Еще не зарегистрированы?<button onClick={() => this.toggleAuth()}>Регистрация</button></div>
+            <div className={style['bg']}>
+                {
+                    !this.state.isModalOpen
+                        ? <div className={this.state.isActive ? style['frame'] + " " + style['frame-long'] : style['frame']}>
+                            <button onClick={e => this.close(e)} className={style["close-auth"]}><span>x</span></button>
+                            <div className={style['logo']}><img src={logo} alt="" /></div>
+                            <div className={this.state.isActive ? style['signin'] + " " + style['signin-left'] : style['signin']}>
+                                <div className={style['title']}>Вход</div>
+                                <LoginForm onSubmit={this.onSubmitAuth} />
+                                <div className={style['signin-active']}>Еще не зарегистрированы?<button onClick={() => this.toggleAuth()}>Регистрация</button></div>
+                            </div>
+                            <div className={this.state.isActive ? style['signup'] + ' ' + style['signup-left'] : style['signup']}>
+                                <div className={style['title']}>Регистрация</div>
+                                <LogupFormRedux onSubmit={this.onSubmitReg} />
+                                <div className={style['signin-active']}>Уже зарегистрированы? <button onClick={() => this.toggleAuth()}>Войти</button></div>
+                            </div>
                         </div>
-                        <div className={this.state.isActive ? style['signup'] + ' ' + style['signup-left'] : style['signup']}>
-                            <div className={style['title']}>Регистрация</div>
-                            <LogupFormRedux onSubmit={this.onSubmitReg} />
-                            <div className={style['signin-active']}>Уже зарегистрированы? <button onClick={() => this.toggleAuth()}>Войти</button></div>
+                        : <div className={style['frame-short'] + " " + style['frame']}>
+                            <button onClick={e => this.close(e)} className={style["close-auth"]}><span>x</span></button>
+                            <div className={style['logo']}><img src={logo} alt="" /></div>
+                            <div className={style['confirm']}>
+                                <div className={style['title']}>Подтверждение регистрации</div>
+                                <ConfirmFormRedux onSubmit={this.onSubmitConfirm} />
+                            </div>
                         </div>
-                        <div className={this.state.isActive ? style['signup'] + ' ' + style['signup-left'] : style['signup']}>
-                            <div className={style['title']}>Подтверждение кода</div>
-                            <ConfirmFormRedux onSubmit={this.onSubmitConfirm} />
-                        </div>
-                    </div>
-                </div>
-            </>
+                }
+            </div >
         )
     }
     close(e) {
@@ -169,4 +169,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps,{setLogin,sendEmail})(Login);
+export default connect(mapStateToProps, { setLogin, sendEmail })(Login);
