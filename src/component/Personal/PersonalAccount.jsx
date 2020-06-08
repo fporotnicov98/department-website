@@ -24,7 +24,7 @@ class PersonalAccount extends React.Component {
                                         <ul className={style['info']}>
                                             <li>Пользователь:<span>{this.props.users.fio}</span></li>
                                             <li>Электронная почта:<span></span></li>
-                                            <li>Номер телефона:<span></span></li>
+                                            <li>Номер телефона<span></span></li>
                                             <li>Роль:<span></span></li>
                                         </ul>
                                         <div className={style['edit-password']}>
