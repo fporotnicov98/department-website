@@ -64,4 +64,10 @@ export const authAPI = {
     },
 }
 
+export const userAPI = {
+    getUsers() {
+        return instanse.get(`​/User​/GetUser`)
+    }
+}
+
 

@@ -22,7 +22,7 @@ class PersonalAccount extends React.Component {
                                     <div className={style['user-data']}>
                                         <div className={style['sub-title']}>Личные данные</div>
                                         <ul className={style['info']}>
-                                            <li>Пользователь:<span></span></li>
+                                            <li>Пользователь:<span>{this.props.users.fio}</span></li>
                                             <li>Электронная почта:<span></span></li>
                                             <li>Номер телефона:<span></span></li>
                                             <li>Роль:<span></span></li>
@@ -48,17 +48,23 @@ class PersonalAccount extends React.Component {
                                             }
                                         </div>
                                     </div>
-                                    <div className={style['users']}>
-                                        <div className={style['sub-title']}>Управление пользователями</div>
-                                        <div className={style['users-wrapper']}>
-                                            <div className={style['user']}>
-                                                <div className={style['id']}>#1</div>
-                                                <div className={style['fio']}>Пупкин Василий Петрович</div>
-                                                <a href='#s' className={style['role']}>Гость</a>
-                                                <a href="#s" className={style['delete']}><i class="fas fa-trash-alt"></i></a>
+                                    {
+                                        this.props.users.map((user, index) =>
+                                            <div className={style['users']}>
+                                                <div className={style['sub-title']}>Управление пользователями</div>
+                                                <div className={style['users-wrapper']}>
+                                                    <div className={style['user']}>
+                                                        <div className={style['id']}>#{index}</div>
+                                                        <div className={style['fio']}>{user.fio}</div>
+                                                        <a href='#s' className={style['role']}>{user.roleUser}</a>
+                                                        <a href="#s" className={style['delete']}><i class="fas fa-trash-alt"></i></a>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        )
+
+                                    }
+
                                 </div>
                                 : <div className={style["body-user"]}>
                                     <div className={style['user-data']}>
