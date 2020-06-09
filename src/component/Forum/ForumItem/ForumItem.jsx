@@ -79,8 +79,8 @@ class ForumItem extends React.Component {
             <div>
                 <div className={style['body']}>
                     <div className={style['thema-title']}>Тема: {this.props.forumTheme}</div>
-                    {this.props.forumMessages.map(message =>
-                        <div className={style['item']}>
+                    {this.props.forumMessages.map((message, index) =>
+                        <div className={index !== 0 ? style['item'] : style['item'] + ' ' + style['item-first']}>
                             <div className={style['body__content']}>
                                 <div className={style['text']}>{message.messageText}</div>
                                 {this.props.userId === message.idAuthor || this.props.roleUser === 'admin'
