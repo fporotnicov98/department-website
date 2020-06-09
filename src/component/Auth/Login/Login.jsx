@@ -3,9 +3,9 @@ import style from './Login.module.scss'
 import logo from './../../../asets/image/logo.png'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form';
-import { sendEmail, setLogin } from '../../../redux/authReducer'
+import { sendEmail, setLogin,getCode } from '../../../redux/authReducer'
 import { Redirect } from "react-router-dom";
-import { Confirm } from './Confirm';
+
 
 let LoginForm = (props) => {
     return (
@@ -122,6 +122,9 @@ class Login extends React.Component {
     onSubmitAuth = (formData) => {
         this.props.setLogin(formData.email, formData.password);
     }
+    onSubmitConfirm = formData => {
+        this.props.getCode(formData.code)
+    }
     render() {
         if (this.props.isOpen === false) return null;
         if (this.props.isAuth) return <Redirect to={'/'}></Redirect>
@@ -169,4 +172,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { setLogin, sendEmail })(Login);
+export default connect(mapStateToProps, { setLogin, sendEmail, getCode })(Login);

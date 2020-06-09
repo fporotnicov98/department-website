@@ -93,10 +93,12 @@ class ForumItem extends React.Component {
                                     onClose={() => this.closeModal()}
                                     removeId={this.state.removeId}
                                     removeForumMessage={this.props.removeForumMessage}
+                                    getForumItem = {this.props.getForumItem}
+                                    idForum ={message.idForum}
                                 />
                             </div>
                             {/* {
-                                this.state.updateId.some(item => item === post.id)
+                                this.state.updateId.some(item => item === message.id)
                                     ? <div className={style['content']}>
                                         <textarea onChange={this.updateText} value={this.state.newsText}></textarea>
                                     </div>

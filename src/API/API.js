@@ -56,6 +56,9 @@ export const authAPI = {
     sendEmail(email,password,fio){
         return instanse.post(`/Auth/SendMail`,{email,password,fio})
     },
+    getCode(code){
+        return instanse.get(`/Auth/CodeRegistration?code=${code}`)
+    },
     login(eMail, password) {
         return instanse.post(`/Auth/Authenticate`, { eMail, password })
     },

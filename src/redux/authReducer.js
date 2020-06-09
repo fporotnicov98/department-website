@@ -36,6 +36,16 @@ export const sendEmail = (email,password,fio) => dispatch => {
             dispatch(action)
         })
 }
+export const getCode = (code) => dispatch => {
+    authAPI.getCode(code)
+        .then(response => {
+            alert("Регистрация прошла успешно!")
+        })
+        .catch(err => {
+            let action = stopSubmit("confirmForm",{_error: "Вы ввели не правильный код!"})
+            dispatch(action)
+        })
+}
 export const setLogin = (email, password) => dispatch => {
     authAPI.login(email, password)
         .then(response => {

@@ -16,6 +16,7 @@ const ShowModalConfirmDeleteForumMessage = (props) => {
                 <div className={style['buttons']}>
                     <a href='#s' className={style['yes']} onClick={(e) => {
                         props.removeForumMessage(props.removeId)
+                        props.getForumItem(props.idForum)
                         close(e)
                     }}>Да</a>
                     <a className={style['no']} onClick={(e) => close(e)} href="#s">Отмена</a>
