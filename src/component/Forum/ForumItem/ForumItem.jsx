@@ -19,7 +19,7 @@ let NewMessageForm = (props) => {
                     required='required'
                 />
             </div>
-            <button className={style['btn-public']}>Отправить</button>  
+            <button className={style['btn-public']}>Отправить</button>
         </form>
     )
 }
@@ -28,7 +28,7 @@ NewMessageForm = reduxForm({ form: 'PostForm' })(NewMessageForm)
 
 export const NewMessage = (props) => {
     const onSubmit = (values) => {
-        props.addForumMessage(props.forumId,props.userId,values.newPostText, date());
+        props.addForumMessage(props.forumId, props.userId, values.newPostText, date());
         props.getForumItem(props.forumId)
     }
 
@@ -79,29 +79,29 @@ class ForumItem extends React.Component {
             <div>
                 <div className={style['body']}>
                     <div className={style['thema-title']}>Тема: {this.props.forumTheme}</div>
-                    { this.props.forumMessages.map(message => 
-                    <div className={style['item']}>
-                        <div className={style['body__content']}>
-                    <div className={style['text']}>{message.messageText}</div>
-                    { this.props.userId === message.idAuthor || this.props.roleUser === 'admin'
-                           ? <div className={style['buttons']}>
-                                <button onClick={() => {
-                                    this.openModal()
-                                    this.setRemoveId(message.id)
-                                }} className={style['delete']}><i class="fas fa-trash-alt"></i></button>
-                      
-                                <ShowModalConfirmDeleteForumMessage
-                                    isOpen={this.state.isShowModal}
-                                    onClose={() => this.closeModal()}
-                                    removeId={this.state.removeId}
-                                    removeForumMessage={this.props.removeForumMessage}
-                                    getForumItem = {this.props.getForumItem}
-                                    idForum ={message.idForum}
-                                />
-                            </div>
-                                  : null
+                    {this.props.forumMessages.map(message =>
+                        <div className={style['item']}>
+                            <div className={style['body__content']}>
+                                <div className={style['text']}>{message.messageText}</div>
+                                {this.props.userId === message.idAuthor || this.props.roleUser === 'admin'
+                                    ? <div className={style['buttons']}>
+                                        <button onClick={() => {
+                                            this.openModal()
+                                            this.setRemoveId(message.id)
+                                        }} className={style['delete']}><i class="fas fa-trash-alt"></i></button>
+
+                                        <ShowModalConfirmDeleteForumMessage
+                                            isOpen={this.state.isShowModal}
+                                            onClose={() => this.closeModal()}
+                                            removeId={this.state.removeId}
+                                            removeForumMessage={this.props.removeForumMessage}
+                                            getForumItem={this.props.getForumItem}
+                                            idForum={message.idForum}
+                                        />
+                                    </div>
+                                    : null
                                 }
-                            {/* {
+                                {/* {
                                 this.state.updateId.some(item => item === message.id)
                                     ? <div className={style['content']}>
                                         <textarea onChange={this.updateText} value={this.state.newsText}></textarea>
@@ -110,13 +110,13 @@ class ForumItem extends React.Component {
                                         <div className={style['text']}>{post.newsText.length < 100 || this.state.detailId.some(item => item === post.id) ? post.newsText : post.newsText.slice(0, 99) + ' ...'}</div>
                                     </div>
                             } */}
-                            <div className={style['footer']}>
-                                <div className={style['author']}> {message.fio} </div>
-                                <div className={style['data']}> {message.messageDate} </div>
-                                <a className={style['comment']} href="">Ответить</a>
+                                <div className={style['footer']}>
+                                    <div className={style['author']}> {message.fio} </div>
+                                    <div className={style['data']}> {message.messageDate} </div>
+                                    {/* <a className={style['comment']} href="">Ответить</a> */}
+                                </div>
                             </div>
                         </div>
-                    </div>
                     )}
                     <NewMessage {...this.props} />
                 </div>
