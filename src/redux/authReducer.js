@@ -1,5 +1,7 @@
 import {authAPI} from '../API/API'
 import { stopSubmit, reset } from 'redux-form'
+import { Redirect } from 'react-router-dom'
+import React from 'react'
 
 let initial = {
     email: null,
@@ -71,5 +73,6 @@ export const getAuth = (token) => (dispatch) => {
 }
 export const logout = () => dispatch => {
     dispatch(setAuthData(null,null,null,null,false))
+    return <Redirect to={'/'}></Redirect>
 }
 export default authReducer

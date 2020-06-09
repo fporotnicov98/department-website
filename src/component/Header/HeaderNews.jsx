@@ -4,6 +4,7 @@ import logo from './../../asets/image/logo.png'
 import { NavLink } from 'react-router-dom'
 import Login from '../Auth/Login/Login'
 import { connect } from 'react-redux'
+import {logout} from '../../redux/authReducer'
 
 class HeaderNews extends React.Component {
 
@@ -38,7 +39,7 @@ class HeaderNews extends React.Component {
                                         <a href="#s"><i class="fas fa-user"></i></a>
                                         <ul className={style['sub-menu']}>
                                             <li><NavLink to="/personal">Личный кабинет</NavLink></li>
-                                            <li><a href="#s">Выход</a></li>
+                                            <li><a onClick = {() => this.props.logout()}>Выход</a></li>
                                         </ul>
                                     </li>
                             }
@@ -60,4 +61,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {})(HeaderNews);
+export default connect(mapStateToProps, {logout})(HeaderNews);
