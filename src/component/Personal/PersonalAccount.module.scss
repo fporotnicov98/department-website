@@ -21,7 +21,7 @@
             display: flex;
             justify-content: space-between;
             .user-data {
-                width: 49%;
+                width: 44%;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -78,7 +78,7 @@
                 }
             }
             .users {
-                width: 49%;
+                width: 55%;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -102,6 +102,7 @@
                     height: 100%;
                     padding: 20px;
                     .user {
+                        margin-bottom: 20px;
                         background: #fff;
                         min-height: 40px;
                         box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.25);
@@ -115,13 +116,27 @@
                             text-align: center;
                             flex: 1 0 auto;
                         }
-                        .role {
-                            text-align: center;
+                        .roles {
+                            padding: 5px 0;
                             flex: 0 0 23%;
+                            button:disabled {
+                                background: #050381;
+                                color: #fff;
+                                border-radius: 5px;
+                            }
+                            button {
+                                padding: 5px;
+                                background: none;
+                                margin-bottom: 5px;
+                                &:last-child {
+                                    margin: 0;
+                                }
+                            }
                         }
                         .delete {
                             text-align: center;
-                            flex: 0 0 10%;
+                            flex: 0 0 10%; 
+                            color: #000;
                         }
                     }
                 }

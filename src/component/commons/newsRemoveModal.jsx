@@ -14,7 +14,7 @@ const ShowModalConfirmDeletePost = (props) => {
             <div className={style['modal']}>
                 <div className={style['title']}>Вы действительно хотите удалить пост?</div>
                 <div className={style['buttons']}>
-                    <a className={style['yes']} onClick={(e) => {
+                    <a href='#s' className={style['yes']} onClick={(e) => {
                         props.removeNews(props.removeId)
                         close(e)
                     }}>Да</a>

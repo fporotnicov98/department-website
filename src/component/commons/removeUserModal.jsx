@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './../News/News.module.scss'
 
-const ShowModalConfirmDeleteForumMessage = (props) => {
+const ShowModalConfirmDeleteUser = (props) => {
     let close = (e) => {
         e.preventDefault();
         if (props.onClose) {
@@ -12,10 +12,10 @@ const ShowModalConfirmDeleteForumMessage = (props) => {
     return (
         <div className={style['wrapper']}>
             <div className={style['modal']}>
-                <div className={style['title']}>Вы действительно хотите удалить сообщение?</div>
+                <div className={style['title']}>Вы действительно хотите удалить пользователя?</div>
                 <div className={style['buttons']}>
                     <a href='#s' className={style['yes']} onClick={(e) => {
-                        props.removeForumMessage(props.removeId)
+                        props.removeUser(props.removeId)
                         close(e)
                     }}>Да</a>
                     <a className={style['no']} onClick={(e) => close(e)} href="#s">Отмена</a>
@@ -25,4 +25,4 @@ const ShowModalConfirmDeleteForumMessage = (props) => {
     )
 }
 
-export default ShowModalConfirmDeleteForumMessage
+export default ShowModalConfirmDeleteUser;

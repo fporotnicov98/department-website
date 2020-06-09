@@ -17,7 +17,8 @@ class PersonalAccountContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         users: state.personalPage.users,
-        auth: state.auth
+        auth: state.auth,
+        roleUser: state.auth.roleUser,
     }
 }
 

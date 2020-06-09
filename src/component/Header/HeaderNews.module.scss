@@ -48,13 +48,16 @@
                         a {
                             padding: 16px 10px;
                             display: inline-block;
+                            &:hover {
+                                color: #000;
+                            }
                         }
                         >li {
                             background: rgba(159, 158, 180, 1);
-                            // padding: 10px 0;
+                            border-radius: 5px 5px 0 0;
                             &:last-child {
                                 margin: 0;
-                                border: 0;
+                                border-radius: 0 0 5px 5px;
                             }
                         }
                     }
