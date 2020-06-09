@@ -68,7 +68,7 @@ namespace DepartmentWebApi.DB
                     }
                     using(SqlCommand commandSql = connection.CreateCommand())
                     {
-                        commandSql.CommandText = @"SELECT M.id, M.idForum, U.FIO, M.MessageText, M.MessageDate FROM MessageForum M INNER JOIN Users U ON M.idAuthor = U.id WHERE idForum = @Id";
+                        commandSql.CommandText = @"SELECT M.id, M.idForum, M.idAuthor, U.FIO, M.MessageText, M.MessageDate FROM MessageForum M INNER JOIN Users U ON M.idAuthor = U.id WHERE idForum = @Id";
                         commandSql.Parameters.AddWithValue("@Id", id);
                         DataTable table = new DataTable();
                         table.Load(commandSql.ExecuteReader());

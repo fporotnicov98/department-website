@@ -67,7 +67,7 @@ namespace DepartmentWebApi.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateRole)")]
+        [Route("UpdateRole")]
         public IActionResult UpdateRole(UpdateUserRole user)
         {
             try

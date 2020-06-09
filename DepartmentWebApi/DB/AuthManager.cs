@@ -86,5 +86,104 @@ namespace DepartmentWebApi.DB
                 return false;
             }
         }
+
+        public static bool InsertUserTemporary(UsersWithoutIdRole user, byte[] hashPassword, string code)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = @"INSERT INTO UserTemporary VALUES(@Email, @Password, @FIO, @RoleUser, @Code, @Attempts)";
+                        command.Parameters.AddWithValue("@Email", user.Email);
+                        command.Parameters.AddWithValue("@Password", hashPassword);
+                        command.Parameters.AddWithValue("@FIO", user.FIO);
+                        command.Parameters.AddWithValue("@RoleUser", "user");
+                        command.Parameters.AddWithValue("@Code", code);
+                        command.Parameters.AddWithValue("@Attempts", 0);
+                        command.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                return false;
+            }
+        }
+
+        public static bool ExistCode(int code)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = @"SELECT Count(*) FROM UserTemporary WHERE Code = @Code";
+                        command.Parameters.AddWithValue("@Code", code);
+                        return (int)command.ExecuteScalar() > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                return false;
+            }
+        }
+
+        public static UserTemporary GetTemporaryUser(int code)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = @"SELECT * FROM UserTemporary WHERE Code = @Code";
+                        command.Parameters.AddWithValue("@Code", code);
+                        DataTable table = new DataTable();
+                        table.Load(command.ExecuteReader());
+
+                        UserTemporary user = new UserTemporary(table.Rows[0]);
+                        return user;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                return null;
+            }
+        }
+
+        public static bool DeleteTemporaryUser(int code)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = @"DELETE FROM UserTemporary WHERE Code = @Code";
+                        command.Parameters.AddWithValue("@Code", code);
+                        command.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                return false;
+            }
+        }
     }
 }

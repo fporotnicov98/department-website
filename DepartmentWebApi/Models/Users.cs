@@ -49,6 +49,36 @@ namespace DepartmentWebApi.Models
         }
     }
 
+    public class UserTemporary
+    {
+        public string Email { get; set; }
+        public byte[] Password { get; set; }
+        public string FIO { get; set; }
+        public string RoleUser { get; set; }
+        public string Code { get; set; }
+        public int Attempts { get; set; }
+
+        public UserTemporary(string email, byte[] password, string fIO, string roleUser, string code, int attempts)
+        {
+            Email = email;
+            Password = password;
+            FIO = fIO;
+            RoleUser = roleUser;
+            Code = code;
+            Attempts = attempts;
+        }
+
+        public UserTemporary(DataRow row)
+        {
+            Email = row.Field<string>("Email");
+            Password = row.Field<byte[]>("Password");
+            FIO = row.Field<string>("FIO");
+            RoleUser = row.Field<string>("RoleUser");
+            Code = row.Field<string>("Code");
+            Attempts = row.Field<int>("Attempts");
+        }
+    }
+
     public class UsersWithoutIdRole
     {
         public string Email { get; set; }
@@ -65,12 +95,14 @@ namespace DepartmentWebApi.Models
 
     public class UsersWithoutPass
     {
+        public int Id { get; set; }
         public string Email { get; set; }
         public string FIO { get; set; }
         public string RoleUser { get; set; }
 
-        public UsersWithoutPass(string email, string fIO, string roleUser)
+        public UsersWithoutPass(int id, string email, string fIO, string roleUser)
         {
+            Id = id;
             Email = email;
             FIO = fIO;
             RoleUser = roleUser;

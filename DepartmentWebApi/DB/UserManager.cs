@@ -21,13 +21,13 @@ namespace DepartmentWebApi.DB
                 connection.Open();
                 using (SqlCommand command = connection.CreateCommand())
                 {
-                    command.CommandText = @"SELECT Email, FIO, RoleUser FROM Users";
+                    command.CommandText = @"SELECT id, Email, FIO, RoleUser FROM Users";
                     DataTable table = new DataTable();
                     table.Load(command.ExecuteReader());
                     List<UsersWithoutPass> users = new List<UsersWithoutPass>();
                     foreach(DataRow row in table.Rows)
                     {
-                        users.Add(new UsersWithoutPass(row.Field<string>("Email"), row.Field<string>("FIO"), row.Field<string>("RoleUser")));
+                        users.Add(new UsersWithoutPass(row.Field<int>("id"), row.Field<string>("Email"), row.Field<string>("FIO"), row.Field<string>("RoleUser")));
                     }
                     return users;
                 }
@@ -66,7 +66,7 @@ namespace DepartmentWebApi.DB
                     connection.Open();
                     using (SqlCommand command = connection.CreateCommand())
                     {
-                        command.CommandText = @"UPDATE Users SET UserRole=@Role WHERE id = @Id";
+                        command.CommandText = @"UPDATE Users SET RoleUser=@Role WHERE id = @Id";
                         command.Parameters.AddWithValue("@Id", id);
                         command.Parameters.AddWithValue("@Role", Role);
                         command.ExecuteNonQuery();

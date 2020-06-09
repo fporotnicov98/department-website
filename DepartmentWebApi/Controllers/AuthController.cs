@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
 using DepartmentWebApi.DB;
 using DepartmentWebApi.Models;
 using DepartmentWebApi.Services;
+using Konscious.Security.Cryptography;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +45,7 @@ namespace DepartmentWebApi.Controllers
         {
             try
             {
+                logger.Info($"Аутентификация, {model.Email}");
                 string tn = _userService.Authenticate(model.Email, model.Password);
 
                 var result = new
@@ -50,7 +54,7 @@ namespace DepartmentWebApi.Controllers
                     resultCode = 0
                 };
                 if (tn == null) return Unauthorized("Неправильный email или пароль");
-                logger.Info($"Аутентификация, {model.Email}");
+
                 return Ok(result);
             }
             catch(Exception ex)
@@ -76,6 +80,51 @@ namespace DepartmentWebApi.Controllers
             {
                 logger.Error(ex);
                 return Problem();
+            }
+        }
+
+        [HttpPost]
+        [Route("SendMail")]
+        public IActionResult SendEmail(UsersWithoutIdRole user)
+        {
+            try
+            {
+                EmailService service = new EmailService();
+
+                Random random = new Random();
+                string code = random.Next(100000, 999999).ToString();
+                if (AuthManager.InsertUserTemporary(user, _userService.HashPassword(user.Password), code))
+                    service.SendEmailAsync(user.Email, "Код подтверждения для регистрации", $"Код: {code}");
+                else
+                    return Problem("Не удалось отправить email");
+                return Ok(code);
+            }
+            catch(Exception ex)
+            {
+                logger.Error(ex);
+                return Problem();
+            }
+        }
+
+        [HttpGet]
+        [Route("CodeRegistration")]
+        public IActionResult CodeRegistration(int code)
+        {
+            if (AuthManager.ExistCode(code))
+            {
+                logger.Info("Code exist");
+                var user = AuthManager.GetTemporaryUser(code);
+                logger.Info(user.Email);
+                if (AuthManager.Registration(new UsersWithoutId(user.Email, null, user.FIO, user.RoleUser), user.Password))
+                {
+                    AuthManager.DeleteTemporaryUser(code);
+                    return Ok("Регистрация прошла успешно");
+                }
+                return Problem("Не удалось зарегистрировать пользователя при верном коде подтверждения");
+            }
+            else
+            {
+                return Problem("Неверно введен код подтверждения");
             }
         }
     }
