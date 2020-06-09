@@ -5,6 +5,7 @@ import NewPost from './NewPost/NewPost';
 import ShowModalConfirmDeletePost from '../commons/newsRemoveModal';
 // import Header from '../Header/Header';
 import HeaderNews from '../Header/HeaderNews';
+import Header from '../Header/Header';
 // import { getDate } from "../commons/date";
 
 let date = new Date().toDateString();
@@ -60,7 +61,11 @@ class News extends React.Component {
     render() {
         return (
             <>
-                <HeaderNews />
+                {
+                    this.props.sliderNews.length === 0
+                        ? <Header />
+                        : <HeaderNews />
+                }
                 <Slider />
                 <ShowModalConfirmDeletePost
                     isOpen={this.state.isShowModal}
