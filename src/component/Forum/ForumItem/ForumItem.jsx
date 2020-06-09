@@ -83,11 +83,13 @@ class ForumItem extends React.Component {
                     <div className={style['item']}>
                         <div className={style['body__content']}>
                     <div className={style['text']}>{message.messageText}</div>
-                            <div className={style['buttons']}>
+                    { this.props.userId === message.idAuthor || this.props.roleUser === 'admin'
+                           ? <div className={style['buttons']}>
                                 <button onClick={() => {
                                     this.openModal()
                                     this.setRemoveId(message.id)
                                 }} className={style['delete']}><i class="fas fa-trash-alt"></i></button>
+                      
                                 <ShowModalConfirmDeleteForumMessage
                                     isOpen={this.state.isShowModal}
                                     onClose={() => this.closeModal()}
@@ -97,6 +99,8 @@ class ForumItem extends React.Component {
                                     idForum ={message.idForum}
                                 />
                             </div>
+                                  : null
+                                }
                             {/* {
                                 this.state.updateId.some(item => item === message.id)
                                     ? <div className={style['content']}>
