@@ -124,6 +124,9 @@ class Login extends React.Component {
     }
     onSubmitConfirm = formData => {
         this.props.getCode(formData.code)
+        this.setState({
+            isModalOpen: !this.state.isModalOpen
+        })
     }
     render() {
         if (this.props.isOpen === false) return null;

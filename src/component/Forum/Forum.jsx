@@ -26,7 +26,11 @@ class Forum extends React.Component {
                 <Header />
                 <div className={style['container']}>
                     <div className={style['news']}>
-                        {!this.state.isModalOpen && <a href='#s' onClick={() => this.openModal()} className={style['btn-add-post']}>Создать новую тему</a>}
+                        {
+                            this.props.roleUser === 'admin' || this.props.roleUser === 'moderator'
+                                ? !this.state.isModalOpen && <a href='#s' onClick={() => this.openModal()} className={style['btn-add-post']}>Создать новую тему</a>
+                                : <div className={style["area"]}></div>
+                        }
                         {
                             this.props.posts.map((item) =>
                                 <>
@@ -38,16 +42,19 @@ class Forum extends React.Component {
                                                 <p>{item.author}</p>
                                             </div>
                                             <p>Ответов: <span>{item.countMessages}</span></p>
-                                            <button className={style['basket']} onClick={() => this.props.removeForumPost(item.id)}><i class="fas fa-trash-alt"></i></button>
+                                            {this.props.roleUser === 'admin' || this.props.roleUser === 'moderator'
+                                                ? <button button className={style['basket']} onClick={() => this.props.removeForumPost(item.id)}><i class="fas fa-trash-alt"></i></button>
+                                                : null
+                                            }
                                         </div>
-                                    </div>
+                                </div>
                                 </>)
                         }
                     </div >
-                    <NewForum addForum={this.props.addForum} isOpen={this.state.isModalOpen} onClose={() => this.closeModal()} />
-                </div>
-
+                <NewForum addForum={this.props.addForum} isOpen={this.state.isModalOpen} onClose={() => this.closeModal()} />
             </div>
+
+            </div >
         );
     }
 }

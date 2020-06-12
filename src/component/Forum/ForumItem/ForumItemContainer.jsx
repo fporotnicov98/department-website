@@ -32,6 +32,7 @@ let mapStateToProps = (state) => {
         forumTheme:state.forumPage.forumTheme,
         forumMessages:state.forumPage.forumMessages,
         forumId:state.forumPage.forumId,
+        forumAuthorId: state.forumPage.forumAuthorId,
         userId:state.auth.userId,
         roleUser: state.auth.roleUser,
     }

@@ -161,13 +161,13 @@
     .modal {
         z-index: 1000;
         position: fixed;
-        border-radius: 8px;
-        width: 600px;
-        padding: 20px;
+        border-radius: 14px;
+        width: 500px;
+        padding: 30px;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: rgba(255, 255, 255, 0.8);
+        background: rgba(5, 3, 129, 1);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -175,17 +175,17 @@
         .title {
             font-size: 1.4em;
             margin-bottom: 20px;
-            color: #686767;
+            color: #fff
         }
         .buttons {
             font-size: 1.2em;
             .yes {
                 text-align: center;
                 display: inline-block;
-                width: 60px;
+                width: 100px;
                 padding: 4px 15px;
                 border-radius: 5px;
-                background: #76cdee;
+                background: #fff;
                 margin-right: 15px;
                 border: 1px solid #ccc;
                 box-shadow: 0px 4px 0 0px rgba(0, 0, 0, 0.45);
@@ -210,7 +210,7 @@
                 }
             }
             a {
-                color: #686767;
+                color: #000;
             }
         }
     }

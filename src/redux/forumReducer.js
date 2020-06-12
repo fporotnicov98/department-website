@@ -6,6 +6,7 @@ let initialState = {
     posts: [],
     forumTheme: null,
     forumId:null,
+    forumAuthorId: null,
     forumMessages: []
 };
 
@@ -32,7 +33,7 @@ const forumReducer = (state = initialState, action) => {
 };
 
 export const setForumPosts = (post) => ({ type: "SET_FORUM_POSTS", payload: post })
-export const setForumInfo = (forumTheme, forumId) => ({ type: "SET_FORUM_INFO", payload: {forumTheme,forumId} })
+export const setForumInfo = (forumTheme, forumId,forumAuthorId) => ({ type: "SET_FORUM_INFO", payload: {forumTheme,forumId,forumAuthorId} })
 export const setForumMessages = (messages) => ({ type: "SET_FORUM_MESSAGES", payload: messages })
 
 export const getForum = () => (dispatch) => {
@@ -72,7 +73,7 @@ export const removeForumPost = (id) => (dispatch) => {
 export const getForumItem = (id) => (dispatch) => {
     forumAPI.getForumItem(id)
         .then(response => {
-            dispatch(setForumInfo(response.data.theme,response.data.id))
+            dispatch(setForumInfo(response.data.theme,response.data.id,response.data.authorId))
             dispatch(setForumMessages(response.data.messages))
         })
 }

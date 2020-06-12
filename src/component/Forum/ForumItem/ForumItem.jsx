@@ -111,7 +111,7 @@ class ForumItem extends React.Component {
                                     </div>
                             } */}
                                 <div className={style['footer']}>
-                                    <div className={style['author']}> {message.fio} </div>
+                                    <div className={style['author']}>{this.props.forumAuthorId === message.idAuthor && <i class="fas fa-crown"></i>} {message.fio} </div>
                                     <div className={style['data']}> {message.messageDate} </div>
                                     {/* <a className={style['comment']} href="">Ответить</a> */}
                                 </div>

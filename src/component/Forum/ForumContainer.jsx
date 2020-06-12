@@ -18,6 +18,7 @@ class ForumContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         posts: state.forumPage.posts,
+        roleUser: state.auth.roleUser
     }
 }
 

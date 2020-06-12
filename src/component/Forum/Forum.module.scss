@@ -6,6 +6,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    .area{
+        height: 20px;
+    }
     .themes {
         width: 100%;
         margin: 0 auto;
