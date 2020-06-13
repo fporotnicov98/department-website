@@ -32,8 +32,8 @@ export const forumAPI = {
     getForum() {
         return instanse.get(`Forum/GetForum`)
     },
-    addForum(id, theme, forumDate) {
-        return instanse.post(`Forum/AddForum`, { id, theme, forumDate })
+    addForum(authorId, theme, forumDate) {
+        return instanse.post(`Forum/AddForum`, { authorId, theme, forumDate })
     },
     updateForum(id, theme, forumDate) {
         return instanse.put(`/Forum/UpdateForum`, { id, theme, forumDate })

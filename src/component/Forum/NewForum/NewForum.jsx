@@ -39,7 +39,7 @@ class NewForum extends React.Component {
     }
 
     onSubmit = (values) => {
-        this.props.addForum(1, values.newPostTheme, date)
+        this.props.addForum(this.props.userId, values.newPostTheme, date)
         this.props.onClose()
     }
 

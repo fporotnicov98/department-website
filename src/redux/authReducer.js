@@ -73,6 +73,5 @@ export const getAuth = (token) => (dispatch) => {
 }
 export const logout = () => dispatch => {
     dispatch(setAuthData(null,null,null,null,false))
-    return <Redirect to={'/'}></Redirect>
 }
 export default authReducer

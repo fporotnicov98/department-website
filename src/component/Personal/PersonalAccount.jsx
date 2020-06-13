@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../Header/Header';
 import style from './PersonalAccount.module.scss';
 import ShowModalConfirmDeleteUser from '../commons/removeUserModal';
+import { Redirect } from 'react-router-dom';
 
 class PersonalAccount extends React.Component {
     state = {
@@ -22,6 +23,7 @@ class PersonalAccount extends React.Component {
         this.setState({ isClick: !this.state.isClick })
     }
     render() {
+        if (!this.props.auth.isAuth) return <Redirect to={'/'}></Redirect>
         return (
             <div>
                 <Header />

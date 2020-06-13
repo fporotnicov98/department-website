@@ -5,7 +5,8 @@ export let getDate = () => {
     let Day = Data.getDate();
     let Hour = Data.getHours();
     let Minutes = Data.getMinutes();
-    return `${Day}.${Month}.${Year} ${Hour}:${Minutes}`
+    let Seconds = Data.getSeconds();
+    return `${Year}.${Month}.${Day} ${Hour}:${Minutes}:${Seconds}`
 }
 
 export default getDate
