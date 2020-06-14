@@ -31,7 +31,6 @@ export const NewMessage = (props) => {
         props.addForumMessage(props.forumId, props.userId, values.newPostText, date());
         props.getForumItem(props.forumId)
     }
-
     return (
         <div className={style['form-item']}>
             <div className={style['body__content']}>
@@ -42,7 +41,6 @@ export const NewMessage = (props) => {
         </div>
     );
 }
-
 class ForumItem extends React.Component {
     state = {
         updateId: [],
