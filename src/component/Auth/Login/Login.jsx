@@ -4,7 +4,6 @@ import logo from './../../../asets/image/logo.png'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form';
 import { sendEmail, setLogin,getCode } from '../../../redux/authReducer'
-import { Redirect } from "react-router-dom";
 
 
 let LoginForm = (props) => {
@@ -124,13 +123,10 @@ class Login extends React.Component {
     }
     onSubmitConfirm = formData => {
         this.props.getCode(formData.code)
-        this.setState({
-            isModalOpen: !this.state.isModalOpen
-        })
     }
     render() {
         if (this.props.isOpen === false) return null;
-        if (this.props.isAuth) return <Redirect to={'/'}></Redirect>
+        if (this.props.isAuth === true) return null;
         return (
             <div className={style['bg']}>
                 {
