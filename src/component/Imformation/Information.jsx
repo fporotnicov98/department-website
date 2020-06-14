@@ -55,9 +55,8 @@ class Information extends React.Component {
             isActiveShowInfo: true,
             isActiveShowStructure: false,
         };
-        this.showInfo = this.showInfo.bind(this);
     }
-    showInfo(e) {
+    showInfo = (e) => {
         e.preventDefault();
         this.setState({
             isShowInfo: !this.state.isShowInfo,

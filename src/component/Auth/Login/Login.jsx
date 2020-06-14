@@ -3,13 +3,12 @@ import style from './Login.module.scss'
 import logo from './../../../asets/image/logo.png'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form';
-import { sendEmail, setLogin,getCode } from '../../../redux/authReducer'
+import { sendEmail, setLogin, getCode } from '../../../redux/authReducer'
 
 
 let LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={style['form']}>
-            <div className={style['error']}>{props.error}</div>
             <label htmlFor="email">Введите email</label>
             <Field
                 name='email'
@@ -35,6 +34,7 @@ let LoginForm = (props) => {
                 />
                 <label htmlFor="rememberMe" className={style['save']}>Запомнить меня</label>
             </div> */}
+            <span className={style['error']}>{props.error}</span>
             <button className={style['login']} type="submit" ><span>Войти</span></button>
         </form>
     )
@@ -44,7 +44,6 @@ LoginForm = reduxForm({ form: 'loginForm' })(LoginForm)
 let LogupForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={style['form']}>
-            <div className={style['error']}>{props.error}</div>
             <label htmlFor="fio">ФИО</label>
             <Field
                 name='fio'
@@ -77,8 +76,8 @@ let LogupForm = (props) => {
                 required='required'
                 id='password'
             /> */}
+            <span className={style['error']}>{props.error}</span>
             <button className={style['logup']} type="submit" ><span>Зарегистрироваться</span></button>
-
         </form>
     )
 }
@@ -87,7 +86,7 @@ const LogupFormRedux = reduxForm({ form: 'registrationForm' })(LogupForm)
 let ConfirmForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={style['form']}>
-            <div className={style['error']}>{props.error}</div>
+            <span className={style['error']}>{props.error}</span>
             <label htmlFor="code">Вам на почту был отправлен код подтверждения. Введите его в поле ниже.</label>
             <Field
                 name='code'
