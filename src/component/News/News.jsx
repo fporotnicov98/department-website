@@ -3,10 +3,8 @@ import Slider from './../Slider/Slider'
 import style from './News.module.scss';
 import NewPost from './NewPost/NewPost';
 import ShowModalConfirmDeletePost from '../commons/newsRemoveModal';
-// import Header from '../Header/Header';
 import HeaderNews from '../Header/HeaderNews';
 import Header from '../Header/Header';
-// import { getDate } from "../commons/date";
 
 let date = new Date().toDateString();
 
