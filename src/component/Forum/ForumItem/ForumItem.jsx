@@ -3,6 +3,7 @@ import style from './ForumItem.module.scss';
 import { Field, reduxForm } from 'redux-form';
 import ShowModalConfirmDeleteForumMessage from '../../commons/removeForumMessageModal';
 import date from '../../commons/date'
+import Login from '../../Auth/Login/Login';
 
 
 
@@ -46,7 +47,14 @@ class ForumItem extends React.Component {
         updateId: [],
         removeId: null,
         isToggleShowPostForm: false,
-        isShowModal: false
+        isShowModal: false,
+        isShowAuth: false
+    }
+    openAuth = () => {
+        this.setState({ isShowAuth: true })
+    }
+    closeAuth = () => {
+        this.setState({ isShowAuth: false })
     }
     openModal = () => {
         this.setState({ isShowModal: true })
@@ -116,7 +124,15 @@ class ForumItem extends React.Component {
                             </div>
                         </div>
                     )}
-                    <NewMessage {...this.props} />
+                    {
+                        this.props.isAuth
+                            ? <NewMessage {...this.props} />
+                            : <a href='#s' onClick={() => this.openAuth()} className={style['auth-reg']}>Войдите или зарегистрируйтесь, чтобы ответить</a>
+                    }
+                    <Login
+                        isOpen={this.state.isShowAuth}
+                        onClose={() => this.closeAuth()}
+                    />
                 </div>
             </div >
         )

@@ -1,8 +1,5 @@
 import {authAPI} from '../API/API'
 import { stopSubmit, reset } from 'redux-form'
-import { Redirect } from 'react-router-dom'
-import React from 'react'
-import { divide } from 'lodash'
 
 let initial = {
     email: null,
@@ -20,7 +17,6 @@ const authReducer = (state = initial, action) => {
             }
         default:
             return state;
-
     }
 }
 
@@ -45,20 +41,18 @@ export const getCode = (code) => dispatch => {
             alert("Регистрация прошла успешно!")
         })
         .catch(err => {
-            let action = stopSubmit("confirmForm",{_error: "Вы ввели не правильный код!"})
+            let action = stopSubmit("confirmForm",{_error: "Вы ввели неправильный код!"})
             dispatch(action)
         })
 }
-// authAlert = () => {
-//     alert()
-// }
+
 export const setLogin = (email, password) => dispatch => {
     authAPI.login(email, password)
         .then(response => {
             if(response.data.resultCode === 0){
                 dispatch(getAuth(response.data.token))
                 dispatch(reset('loginForm'));
-                alert('<div>Авторизация прошла успешно!</div>')
+                alert('Авторизация прошла успешно!')
             }
                 else {
                     

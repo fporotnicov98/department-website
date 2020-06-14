@@ -14,6 +14,7 @@ class Forum extends React.Component {
         isModalOpen: false,
         isShowConfirmModal: false,
         removeId: null,
+        isToggleShowNewForum: false,
     };
     openModal() {
         this.setState({ isModalOpen: true });
@@ -27,22 +28,26 @@ class Forum extends React.Component {
     openConfirmModal(){
         this.setState({ isShowConfirmModal: true })
     }
-
     closeModal() {
         this.setState({ isModalOpen: false });
     }
-
+    toggleShowPostForm = (isShow) => {
+        this.setState({ isToggleShowNewForum: isShow })
+    }
     render() {
         return (
             <div>
                 <Header />
                 <div className={style['container']}>
                     <div className={style['news']}>
-                        {
-                            this.props.roleUser === 'admin' || this.props.roleUser === 'moderator'
-                                ? !this.state.isModalOpen && <a href='#s' onClick={() => this.openModal()} className={style['btn-add-post']}>Создать новую тему</a>
-                                : <div className={style["area"]}></div>
+                        {this.props.roleUser === 'admin' || this.props.roleUser === 'moderator'
+                            ? !this.state.isToggleShowNewForum
+                                ? <button onClick={() => this.toggleShowPostForm(true)} className={style['btn-add-post']}>Создать новую тему</button>
+                                : <button onClick={() => this.toggleShowPostForm(false)} className={style['btn-add-post']}>Отмена</button>
+
+                            : <div className={style["area"]}></div>
                         }
+                        {this.state.isToggleShowNewForum && <NewForum userId={this.props.userId} addForum={this.props.addForum} toggleShowPostForm={this.toggleShowPostForm} />}
                         {
                             this.props.posts.map((item) =>
                                 <>
@@ -58,8 +63,9 @@ class Forum extends React.Component {
                                                 ? <>
                                                     <button button className={style['basket']} onClick={() => {
                                                         this.openConfirmModal(item.id)
-                                                        this.setRemoveId(item.id)}
-                                                        }><i class="fas fa-trash-alt"></i></button>
+                                                        this.setRemoveId(item.id)
+                                                    }
+                                                    }><i class="fas fa-trash-alt"></i></button>
                                                     <ShowModalConfirmDeleteForumPost
                                                         isOpen={this.state.isShowConfirmModal}
                                                         onClose={() => this.closeConfirmModal()}
@@ -74,9 +80,7 @@ class Forum extends React.Component {
                                 </>)
                         }
                     </div >
-                    <NewForum userId={this.props.userId} addForum={this.props.addForum} isOpen={this.state.isModalOpen} onClose={() => this.closeModal()} />
                 </div>
-
             </div >
         );
     }

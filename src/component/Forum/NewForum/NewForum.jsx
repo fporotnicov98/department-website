@@ -6,62 +6,32 @@ let date = new Date().toDateString();
 
 let ForumForm = (props) => {
     return (
-        <form className={style['form']} onSubmit={props.handleSubmit}>
-            <div className={style['theme']}>
-                <label htmlFor="newPostTheme">Тема:</label>
-                <Field
-                    name='newPostTheme'
-                    component='input'
-                    type='text'
-                    id='newPostTheme'
-                    required='required'
-                />
-            </div>
-            {/* <div className={style['text']}>
-                <Field
-                    name='newPostText'
-                    component='textarea'
-                    id='newPostText'
-                    required='required'
-                />
-            </div> */}
-            <button className={style['btn']}>Опубликовать</button>
+        <form className={style['content']} onSubmit={props.handleSubmit}>
+            <label className={style['theme']} htmlFor="newSurvey">Тема: </label>
+            <Field
+                component='input'
+                type='text'
+                required='required'
+                name='newPostTheme'
+            />
+            <button className={style['btn']}>Добавить</button>
         </form>
     )
 }
 
 ForumForm = reduxForm({ form: 'forumForm' })(ForumForm)
 
-class NewForum extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { isModalOpen: false };
-    }
+const NewForum = (props) => {
 
-    onSubmit = (values) => {
-        this.props.addForum(this.props.userId, values.newPostTheme, date)
-        this.props.onClose()
+    const onSubmit = (values) => {
+        props.addForum(props.userId, values.newPostTheme, date)
+        props.toggleShowPostForm(false)
     }
-
-    render() {
-        if (this.props.isOpen === false) return null;
-        return (
-            <div className={style['modal']}>
-                <div className={style['body']}>
-                    <div className={style['content']}>
-                        <a href="#s" onClick={(e) => this.close(e)} className={style['close']}>x</a>
-                        <ForumForm onSubmit={this.onSubmit} />
-                    </div>
-                </div>
-            </div>
-        );
-    }
-    close(e) {
-        e.preventDefault();
-        if (this.props.onClose) {
-            this.props.onClose();
-        }
-    }
-};
+    return (
+        <div className={style['item']}>
+            <ForumForm onSubmit={onSubmit} />
+        </div>
+    );
+}
 
 export default NewForum;

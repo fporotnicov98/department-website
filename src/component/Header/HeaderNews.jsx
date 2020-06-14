@@ -39,7 +39,7 @@ class HeaderNews extends React.Component {
                                         <a href="#s"><i class="fas fa-user"></i></a>
                                         <ul className={style['sub-menu']}>
                                             <li><NavLink to="/personal">Личный кабинет</NavLink></li>
-                                            <li><a onClick = {() => this.props.logout()}>Выход</a></li>
+                                            <li><a href='#s' onClick = {() => this.props.logout()}>Выход</a></li>
                                         </ul>
                                     </li>
                             }

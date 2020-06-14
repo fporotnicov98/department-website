@@ -17,7 +17,11 @@ class News extends React.Component {
         detailId: [],
         removeId: null,
         isToggleShowPostForm: false,
-        isShowModal: false
+        isShowModal: false,
+        isCheck: true
+    }
+    checkUpdate = () => {
+        this.setState({ isCheck: !this.state.isCheck })
     }
     openModal = () => {
         this.setState({ isShowModal: true })
@@ -59,10 +63,9 @@ class News extends React.Component {
     render() {
         return (
             <>
-                {
-                    this.props.sliderNews.length === 0
-                        ? <Header />
-                        : <HeaderNews />
+                {this.props.sliderNews.length === 0
+                    ? <Header />
+                    : <HeaderNews />
                 }
                 <Slider />
                 <ShowModalConfirmDeletePost
@@ -88,7 +91,7 @@ class News extends React.Component {
                                         <div className={style['body__content']}>
                                             <div className={style['buttons']}>
                                                 {this.props.roleUser === 'admin' || this.props.roleUser === 'moderator'
-                                                    ? <button className={!post.isImportant ? style['stars'] : style['stars'] + " " + style['stars-active']} onClick={() => {
+                                                    ? this.state.isCheck && <button className={!post.isImportant ? style['stars'] : style['stars'] + " " + style['stars-active']} onClick={() => {
                                                         this.props.toggleImportantNews(post.id, !post.isImportant)
                                                     }}><i class="fas fa-star"></i></button>
                                                     : null
@@ -98,17 +101,19 @@ class News extends React.Component {
                                                         ? <button onClick={() => {
                                                             this.removeUpdateId(post.id)
                                                             this.props.updateNews(post.id, this.state.newsTheme, this.state.newsText, date)
+                                                            this.checkUpdate()
                                                         }
                                                         } className={style['edit']}><i class="fas fa-check"></i></button>
                                                         : <button onClick={() => {
                                                             this.setText(post.newsText)
                                                             this.setTheme(post.theme)
                                                             this.setUpdateId(post.id)
+                                                            this.checkUpdate()
                                                         }} className={style['edit']}><i class="fas fa-pencil-alt"></i></button>
                                                     : null
                                                 }
                                                 {this.props.roleUser === 'admin' || this.props.roleUser === 'moderator'
-                                                    ? <button onClick={() => {
+                                                    ? this.state.isCheck && <button onClick={() => {
                                                         this.openModal()
                                                         this.setRemoveId(post.id)
                                                     }} className={style['delete']}><i class="fas fa-trash-alt"></i></button>

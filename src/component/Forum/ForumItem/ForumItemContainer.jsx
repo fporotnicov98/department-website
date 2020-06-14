@@ -35,6 +35,7 @@ let mapStateToProps = (state) => {
         forumAuthorId: state.forumPage.forumAuthorId,
         userId:state.auth.userId,
         roleUser: state.auth.roleUser,
+        isAuth: state.auth.isAuth
     }
 }
 

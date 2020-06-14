@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './Header.module.scss'
 import logo from './../../asets/image/logo.png'
-import { NavLink, Redirect } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import Login from '../Auth/Login/Login'
 import { connect } from 'react-redux'
 import { logout } from './../../redux/authReducer'
@@ -36,7 +36,7 @@ class Header extends React.Component {
                                         <a href="#s"><i class="fas fa-user"></i></a>
                                         <ul className={style['sub-menu']}>
                                             <li><NavLink to="/personal">Личный кабинет</NavLink></li>
-                                            <li><a onClick = {() => this.props.logout()}>Выход</a></li>
+                                            <li><a href='#s' onClick = {() => this.props.logout()}>Выход</a></li>
                                         </ul>
                                     </li>
                             }
