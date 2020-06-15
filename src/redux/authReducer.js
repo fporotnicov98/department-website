@@ -1,5 +1,7 @@
 import {authAPI} from '../API/API'
-import { stopSubmit, reset } from 'redux-form'
+import { reset } from 'redux-form'
+import {authError, regError, codeError} from '../component/confirmForms/errorConfirm'
+import {authSuccess,regSuccess} from '../component/confirmForms/successConfirm'
 
 let initial = {
     email: null,
@@ -31,18 +33,19 @@ export const sendEmail = (email,password,fio) => dispatch => {
             dispatch(reset('registrationForm'));
         })
         .catch(err => {
-            let action = stopSubmit("registrationForm",{_error: "Пользователь с таким email уже существует"})
-            dispatch(action)
+            regError()
+            dispatch(reset('registrationForm'));
         })
 }
 export const getCode = (code) => dispatch => {
     authAPI.getCode(code)
         .then(response => {
-            alert("Регистрация прошла успешно!")
+            regSuccess()
+            dispatch(reset('confirmForm'));
         })
         .catch(err => {
-            let action = stopSubmit("confirmForm",{_error: "Вы ввели неправильный код!"})
-            dispatch(action)
+            codeError()
+            dispatch(reset('confirmForm'));
         })
 }
 
@@ -52,15 +55,12 @@ export const setLogin = (email, password) => dispatch => {
             if(response.data.resultCode === 0){
                 dispatch(getAuth(response.data.token))
                 dispatch(reset('loginForm'));
-                alert('Авторизация прошла успешно!')
+                authSuccess()
             }
-                else {
-                    
-                }
         })
         .catch(err => {
-            let action = stopSubmit("loginForm",{_error: "Неправильный логин или пароль"})
-            dispatch(action)
+            authError()
+            dispatch(reset('loginForm'));
         })
 }
 export const getAuth = (token) => (dispatch) => {
