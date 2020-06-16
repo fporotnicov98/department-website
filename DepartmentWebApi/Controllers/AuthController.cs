@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
+using reCAPTCHA.AspNetCore.Attributes;
 
 namespace DepartmentWebApi.Controllers
 {
@@ -41,6 +42,7 @@ namespace DepartmentWebApi.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("Authenticate")]
+        [ValidateRecaptcha]
         public IActionResult Authenticate(AuthModel model)
         {
             try

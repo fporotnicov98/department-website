@@ -19,6 +19,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using reCAPTCHA.AspNetCore;
+
 namespace DepartmentWebApi
 
 {
@@ -75,6 +77,10 @@ namespace DepartmentWebApi
                     .AllowAnyHeader()
                     .AllowCredentials());
             });
+
+
+            // Add recaptcha and pass recaptcha configuration section
+            services.AddRecaptcha(Configuration.GetSection("RecaptchaSettings"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
