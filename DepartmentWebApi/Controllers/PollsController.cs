@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using DepartmentWebApi.DB;
 using DepartmentWebApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
@@ -35,6 +37,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpPost]
         [Route("AddPoll")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult AddPoll(PollsWithoutId polls)
         {
             try
@@ -53,6 +56,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpPut]
         [Route("UpdatePoll")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult UpdatePoll(Polls polls)
         {
             try
@@ -68,6 +72,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpDelete]
         [Route("DeletePoll")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult DeletePoll(int id)
         {
             try
@@ -99,6 +104,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpPost]
         [Route("AddPollAnswerFirst")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult AddPollAnswerFirst()
         {
             try
@@ -114,6 +120,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpPut]
         [Route("UpdatePollAnswerFirst")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult UpdatePollAnswerFirst()
         {
             try
@@ -129,6 +136,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpDelete]
         [Route("DeletePollAnswerFirst")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult DeletePollAnswerFirst()
         {
             try
@@ -160,6 +168,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpPost]
         [Route("AddPollAnswerSecond")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult AddPollAnswerSecond()
         {
             try
@@ -175,6 +184,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpPut]
         [Route("UpdatePollAnswerSecond")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult UpdatePollAnswerSecond()
         {
             try
@@ -190,6 +200,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpDelete]
         [Route("DeletePollAnswerSecond")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult DeletePollAnswerSecond()
         {
             try

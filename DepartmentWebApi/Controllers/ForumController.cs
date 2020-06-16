@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using DepartmentWebApi.DB;
 using DepartmentWebApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
@@ -44,6 +46,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpPost]
         [Route("AddForum")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult AddForum(ForumWithoutId forum)
         {
             try
@@ -62,6 +65,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpPut]
         [Route("UpdateForum")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult UpdateForum(Forum forum)
         {
             try
@@ -80,6 +84,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpDelete]
         [Route("DeleteForum")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult DeleteForum(int id)
         {
             try
@@ -116,14 +121,22 @@ namespace DepartmentWebApi.Controllers
 
         [HttpPost]
         [Route("AddForumMessage")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult AddForumMessage(MessageForumWithoutId messageForum)
         {
             try
             {
-                if (ForumManager.AddForumMessage(messageForum))
-                    return Ok("Сообщение успешно добавлено");
+                if (DateTime.Now - ForumManager.GetLastDateForumMessage(messageForum.idForum, messageForum.idAuthor) <= TimeSpan.FromSeconds(60))
+                {
+                    if (ForumManager.AddForumMessage(messageForum))
+                        return Ok("Сообщение успешно добавлено");
+                    else
+                        return Problem("Не удалось добавить сообщение");
+                }
                 else
-                    return Problem("Не удалось добавить сообщение");
+                {
+                    return Problem("Таймаут");
+                }
             }
             catch (Exception ex)
             {
@@ -134,6 +147,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpPut]
         [Route("UpdateForumMessage")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult UpdateForumMessage(MessageForum messageForum)
         {
             try
@@ -152,6 +166,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpDelete]
         [Route("DeleteForumMessage")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult DeleteForumMessage(int id)
         {
             try

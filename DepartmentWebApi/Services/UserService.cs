@@ -21,6 +21,7 @@ namespace DepartmentWebApi.Services
         bool Registration(UsersWithoutId user);
         byte[] HashPassword(string Password);
         Users Authorization(string Email);
+        string TokenAdmin(string Email);
     }
 
     public class UserService : IUserService
@@ -48,6 +49,9 @@ namespace DepartmentWebApi.Services
                 string role = AuthManager.Authenticate(email, hashPassword);
                 if (role == null)
                     return null;
+                if (role.Equals("admin"))
+                    return role;
+
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
                 var tokenDescriptor = new SecurityTokenDescriptor
@@ -98,6 +102,24 @@ namespace DepartmentWebApi.Services
             argon2.MemorySize = 8192;
             argon2.Iterations = 40;
             return argon2.GetBytes(512);
+        }
+
+        public string TokenAdmin(string Email)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            byte[] key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Email, Email),
+                    new Claim(ClaimTypes.Role, "admin")
+                }),
+                Expires = DateTime.UtcNow.AddDays(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
 
         public Users Authorization(string Email)

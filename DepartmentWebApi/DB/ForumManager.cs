@@ -201,6 +201,29 @@ namespace DepartmentWebApi.DB
             }
         }
 
+        public static DateTime GetLastDateForumMessage(int idForum, int idAuthor)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = "SELECT TOP(1) MessageDate FROM MessageForum Where idForum = @idForum AND idAuthor = @idAuthor ORDER BY MessageDate DESC";
+                        command.Parameters.AddWithValue("@idForum", idForum);
+                        command.Parameters.AddWithValue("@idAuthor", idAuthor);
+                        return (DateTime)command.ExecuteScalar();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                return new DateTime();
+            }
+        }
+
         public static bool AddForumMessage(MessageForumWithoutId message)
         {
             try

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using DepartmentWebApi.DB;
 using DepartmentWebApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
@@ -12,6 +14,7 @@ namespace DepartmentWebApi.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    //[ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
     public class NewsController : ControllerBase
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
@@ -34,6 +37,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpPut]
         [Route("UpdateNews")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult UpdateNews(NewsWithoutAuthor news)
         {
             try
@@ -53,6 +57,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpPut]
         [Route("UpdateNewsImportant")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult UpdateNewsImportant(Slider news)
         {
             try
@@ -71,6 +76,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpPost]
         [Route("AddNews")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult AddNews(NewsWithoutId news)
         {
             try
@@ -89,6 +95,7 @@ namespace DepartmentWebApi.Controllers
         }
         [HttpDelete]
         [Route("DeleteNews")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult DeleteNews(int id)
         {
             try

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
+using NLog.Fluent;
 using reCAPTCHA.AspNetCore.Attributes;
 
 namespace DepartmentWebApi.Controllers
@@ -42,7 +43,6 @@ namespace DepartmentWebApi.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("Authenticate")]
-        [ValidateRecaptcha]
         public IActionResult Authenticate(AuthModel model)
         {
             try
@@ -51,8 +51,31 @@ namespace DepartmentWebApi.Controllers
                     return Unauthorized("Неправильный email или пароль");
 
                 logger.Info($"Аутентификация, {model.Email}");
-                string tn = _userService.Authenticate(model.Email, model.Password);
 
+                string tn = _userService.Authenticate(model.Email, model.Password);
+                if (tn.Equals("admin"))
+                {
+                    logger.Debug("Роль админ");
+                    var res = new
+                    {
+                        resultCode = 1
+                    };
+                    EmailService service = new EmailService();
+                    Random random = new Random();
+                    string code = random.Next(100000, 999999).ToString();
+                    if (AuthManager.GetAuthByEmail(model.Email))
+                    {
+                        var r = new
+                        {
+                            resultCode = 2
+                        };
+                        return Ok(r);
+                    }
+                    service.SendEmailAsync(model.Email, "Код подтверждения для аутентификации", $"Код: {code}");
+                    logger.Debug("Вставка в таблицу Auth");
+                    AuthManager.InsertAuth(model.Email, code);
+                    return Ok(res);
+                }
                 var result = new
                 {
                     token = tn,
@@ -66,6 +89,42 @@ namespace DepartmentWebApi.Controllers
             {
                 logger.Error(ex);
                 return Problem();
+            }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("ConfirmAuth")]
+        public IActionResult ConfirmAuth(string Email, int code)
+        {
+            logger.Debug($"Email = {Email}, code = {code}");
+            if (AuthManager.GetAuthByCode(code.ToString()))
+            {
+                logger.Debug($"Код введен верно, Email = {Email}");
+                var result = new
+                {
+                    token = _userService.TokenAdmin(Email),
+                    resultCode = 0
+                };
+                return Ok(result);
+            }
+            else
+            {
+                logger.Debug($"Код введен не верно, Email = {Email}");
+                if (AuthManager.GetAttemptsByEmail(Email) < 3)
+                {
+                    logger.Debug("Кол-во попыток меньше 3");
+                    AuthManager.IncreaseAttempts(Email);
+                    return Unauthorized("Неправильный код подтверждения");
+                }
+                else
+                {
+                    logger.Debug("Кол-во попыток больше 3, удаляем запись");
+                    if (AuthManager.DeleteAuth(Email))
+                        return NotFound("Код неверный, попробуйте позже");
+                    else
+                        return Problem("Ошибка авторизации");
+                }
             }
         }
 
@@ -119,7 +178,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpGet]
         [Route("CodeRegistration")]
-        public IActionResult CodeRegistration(int code)
+        public IActionResult CodeRegistration(string Email, int code)
         {
             if (AuthManager.ExistCode(code))
             {
@@ -128,14 +187,28 @@ namespace DepartmentWebApi.Controllers
                 logger.Info(user.Email);
                 if (AuthManager.Registration(new UsersWithoutId(user.Email, null, user.FIO, user.RoleUser), user.Password))
                 {
-                    AuthManager.DeleteTemporaryUser(code);
+                    AuthManager.DeleteTemporaryUserByCode(code);
                     return Ok("Регистрация прошла успешно");
                 }
                 return Problem("Не удалось зарегистрировать пользователя при верном коде подтверждения");
             }
             else
             {
-                return Problem("Неверно введен код подтверждения");
+                logger.Info($"Код введен неверно, Email = {Email}");
+                if (AuthManager.GetAttemtpsTemporaryUser(Email) < 3)
+                {
+                    logger.Debug("Кол-во попыток меньше 3");
+                    AuthManager.IncreaseAttemptsTemporaryUser(Email);
+                    return Unauthorized("Неверный код подтвеждения, проверьте код ещё раз");
+                }
+                else
+                {
+                    logger.Debug("Кол-во попыток больше 3, удаляем временного пользователя");
+                    if (AuthManager.DeleteTemporaryUserByEmail(Email))
+                        return NotFound("Неверный код, попробуйте зарегистрироваться позже");
+                    else
+                        return Problem("Ошибка регистрации");
+                }
             }
         }
     }

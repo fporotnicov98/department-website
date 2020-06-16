@@ -186,7 +186,53 @@ namespace DepartmentWebApi.DB
             }
         }
 
-        public static bool DeleteTemporaryUser(int code)
+        public static int GetAttemtpsTemporaryUser(string Email)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = @"SELECT Attempts FROM UserTemporary WHERE Email = @Email";
+                        command.Parameters.AddWithValue("@Email", Email);
+                        return (int)command.ExecuteScalar();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                return -1;
+            }
+        }
+
+        public static bool IncreaseAttemptsTemporaryUser(string Email)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = @"UPDATE UserTemporary SET Attempts = Attempts + 1 WHERE Email = @Email";
+                        command.Parameters.AddWithValue("@Email", Email);
+                        command.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                return false;
+            }
+        }
+
+
+        public static bool DeleteTemporaryUserByCode(int code)
         {
             try
             {
@@ -197,6 +243,166 @@ namespace DepartmentWebApi.DB
                     {
                         command.CommandText = @"DELETE FROM UserTemporary WHERE Code = @Code";
                         command.Parameters.AddWithValue("@Code", code);
+                        command.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                return false;
+            }
+        }
+        public static bool DeleteTemporaryUserByEmail(string Email)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = @"DELETE FROM UserTemporary WHERE Email = @Email";
+                        command.Parameters.AddWithValue("@Email", Email);
+                        command.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                return false;
+            }
+        }
+
+        public static bool InsertAuth(string email, string code)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = @"INSERT INTO Auth VALUES(@Email, @Code, @Attempts)";
+                        command.Parameters.AddWithValue("@Email", email);
+                        command.Parameters.AddWithValue("@Code", code);
+                        command.Parameters.AddWithValue("@Attempts", 0);
+                        command.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                return false;
+            }
+        }
+
+        public static bool GetAuthByCode(string code)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = @"SELECT COUNT(*) FROM Auth WHERE Code = @Code";
+                        command.Parameters.AddWithValue("@Code", code);
+                        return (int)command.ExecuteScalar() > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                return false;
+            }
+        }
+
+
+        public static bool GetAuthByEmail(string Email)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = @"SELECT COUNT(*) FROM Auth WHERE Email = @Email";
+                        command.Parameters.AddWithValue("@Email", Email);
+                        return (int)command.ExecuteScalar() > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                return false;
+            }
+        }
+
+        public static bool IncreaseAttempts(string Email)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = @"UPDATE Auth SET Attempts = Attempts + 1 WHERE Email = @Email";
+                        command.Parameters.AddWithValue("@Email", Email);
+                        command.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                return false;
+            }
+        }
+
+        public static int GetAttemptsByEmail(string Email)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = @"SELECT Attempts FROM Auth WHERE Email = @Email";
+                        command.Parameters.AddWithValue("@Email", Email);
+                        return (int)command.ExecuteScalar();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                return -1;
+            }
+        }
+
+        public static bool DeleteAuth(string Email)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = @"DELETE FROM Auth WHERE Email = @Email";
+                        command.Parameters.AddWithValue("@Email", Email);
                         command.ExecuteNonQuery();
                         return true;
                     }

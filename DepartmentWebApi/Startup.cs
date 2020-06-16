@@ -9,6 +9,7 @@ using DepartmentWebApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +37,8 @@ namespace DepartmentWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+
             services.AddControllers();
             services.AddControllers().AddNewtonsoftJson();
             var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -81,12 +84,28 @@ namespace DepartmentWebApi
 
             // Add recaptcha and pass recaptcha configuration section
             services.AddRecaptcha(Configuration.GetSection("RecaptchaSettings"));
+
+            services.AddResponseCaching();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+                context.Response.GetTypedHeaders().CacheControl =
+                new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
+                {
+                    NoStore = true,
+                    MustRevalidate = true,
+                    NoCache = true,
+                };
+                context.Response.Headers.Add("Pragma", "no-cache");
+                context.Response.Headers.Remove("X-Powered-By");
+                await next();
+            });
 
             app.UseRouting();
 
@@ -96,8 +115,9 @@ namespace DepartmentWebApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseHsts();
             app.UseHttpsRedirection();
+
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>

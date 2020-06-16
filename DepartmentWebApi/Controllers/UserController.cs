@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using DepartmentWebApi.DB;
 using DepartmentWebApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
@@ -35,6 +37,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpPut]
         [Route("UpdateUser")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult UpdateUser(Users users)
         {
             try
@@ -50,6 +53,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpDelete]
         [Route("DeleteUser")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult DeleteUser(int id)
         {
             try
@@ -68,6 +72,7 @@ namespace DepartmentWebApi.Controllers
 
         [HttpPut]
         [Route("UpdateRole")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult UpdateRole(UpdateUserRole user)
         {
             try
