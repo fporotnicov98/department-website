@@ -53,7 +53,7 @@ namespace DepartmentWebApi.Controllers
                 logger.Info($"Аутентификация, {model.Email}");
 
                 string tn = _userService.Authenticate(model.Email, model.Password);
-                if (tn.Equals("admin"))
+                if (tn != null && tn.Equals("admin"))
                 {
                     logger.Debug("Роль админ");
                     var res = new
@@ -184,7 +184,8 @@ namespace DepartmentWebApi.Controllers
             {
                 logger.Info("Code exist");
                 var user = AuthManager.GetTemporaryUser(code);
-                logger.Info(user.Email);
+                if (user == null) return Problem();
+                    logger.Info(user.Email);
                 if (AuthManager.Registration(new UsersWithoutId(user.Email, null, user.FIO, user.RoleUser), user.Password))
                 {
                     AuthManager.DeleteTemporaryUserByCode(code);

@@ -35,13 +35,15 @@ namespace DepartmentWebApi.Services
                 bodyBuilder.HtmlBody = message;
                 mimeMessage.Body = bodyBuilder.ToMessageBody();
 
-                var client = new SmtpClient();
+                using (SmtpClient client = new SmtpClient())
+                {
 
-                client.ServerCertificateValidationCallback = (s, c, h, e) => true;
-                client.Connect("smtp.gmail.com", 465, SecureSocketOptions.SslOnConnect);
-                client.Authenticate("kafsend@gmail.com", "&12BqC50");
-                client.Send(mimeMessage);
-                client.Disconnect(true);
+                    client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+                    client.Connect("smtp.gmail.com", 465, SecureSocketOptions.SslOnConnect);
+                    client.Authenticate("kafsend@gmail.com", "&12BqC50");
+                    client.Send(mimeMessage);
+                    client.Disconnect(true);
+                }
             }
             catch(Exception ex)
             {

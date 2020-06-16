@@ -26,7 +26,8 @@ namespace DepartmentWebApi.Controllers
             try
             {
                 var result = ForumManager.GetForum();
-                logger.Info($"Кол-во форумов {result.Count}");
+                if (result != null)
+                    logger.Info($"Кол-во форумов {result.Count}");
                 return Ok(result);
             }
             catch(Exception ex)

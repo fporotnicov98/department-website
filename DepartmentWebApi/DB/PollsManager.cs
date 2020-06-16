@@ -20,7 +20,7 @@ namespace DepartmentWebApi.DB
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    List<PollsWithAnswer> result = new List<PollsWithAnswer>();
+                    List<PollsWithAnswer> result;
                     connection.Open();
                     using (SqlCommand command = connection.CreateCommand())
                     {
