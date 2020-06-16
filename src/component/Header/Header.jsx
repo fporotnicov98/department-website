@@ -1,28 +1,28 @@
 import React from 'react'
 import style from './Header.module.scss'
 import logo from './../../asets/image/logo.png'
-import { NavLink } from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import Login from '../Auth/Login/Login'
-import { connect } from 'react-redux'
-import { logout } from './../../redux/authReducer'
+import {connect} from 'react-redux'
+import {logout} from './../../redux/authReducer'
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isModalOpen: false };
+        this.state = {isModalOpen: false};
     }
     openModal() {
-        this.setState({ isModalOpen: true });
+        this.setState({isModalOpen: true});
     }
     closeModal() {
-        this.setState({ isModalOpen: false });
+        this.setState({isModalOpen: false});
     }
     render() {
         return (
             <header className={style['header']}>
                 <div className={style['container']}>
                     <div className={style['header__row']}>
-                        <a className={style['logo']} href="/"><img src={logo} alt="" /></a>
+                        <a className={style['logo']} href="/"><img src={logo} alt=""/></a>
                         <a href="/" className={style['title']}>Кафедра информационной безопасности</a>
                         <ul className={style['menu']}>
                             <li><NavLink exact to='/' activeClassName={style['active-link']}>Новости</NavLink></li>
@@ -36,7 +36,7 @@ class Header extends React.Component {
                                         <a href="#s"><i class="fas fa-user"></i></a>
                                         <ul className={style['sub-menu']}>
                                             <li><NavLink to="/personal">Личный кабинет</NavLink></li>
-                                            <li><a href='#s' onClick = {() => this.props.logout()}>Выход</a></li>
+                                            <li><a href='#s' onClick={() => this.props.logout()}>Выход</a></li>
                                         </ul>
                                     </li>
                             }
@@ -58,4 +58,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { logout })(Header);
+export default connect(mapStateToProps, {logout})(Header);

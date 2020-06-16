@@ -16,6 +16,7 @@ let LoginForm = (props) => {
                 type='email'
                 required='required'
                 id='email'
+                
             />
             <label htmlFor="password">Введите пароль</label>
             <Field
@@ -40,7 +41,6 @@ let LoginForm = (props) => {
     )
 }
 LoginForm = reduxForm({ form: 'loginForm' })(LoginForm)
-
 let LogupForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={style['form']}>
@@ -65,7 +65,9 @@ let LogupForm = (props) => {
                 name='password'
                 component='input'
                 type='password'
-                required='required'
+                pattern='(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$'
+                title='Строчные и прописные латинские буквы, цифры, спецсимволы. Минимум 8 символов'
+                // required='required'
                 id='password'
             />
             {/* <label htmlFor="password">Повторите пароль</label>
