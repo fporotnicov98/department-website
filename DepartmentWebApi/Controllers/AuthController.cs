@@ -45,6 +45,9 @@ namespace DepartmentWebApi.Controllers
         {
             try
             {
+                if (model.Email.Length <= 0 || model.Password.Length <= 0)
+                    return Unauthorized("Неправильный email или пароль");
+
                 logger.Info($"Аутентификация, {model.Email}");
                 string tn = _userService.Authenticate(model.Email, model.Password);
 
@@ -89,6 +92,12 @@ namespace DepartmentWebApi.Controllers
         {
             try
             {
+
+                if (AuthManager.UserExist(user.Email))
+                {
+                    logger.Info($"Пользователь {user.Email} уже существует");
+                    return Problem("Пользователь с таким email уже существует");
+                }
                 EmailService service = new EmailService();
 
                 Random random = new Random();

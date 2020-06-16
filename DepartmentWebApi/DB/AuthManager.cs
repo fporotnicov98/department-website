@@ -60,6 +60,29 @@ namespace DepartmentWebApi.DB
             }
         }
 
+        public static bool UserExist(string email)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = @"SELECT COUNT(*) FROM Users WHERE Email = @Email";
+                        command.Parameters.AddWithValue("@Email", email);
+                        return (int)command.ExecuteScalar() > 0;
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                return false;
+            }
+        }
+
         public static bool Registration(UsersWithoutId user, byte[] hashPassword)
         {
             try
