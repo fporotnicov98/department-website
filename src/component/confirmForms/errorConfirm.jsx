@@ -23,7 +23,7 @@ export const regError = () => {
     })
 }
 export const codeError = () => {
-    toast.error('Не правильный код!', {
+    toast.error('Неправильный код!', {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 1700,
         hideProgressBar: true,
@@ -32,5 +32,16 @@ export const codeError = () => {
         transition: Flip
     })
 }
+export const varificationError = () => {
+    toast.error('Вы не верифицированны!', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1700,
+        hideProgressBar: true,
+        closeOnClick: true,
+        draggable: true,
+        transition: Flip
+    })
+}
+
 
 

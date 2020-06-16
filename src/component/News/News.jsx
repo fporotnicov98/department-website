@@ -67,6 +67,8 @@ class News extends React.Component {
                     ? <Header />
                     : <HeaderNews />
                 }
+                 {this.props.posts.length === 0 && <p className={style['title-news']}>На данный момент не добавено новостей</p>}
+                
                 <Slider />
                 <ShowModalConfirmDeletePost
                     isOpen={this.state.isShowModal}

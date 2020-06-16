@@ -9,6 +9,8 @@ let initial = {
     fio: null,
     userId:null,
     roleUser: null,
+    onReg: false,
+    isVerified: false,
 }
 const authReducer = (state = initial, action) => {
     switch (action.type) {
@@ -16,6 +18,16 @@ const authReducer = (state = initial, action) => {
             return {
                 ...state,
                 ...action.payload
+            }
+        case "SET_ON_REG":
+            return{
+                ...state,
+                onReg: action.payload
+            }
+        case "SET_VERIFIED":
+            return{
+                ...state,
+                isVerified: action.payload
             }
         default:
             return state;
@@ -25,12 +37,16 @@ const authReducer = (state = initial, action) => {
 export const setAuthData = (email, fio, userId ,roleUser, isAuth) => ({ type: "SET_AUTH_DATA", payload: { email, fio, userId ,roleUser, isAuth } })
 export const setToken = (token) => ({ type: "SET_TOKEN", payload: token })
 export const setOrders= (orders) => ({ type: "SET_ORDERS", payload: orders })
+export const setOnReg = (flag) => ({type: "SET_ON_REG", payload: flag})
+export const setVerified = (flag) => ({type: "SET_VERIFIED", payload: flag})
+
 
 
 export const sendEmail = (email,password,fio) => dispatch => {
     authAPI.sendEmail(email,password,fio)
         .then(response => {
             dispatch(reset('registrationForm'));
+            dispatch(setOnReg(true))
         })
         .catch(err => {
             regError()
@@ -42,6 +58,7 @@ export const getCode = (code) => dispatch => {
         .then(response => {
             regSuccess()
             dispatch(reset('confirmForm'));
+            dispatch(setOnReg(false))
         })
         .catch(err => {
             codeError()
