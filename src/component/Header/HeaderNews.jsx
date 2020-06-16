@@ -29,7 +29,7 @@ class HeaderNews extends React.Component {
                         <a href="/" className={style['title']}>Кафедра информационной безопасности</a>
                         <ul className={style['menu']}>
                             <li><NavLink exact to='/' activeClassName={style['active-link']}>Новости</NavLink></li>
-                            <li><NavLink to='/survey' activeClassName={style['active-link']}>Опросы</NavLink></li>
+                            {/*<li><NavLink to='/survey' activeClassName={style['active-link']}>Опросы</NavLink></li>*/}
                             <li><NavLink to='/forums' activeClassName={style['active-link']}>Форум</NavLink></li>
                             <li><NavLink to='/info' activeClassName={style['active-link']}>Информация</NavLink></li>
                             {

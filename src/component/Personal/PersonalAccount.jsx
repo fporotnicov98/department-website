@@ -45,26 +45,26 @@ class PersonalAccount extends React.Component {
                                             <li>Пользователь:  <span style={{ fontWeight: "bold" }}>{this.props.auth.fio}</span></li>
                                             <li>Электронная почта:  <span style={{ fontWeight: "bold" }}>{this.props.auth.email}</span></li>
                                         </ul>
-                                        <div className={style['edit-password']}>
-                                            <div onClick={() => this.showEditPassword()} className={style['sub-title']}>Изменение пароля</div>
-                                            {
-                                                this.state.isClick &&
-                                                <form action="">
-                                                    <div className={style['form-item']}>
-                                                        <label htmlFor="">Старый пароль</label>
-                                                        <input type="password" name="" id="" />
-                                                    </div>
-                                                    <div className={style['form-item']}>
-                                                        <label htmlFor="">Новый пароль</label>
-                                                        <input type="password" name="" id="" />
-                                                    </div>
-                                                    <div className={style['form-item']}>
-                                                        <label htmlFor="">Еще раз</label>
-                                                        <input type="password" name="" id="" />
-                                                    </div>
-                                                </form>
-                                            }
-                                        </div>
+                                        {/*<div className={style['edit-password']}>*/}
+                                        {/*    <div onClick={() => this.showEditPassword()} className={style['sub-title']}>Изменение пароля</div>*/}
+                                        {/*    {*/}
+                                        {/*        this.state.isClick &&*/}
+                                        {/*        <form action="">*/}
+                                        {/*            <div className={style['form-item']}>*/}
+                                        {/*                <label htmlFor="">Старый пароль</label>*/}
+                                        {/*                <input type="password" name="" id="" />*/}
+                                        {/*            </div>*/}
+                                        {/*            <div className={style['form-item']}>*/}
+                                        {/*                <label htmlFor="">Новый пароль</label>*/}
+                                        {/*                <input type="password" name="" id="" />*/}
+                                        {/*            </div>*/}
+                                        {/*            <div className={style['form-item']}>*/}
+                                        {/*                <label htmlFor="">Еще раз</label>*/}
+                                        {/*                <input type="password" name="" id="" />*/}
+                                        {/*            </div>*/}
+                                        {/*        </form>*/}
+                                        {/*    }*/}
+                                        {/*</div>*/}
                                     </div>
                                     <div className={style['users']}>
                                         <div className={style['sub-title']}>Управление пользователями</div>
@@ -95,26 +95,26 @@ class PersonalAccount extends React.Component {
                                             <li>Пользователь:  <span style={{ fontWeight: "bold" }}>{this.props.auth.fio}</span></li>
                                             <li>Электронная почта:  <span style={{ fontWeight: "bold" }}>{this.props.auth.email}</span></li>
                                         </ul>
-                                        <div className={style['edit-password']}>
-                                            <div onClick={() => this.showEditPassword()} className={style['sub-title']}>Изменение пароля</div>
-                                            {
-                                                this.state.isClick &&
-                                                <form action="">
-                                                    <div className={style['form-item']}>
-                                                        <label htmlFor="">Старый пароль</label>
-                                                        <input type="password" name="" id="" />
-                                                    </div>
-                                                    <div className={style['form-item']}>
-                                                        <label htmlFor="">Новый пароль</label>
-                                                        <input type="password" name="" id="" />
-                                                    </div>
-                                                    <div className={style['form-item']}>
-                                                        <label htmlFor="">Еще раз</label>
-                                                        <input type="password" name="" id="" />
-                                                    </div>
-                                                </form>
-                                            }
-                                        </div>
+                                        {/*<div className={style['edit-password']}>*/}
+                                        {/*    <div onClick={() => this.showEditPassword()} className={style['sub-title']}>Изменение пароля</div>*/}
+                                        {/*    {*/}
+                                        {/*        this.state.isClick &&*/}
+                                        {/*        <form action="">*/}
+                                        {/*            <div className={style['form-item']}>*/}
+                                        {/*                <label htmlFor="">Старый пароль</label>*/}
+                                        {/*                <input type="password" name="" id="" />*/}
+                                        {/*            </div>*/}
+                                        {/*            <div className={style['form-item']}>*/}
+                                        {/*                <label htmlFor="">Новый пароль</label>*/}
+                                        {/*                <input type="password" name="" id="" />*/}
+                                        {/*            </div>*/}
+                                        {/*            <div className={style['form-item']}>*/}
+                                        {/*                <label htmlFor="">Еще раз</label>*/}
+                                        {/*                <input type="password" name="" id="" />*/}
+                                        {/*            </div>*/}
+                                        {/*        </form>*/}
+                                        {/*    }*/}
+                                        {/*</div>*/}
                                     </div>
                                 </div>
                         }
