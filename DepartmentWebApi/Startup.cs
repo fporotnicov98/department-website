@@ -38,6 +38,11 @@ namespace DepartmentWebApi
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = StatusCodes.Status308PermanentRedirect;
+                options.HttpsPort = 443;
+            });
 
             services.AddControllers();
             services.AddControllers().AddNewtonsoftJson();
