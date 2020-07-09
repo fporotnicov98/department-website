@@ -21,7 +21,6 @@ const App = () => {
               <Route path='/personal' render={() => <PersonalAccountContainer />} />
           </Switch>
         </div>
-
     </BrowserRouter>
   )
 }
